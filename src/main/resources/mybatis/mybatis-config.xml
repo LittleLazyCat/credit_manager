@@ -15,8 +15,14 @@
 		<typeAlias type="com.gvtv.manage.base.system.entity.Role" alias="Role"/>
 		<typeAlias type="com.gvtv.manage.base.system.entity.Menu" alias="Menu"/>
 		<typeAlias type="com.gvtv.manage.base.system.entity.Button" alias="Button"/>
-		
 		<typeAlias type="com.gvtv.manage.base.util.PageData" alias="PageData"/>
+		
+		<typeAlias type="com.credit.manage.entity.User" alias="CrUser"/>
+		<typeAlias type="com.credit.manage.entity.Blog" alias="Blog"/>
+		<typeAlias type="com.credit.manage.entity.Credit" alias="Credit"/>
+		<typeAlias type="com.credit.manage.entity.Feedback" alias="Feedback"/>
+		<typeAlias type="com.credit.manage.entity.Reward" alias="Reward"/>
+		<typeAlias type="com.credit.manage.entity.FileManager" alias="FileManager"/>
 		<!-- 分页 -->
 		<typeAlias type="com.gvtv.manage.base.entity.Page" alias="Page"/>
 	</typeAliases>

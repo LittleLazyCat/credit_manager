@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RewardMapper">
+	<sql id="commonColumns">
+		 select id,
+		 reward_type,
+		 reward_amount,
+		 reward_name,
+		 cart_id,
+		 car_brand,
+		 province,
+		 city,
+		 images,
+		 create_time,
+		 end_time,
+		 description,
+		 reward_status,
+		 user_id
+	</sql>
+		
+
+	<resultMap type="Reward" id="RewardResultMap">
+		<id column="id" property="id"/>
+		<result column="reward_type" property="rewardType"/>
+		<result column="reward_amount" property="rewardAmount"/>
+		<result column="reward_name" property="rewardName"/>
+		<result column="cart_id" property="cartId"/>
+		<result column="car_brand" property="carBrand"/>
+		<result column="province" property="province"/>
+		<result column="city" property="city"/>
+		<result column="images" property="images"/>
+		<result column="create_time" property="createTime"/>
+		<result column="end_time" property="endTime"/>
+	    <result column="description" property="description"/>
+		<result column="reward_status" property="rewardStatus"/>
+		<result column="debt_proof" property="debtProof"/>
+		<result column="description" property="description"/>
+		<result column="user_id" property="userId"/>
+	</resultMap>
+    
+    <!-- 根据id获取债权信息 -->
+	<select id="findById" parameterType="PageData" resultType="Reward" useCache="false">
+	   <include refid="commonColumns"></include>
+		from cr_reward 
+		where id = #{id}
+	</select>
+	
+	
+   <select id="count" parameterType="PageData" resultType="int">
+		select count(1)
+		from cr_reward u
+		where u.reward_status != -1
+		<if test="userId != null and userId != ''">
+		and user_id=#{userId}
+		</if>
+		<if test="rewardName!=nul and rewardName!=''">
+		and reward_name like CONCAT(CONCAT('%',#{rewardName}),'%')
+		</if>
+	</select>
+	
+	<select id="list" parameterType="PageData" resultType="Reward">
+	   <include refid="commonColumns"></include>
+		from cr_reward u
+		where u.reward_status != -1
+		<if test="userId != null and userId != ''">
+		and user_id=#{userId}
+		</if>
+		<if test="rewardName!=nul and rewardName!=''">
+		and reward_name like CONCAT(CONCAT('%',#{rewardName}),'%')
+		</if>
+		ORDER BY u.create_time desc 
+		limit #{from},#{size}
+	</select>
+	
+	
+	<insert id="rewardSave" parameterType="reward">
+		insert into cr_reward (
+			 reward_type,
+			 reward_amount,
+			 reward_name,
+			 cart_id,
+			 car_brand,
+			 province,
+			 city,
+			 images,
+			 create_time,
+			 end_time,
+			 description,
+			 reward_status,
+			 user_id
+		) values (
+			#{rewardType},
+			#{rewardAmount},
+			#{rewardName},
+			#{cartId},
+			#{carBrand},
+			#{province},
+			#{city},
+			#{images},
+			#{createTime},
+			#{endTime},
+			#{description},
+			#{rewardStatus},
+			#{userId}
+		)
+	</insert>	
+
+</mapper>

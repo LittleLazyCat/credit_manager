@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FileManagerMapper">
+	<sql id="commonColumns">id,file_type,file_title,download_url</sql>
+	
+	<resultMap type="FileManager" id="FileResultMap">
+		<id column="id" property="id"/>
+		<result column="file_type" property="fileType"/>
+		<result column="file_title" property="fileTitle"/>
+		<result column="download_url" property="downloadUrl"/>
+	</resultMap>
+	
+	<!-- 根据id获取债权信息 -->
+	<select id="findById" parameterType="PageData" resultType="FileManager" useCache="false">
+	   <include refid="commonColumns"></include>
+		from cr_file_manager 
+		where id = #{id}
+	</select>
+	
+	
+   <select id="count" parameterType="PageData" resultType="int">
+		select count(1)
+		from cr_file_manager u
+		where 1=1
+		<if test="fileType != null and fileType != ''">
+	  	and file_type =#{fileType}
+		</if>
+	</select>
+	
+	<select id="list" parameterType="PageData" resultType="FileManager">
+	  select
+	   <include refid="commonColumns"></include>
+		from cr_file_manager 
+		where 1=1
+		<if test="fileType != null and fileType != ''">
+	  	   and file_type =#{fileType}
+		</if>
+		limit #{from},#{size}
+	</select>
+	
+</mapper>
