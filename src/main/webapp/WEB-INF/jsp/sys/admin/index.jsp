@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link type="image/png" href="${ctx}/static/img/great_vision.png" rel="shortcut icon">
-<title>通用后台</title>
+<title>快易收管理平台</title>
 <meta
 	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 	name='viewport'>

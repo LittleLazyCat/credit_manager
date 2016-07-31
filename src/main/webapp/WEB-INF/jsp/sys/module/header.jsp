@@ -5,8 +5,8 @@
 
 	<!-- Logo -->
 	<a href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
-		<span class="logo-mini"><b>好视</b></span> <!-- logo for regular state and mobile devices -->
-		<span class="logo-lg"><b>好视</b>后台</span>
+		<span class="logo-mini"><b>快易收</b></span> <!-- logo for regular state and mobile devices -->
+		<span class="logo-lg"><b>快易收</b>后台</span>
 	</a>
 
 	<!-- Header Navbar -->
