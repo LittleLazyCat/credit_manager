@@ -26,22 +26,22 @@ CREATE TABLE `cr_blog` (
   `blog_title` varchar(256) DEFAULT NULL COMMENT '业务文章标题',
   `blog_context` text COMMENT '业务文章内容',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `blog_source` varchar(60) DEFAULT NULL COMMENT '来源',
+  `blog_author` varchar(60) DEFAULT NULL COMMENT '作者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `cr_blog` */
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cr_credit` */
 
 DROP TABLE IF EXISTS `cr_credit`;
 
 CREATE TABLE `cr_credit` (
-  `id` int(11) NOT NULL COMMENT '序号',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '序号',
   `user_id` int(11) DEFAULT NULL COMMENT '债权发布人id',
   `cr_type` smallint(3) DEFAULT NULL COMMENT '债权类型',
   `cr_amount` double DEFAULT NULL COMMENT '债权金额',
   `cr_status` smallint(3) DEFAULT NULL COMMENT '债权转让',
-  `disposal_type` smallint(3) DEFAULT NULL COMMENT '处置方式',
+  `disposal_type` varchar(16) DEFAULT NULL,
   `commision_range` varchar(32) DEFAULT NULL COMMENT '佣金范围',
   `contact_name` varchar(32) DEFAULT NULL COMMENT '联系人',
   `contact_number` varchar(32) DEFAULT NULL COMMENT '联系电话',
@@ -49,16 +49,15 @@ CREATE TABLE `cr_credit` (
   `debt_province` varchar(32) DEFAULT NULL COMMENT '债权方省份',
   `debt_city` varchar(32) DEFAULT NULL COMMENT '债权方城市',
   `debt_phone` varchar(32) DEFAULT NULL COMMENT '债权方电话',
-  `debt_proof` varchar(64) DEFAULT NULL COMMENT '债权方凭证',
+  `debt_proof` varchar(1024) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL COMMENT '债权方描述',
   `create_date` datetime DEFAULT NULL COMMENT '创建日期',
   `end_date` datetime DEFAULT NULL COMMENT '结束日期',
   `open_date` datetime DEFAULT NULL COMMENT '开启日期',
   `agreed_date` datetime DEFAULT NULL COMMENT '约定日期',
+  `credit_type` smallint(3) DEFAULT NULL COMMENT '债权类型(1债权处置，2债权转让)',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `cr_credit` */
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cr_feedback` */
 
@@ -71,9 +70,7 @@ CREATE TABLE `cr_feedback` (
   `user_email` varchar(32) DEFAULT NULL COMMENT '反馈者邮件',
   `context` text COMMENT '反馈内容',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `cr_feedback` */
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cr_file_manager` */
 
@@ -83,11 +80,9 @@ CREATE TABLE `cr_file_manager` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '序号',
   `file_type` smallint(3) DEFAULT NULL COMMENT '文件类型',
   `file_title` varchar(32) DEFAULT NULL COMMENT '文件名称',
-  `dowload_url` varchar(128) DEFAULT NULL COMMENT '文件下载路径',
+  `download_url` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `cr_file_manager` */
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cr_reward` */
 
@@ -102,16 +97,14 @@ CREATE TABLE `cr_reward` (
   `car_brand` varchar(32) DEFAULT NULL COMMENT '车牌',
   `province` varchar(32) DEFAULT NULL COMMENT '省份',
   `city` varchar(32) DEFAULT NULL COMMENT '城市',
-  `images` varchar(64) DEFAULT NULL COMMENT '照片',
+  `images` varchar(1024) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
   `end_time` datetime DEFAULT NULL COMMENT '悬赏有效日期',
   `description` varchar(256) DEFAULT NULL COMMENT '悬赏描述',
   `reward_status` smallint(3) DEFAULT NULL COMMENT '悬赏状态',
   `user_id` int(11) DEFAULT NULL COMMENT '登录用户编号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `cr_reward` */
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cr_user` */
 
@@ -130,9 +123,7 @@ CREATE TABLE `cr_user` (
   `description` text COMMENT '用户描述',
   `user_status` smallint(3) DEFAULT NULL COMMENT '用户状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `cr_user` */
+) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `sys_button` */
 
@@ -146,10 +137,6 @@ CREATE TABLE `sys_button` (
   `status` int(3) NOT NULL DEFAULT '1',
   PRIMARY KEY (`button_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
-
-/*Data for the table `sys_button` */
-
-insert  into `sys_button`(`button_id`,`menu_id`,`button_name`,`button_url`,`status`) values (1,2,'新增分类/菜单','right/addMenu',1),(2,2,'修改分类/菜单','right/editMenu',1),(3,2,'删除分类/菜单','right/deleteMenu',1),(4,2,'批量删除分类/菜单','right/batchDeleteMenu',1),(5,2,'菜单信息','right/subMenu',1),(6,2,'按钮信息','right/button',1),(7,2,'新增按钮','right/addBtn',1),(8,2,'修改按钮','right/editBtn',1),(9,2,'删除按钮','right/deleteBtn',1),(10,2,'批量删除按钮','right/batchDeleteBtn',1),(11,3,'新增','user/add',1),(12,3,'修改','user/edit',1),(13,3,'删除','user/delete',1),(14,3,'批量删除','user/batchDelete',1),(15,3,'授权','user/editRole',1),(16,4,'新增','role/add',1),(17,4,'修改','role/edit',1),(18,4,'删除','role/delete',1),(19,4,'批量删除','role/batchDelete',1),(20,4,'编辑权限','role/editRight',1),(21,50,'服务器信息/修改','serverinfo/edit',1),(22,50,'服务器信息/添加','serverinfo/add',1);
 
 /*Table structure for table `sys_menu` */
 
@@ -169,10 +156,6 @@ CREATE TABLE `sys_menu` (
   PRIMARY KEY (`menu_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
 
-/*Data for the table `sys_menu` */
-
-insert  into `sys_menu`(`menu_id`,`menu_name`,`menu_url`,`parent_id`,`menu_order`,`menu_icon`,`menu_type`,`removable`,`description`,`status`) values (1,'系统管理','#',0,1,'',1,0,'系统管理',1),(2,'权限管理','right',1,2,'',2,1,'权限管理',1),(3,'用户管理','user',1,3,'',2,1,'用户管理',1),(4,'角色管理','role',1,4,'',2,1,'角色管理',1),(49,'服务器信息管理','#',0,2,NULL,1,1,'',1),(50,'服务器信息','serverinfo',49,1,NULL,2,1,'1',1),(51,'ttttt','#',0,1,NULL,1,1,'11',-1);
-
 /*Table structure for table `sys_role` */
 
 DROP TABLE IF EXISTS `sys_role`;
@@ -187,10 +170,6 @@ CREATE TABLE `sys_role` (
   PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8;
 
-/*Data for the table `sys_role` */
-
-insert  into `sys_role`(`role_id`,`role_name`,`removable`,`allocatable`,`description`,`status`) values (1,'系统管理员',0,1,'系统管理员',1),(102,'测试角色',1,1,'测试',-1),(103,'test',1,1,'test',-1),(104,'fds',1,1,'fdsa',-1),(105,'agc',1,1,'afdsa',-1),(106,'fdsafdsafdsa',1,1,'fdsafdsa',-1),(107,'fdsafdsa',1,1,'fsafdsasd8888',-1),(108,'fdsa',1,1,'fdsa',-1),(109,'服务器管理员',1,1,'',1);
-
 /*Table structure for table `sys_role_resource` */
 
 DROP TABLE IF EXISTS `sys_role_resource`;
@@ -204,10 +183,6 @@ CREATE TABLE `sys_role_resource` (
   KEY `role_id_idx` (`role_id`),
   KEY `resource_id_idx` (`resource_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8 COMMENT='权限和资源（菜单+按钮）';
-
-/*Data for the table `sys_role_resource` */
-
-insert  into `sys_role_resource`(`id`,`role_id`,`resource_id`,`resource_type`) values (99,109,49,1),(100,109,50,2),(101,1,1,1),(102,1,2,2),(103,1,3,2),(104,1,4,2),(105,1,49,1),(106,1,50,2);
 
 /*Table structure for table `sys_user` */
 
@@ -228,10 +203,6 @@ CREATE TABLE `sys_user` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
-/*Data for the table `sys_user` */
-
-insert  into `sys_user`(`user_id`,`login_name`,`password`,`name`,`last_login`,`ip`,`status`,`description`,`email`,`phone`,`skin`) values (1,'admin','223ce7b851123353479d85757fbbf4e320d1e251',NULL,'2016-07-05 22:28:04','0:0:0:0:0:0:0:1','1',NULL,NULL,NULL,1),(39,'test','a94a8fe5ccb19ba61c4c0873d391e987982fbbd3',NULL,'2015-05-16 17:23:26',NULL,'-1',NULL,NULL,NULL,1),(40,'dzk','c76c524115b16a7e0c71fff97089b34dca7dc45a','dzk','2015-05-18 09:32:28',NULL,'-1','测试','dzk@163.com','123',1),(41,'s','0d3af63f25971b9e0cddc6955d09130fd2b8bace','s','2015-05-18 12:48:58',NULL,'1','1','s@s.com','1',1);
-
 /*Table structure for table `sys_user_role` */
 
 DROP TABLE IF EXISTS `sys_user_role`;
@@ -242,10 +213,6 @@ CREATE TABLE `sys_user_role` (
   `role_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='用户和角色';
-
-/*Data for the table `sys_user_role` */
-
-insert  into `sys_user_role`(`id`,`user_id`,`role_id`) values (1,1,1),(17,40,102),(18,39,102),(20,41,109);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
