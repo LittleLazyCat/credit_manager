@@ -200,7 +200,7 @@ public class UserController extends BaseController {
 	public PageData delete(@RequestParam Integer userId){
 		PageData result = new PageData();
 		try {
-			userService.delete(userId);
+			//userService.delete(userId);
 			result.put("status", 1);
 		} catch (Exception e) {
 			logger.error("delete user error", e);

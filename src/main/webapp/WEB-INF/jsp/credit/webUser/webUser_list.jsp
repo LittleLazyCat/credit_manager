@@ -17,7 +17,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<shiro:hasPermission name="user/add">
+					<%-- <shiro:hasPermission name="user/add">
 						<button type="button" data-url="user/add" data-model="dialog" class="btn btn-sm btn-primary">
 							<i class="fa fa-fw fa-plus"></i>新增
 						</button>
@@ -28,7 +28,7 @@
 							data-checkbox-name="chx_default" data-callback="refreshTable">
 							<i class="fa fa-fw fa-remove"></i>批量删除
 						</button>
-					</shiro:hasPermission>
+					</shiro:hasPermission> --%>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -90,12 +90,12 @@
 				"targets" : 1,
 				"render" : function(data, type, row) {
 					var html = htmlTpl.dropdown.prefix
-		           	<shiro:hasPermission name="user/edit">
-		            	  + '  <li><a href="user/edit?userId='+row.id+'" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
-		            </shiro:hasPermission>
-		            <shiro:hasPermission name="user/delete">
-		            	  + '  <li><a href="user/delete?userId='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
-		            </shiro:hasPermission>
+		           	//<shiro:hasPermission name="user/edit">
+		            	  + '  <li><a href="webUser/resetPass?id='+row.id+'" data-msg="重置后新密码为888888!" data-model="ajaxToDo" data-callback=""><i class="fa fa-pencil"></i>重置密码</a></li>'
+		            //</shiro:hasPermission>
+		            //<shiro:hasPermission name="user/delete">
+		            	  + '  <li><a href="webUser/disable?id='+row.id+'" data-msg="删除该用户后将不能再登录网站!" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
+		            //</shiro:hasPermission>
 		            	  + htmlTpl.dropdown.suffix;
 					return html;
 				}

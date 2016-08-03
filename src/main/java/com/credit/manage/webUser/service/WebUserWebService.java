@@ -100,4 +100,18 @@ public class WebUserWebService {
 		result.put(Const.NDATA, userList);
 		return result;
 	}
+	
+	/**
+	 * 禁用用户
+	 * @param pd
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean disableUser(PageData pd) throws Exception{
+		int num = dao.update("WebUserMapper.disableUser", pd);
+		if (num > 0) {
+			return true;
+		}
+		return false;
+	}
 }

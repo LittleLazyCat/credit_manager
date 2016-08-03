@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.credit.manage.entity.WebUser;
 import com.credit.manage.webUser.service.WebUserWebService;
 import com.gvtv.manage.base.controller.BaseController;
+import com.gvtv.manage.base.util.MD5;
 import com.gvtv.manage.base.util.PageData;
 
 @Controller
@@ -119,5 +120,54 @@ public class WebUserController extends BaseController{
 		}
 		mv.setViewName("/expert_details");
 		return mv;
+	}
+	
+	/**
+	 * 重置用户密码
+	 * @return
+	 */
+	@RequestMapping(value="/resetPass")
+	@ResponseBody
+	public PageData resetPassword(Integer id){
+		PageData pd = new PageData();
+		try {
+			String newEncodePwd = MD5.md5("888888");
+			pd.put("id", id);
+			pd.put("newEncodePwd", newEncodePwd);
+			Boolean isFlag = webUserWebService.updatePassword(pd);
+			if(isFlag){
+				pd.put("result", "密码已重置");
+			}else{
+				pd.put("result", "重置失败");
+			}
+		} catch (Exception e) {
+			logger.error("reset webUser error", e);
+			pd.put("result", "重置失败");
+		}
+		
+		return pd;
+	}
+	
+	/**
+	 * 禁用用户
+	 * @return
+	 */
+	@RequestMapping(value="/disable")
+	@ResponseBody
+	public PageData disableWebUser(Integer id){
+		PageData pd = new PageData();
+		try {
+			pd.put("id", id);
+			Boolean isFlag = webUserWebService.disableUser(pd);
+			if(isFlag){
+				pd.put("result", "用户已禁用");
+			}else{
+				pd.put("result", "禁用失败");
+			}
+		} catch (Exception e) {
+			logger.error("disable webUser error", e);
+			pd.put("result", "禁用失败");
+		}
+		return pd;
 	}
 }

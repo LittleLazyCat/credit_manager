@@ -140,4 +140,10 @@
 		where
 			id		= #{id}
 	</update>
+	<update id="disableUser" parameterType="PageData">
+		update cr_user set
+			user_status	= -1
+		where
+			id	= #{id}
+	</update>
 </mapper>
