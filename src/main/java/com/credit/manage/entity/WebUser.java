@@ -1,6 +1,6 @@
 package com.credit.manage.entity;
 
-public class User {
+public class WebUser {
 
 	private Integer id;
 	private String userEmail;
