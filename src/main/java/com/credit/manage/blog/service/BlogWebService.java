@@ -70,7 +70,20 @@ public class BlogWebService {
 		return blogList;
 	}
 	
-
+	/**
+	 * 保存业务文章
+	 * @author huixiong 
+	 * @param pd
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean saveUser(Blog blog) throws Exception{
+		int num = dao.save("BlogMapper.saveBlogInfo", blog);
+		if (num > 0) {
+			return true;
+		}
+		return false;
+	}
 		
 	public Blog findById(Integer id)throws Exception {
 		Blog blog = dao.findForObject("BlogMapper.findById", id);

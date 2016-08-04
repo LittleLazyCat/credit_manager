@@ -14,39 +14,26 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link type="image/png" href="${ctx}/static/img/great_vision.png" rel="shortcut icon">
 <title>快易收管理平台</title>
-<meta
-	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
-	name='viewport'>
+
+<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <!-- Bootstrap 3.3.4 -->
-<link href="${ctx}/static/AdminLTE/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${ctx}/static/AdminLTE/plugins/bootstrapDialog/bootstrap-dialog.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${ctx}/static/AdminLTE/plugins/datetimepicker/bootstrap-datetimepicker.min.css"
-	rel="stylesheet" type="text/css">
-<link
-	href="${ctx}/static/AdminLTE/plugins/datatables/dataTables.bootstrap.css"
-	rel="stylesheet" type="text/css">
+<link href="${ctx}/static/AdminLTE/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/static/AdminLTE/plugins/bootstrapDialog/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/static/AdminLTE/plugins/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
+<link href="${ctx}/static/AdminLTE/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
 <!-- Font Awesome Icons -->
-<link href="${ctx}/static/AdminLTE/dist/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css" />
+<link href="${ctx}/static/AdminLTE/dist/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <%-- <!-- Ionicons -->
 <link
 	href="${ctx}/static/AdminLTE/dist/css/ionicons.min.css"
 	rel="stylesheet" type="text/css" /> --%>
 <!-- Theme style -->
-<link href="${ctx}/static/AdminLTE/dist/css/AdminLTE.min.css"
-	rel="stylesheet" type="text/css" />
-<link href="${ctx}/static/AdminLTE/dist/css/skins/skin-blue.css"
-	rel="stylesheet" type="text/css" />
-<link href="${ctx}/static/AdminLTE/plugins/iCheck/flat/blue.css"
-	rel="stylesheet" type="text/css">
-<link href="${ctx}/static/AdminLTE/plugins/iCheck/minimal/blue.css"
-	rel="stylesheet" type="text/css">
-<link href="${ctx}/static/css/adjust.css" rel="stylesheet"
-	type="text/css">
+<link href="${ctx}/static/AdminLTE/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/static/AdminLTE/dist/css/skins/skin-blue.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/static/AdminLTE/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css">
+<link href="${ctx}/static/AdminLTE/plugins/iCheck/minimal/blue.css" rel="stylesheet" type="text/css">
+<link href="${ctx}/static/css/adjust.css" rel="stylesheet" type="text/css">
+<link href="${ctx}/static/umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" type="text/css">
 </head>
 <body class="skin-blue" data-spy="scroll" data-target="#scrollspy">
 
@@ -84,19 +71,20 @@
 		type="text/javascript"></script>
 	<script src="${ctx}/static/js/jquery-gv-validate.js"
 		type="text/javascript"></script>
-	<script
-		src="${ctx}/static/AdminLTE/plugins/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+	<script src="${ctx}/static/AdminLTE/plugins/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 	<!-- DataTables plugin -->
 	<script
 		src="${ctx}/static/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script
 		src="${ctx}/static/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js"></script>
 	<script src="${ctx}/static/AdminLTE/plugins/iCheck/icheck.min.js"></script>
-	<script
-		src="${ctx}/static/AdminLTE/plugins/bootstrapDialog/bootstrap-dialog.min.js"></script>
+	<script src="${ctx}/static/AdminLTE/plugins/bootstrapDialog/bootstrap-dialog.min.js"></script>
 
 	<!-- custom js -->
 	<script src="${ctx}/static/js/admin.js" type="text/javascript"></script>
 	<script src="${ctx}/static/js/gv.common.js"></script>
+	<script src="${ctx}/static/umeditor/umeditor.config.js"></script>
+	<script src="${ctx}/static/umeditor/umeditor.min.js"></script>
+	<script src="${ctx}/static/umeditor/zh-cn.js"></script>
 </body>
 </html>

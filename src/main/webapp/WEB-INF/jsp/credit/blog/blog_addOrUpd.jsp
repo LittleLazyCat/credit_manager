@@ -1,46 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
-<form class="form-horizontal" action="webUser/addOrUpd" method="post"
-	id="defForm" callfn="refreshTable" enctype="multipart/form-data">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<form class="form-horizontal" action="blog/addOrUpd" method="post" id="defForm" callfn="refreshTable">
 	<div class="modal-header">
 		<div class='bootstrap-dialog-header'>
 			<div class='bootstrap-dialog-close-button' style='display: block;'>
 				<button class='close' data-dismiss='modal' aria-label='Close'>×</button>
 			</div>
-			<div class='bootstrap-dialog-title'>新增专家顾问</div>
+			<div class='bootstrap-dialog-title'>
+				<c:if test="${empty blog.id}">新增</c:if><c:if test="${not empty blog.id}">编辑</c:if>
+			</div>
 		</div>
 	</div>
-	<input type="hidden" name="userHeadImages" value="${user.userHeadImages}"/>
-	<input type="hidden" name="id" value="${user.id}"/>
+	<input type="hidden" name="description" id="description" value="${blog.description}"/>
+	<input type="hidden" name="id" value="${blog.id}"/>
 	<div class="modal-body">
 		<div class="container-fluid">
 			<div class="form-group">
-				<label for="loginName" class="col-sm-3 control-label">专家顾问名称：</label>
+				<label for="loginName" class="col-sm-3 control-label">标题：</label>
 				<div class="col-sm-7">
-					<input id="nickname" name="nickname" type="text" maxlength="10" value="${user.nickname}" class="form-control required" placeholder="请输入专家顾问名称"/>
+					<input id="blogTitle" name="blogTitle" type="text" maxlength="10" value="${blog.blogTitle}" class="form-control required" placeholder="请输入标题"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="password" class="col-sm-3 control-label">专家顾问分类:</label>
+				<label for="password" class="col-sm-3 control-label">类型:</label>
 				<div class="col-sm-7">
 					<select name="userStatus" id="userStatus" class="form-control">
-						<option value="7">资产处置专家</option>
-						<option value="8">资深诉讼律师</option>
-						<option value="9">资深财经法治媒体人</option>
+						<option value="1" <c:if test="${blog.blogType eq 1}">selected</c:if>>媒体报道</option>
+						<option value="2" <c:if test="${blog.blogType eq 2}">selected</c:if>>业务文章</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="name" class="col-sm-3 control-label">图片:</label>
+				<label for="name" class="col-sm-3 control-label">作者:</label>
 				<div class="col-sm-7">
-					<input class="form-control required" type="file" name="uploadFile" id="uploadFile" accept=".jpg,.png,.jpeg,.gif,.bmp"/>
+					<input class="form-control required" type="text" name="blogAuthor" id="blogAuthor" value="${blog.blogAuthor}"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="name" class="col-sm-3 control-label">来源:</label>
+				<div class="col-sm-7">
+					<input class="form-control required" type="text" name="blogSource" id="blogSource" value="${blog.blogSource}"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="description" class="col-sm-3 control-label">描述:</label>
 				<div class="col-sm-7">
-					<textarea id="description" name="description" class="form-control required" rows="5" maxlength="1000">${user.description}</textarea>
+					<script type="text/plain" id="myEditor" style="width:800px;height:340px;">
+    					<p>这里输入内容</p>
+					</script>
 				</div>
 			</div>
 		</div>
@@ -51,8 +60,7 @@
 	</div>
 </form>
 <script>
-	if('${user.userStatus}' != ''){
-		$("#userStatus").val('${user.userStatus}');
-	}
+	//实例化编辑器
+	var um = UM.getEditor('myEditor');
 	$("#defForm").validate();
 </script>

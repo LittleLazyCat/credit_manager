@@ -77,7 +77,12 @@ public class BlogController extends BaseController{
 		PageData result = new PageData();
 		try{
 			blog.setCreateTime(new Date());
-			blogWebService.updateBlog(blog);
+			if(null != blog.getId() && 0 != blog.getId()){
+				blogWebService.updateBlog(blog);
+			}else{
+				blog.setBlogStatus((short)0);
+				blogWebService.saveUser(blog);
+			}
 			result.put("status", 1);
 		}catch(Exception e){
 			logger.error("addOrUpd blog error", e);

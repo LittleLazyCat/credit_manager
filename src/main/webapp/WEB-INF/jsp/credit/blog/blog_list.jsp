@@ -23,8 +23,7 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-					<table id="default_table"
-						class="table table-primary table-hover table-striped">
+					<table id="default_table" class="table table-primary table-hover table-striped">
 						<thead>
 							<tr>
 								<th width="10px" style="padding-right: 12px;"><input type='checkbox' id="defaultCheck" /></th>

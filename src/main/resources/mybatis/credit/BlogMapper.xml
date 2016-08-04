@@ -49,7 +49,25 @@
 		order by u.id desc
 		limit #{from},#{size}
 	</select>
-	
+	<insert id="saveBlogInfo" parameterType="Blog">
+		insert into cr_blog (
+			blog_type,
+			blog_title,
+			blog_context,
+			create_time,
+			blog_source,
+			blog_author,
+			blog_status
+		) values (
+			#{blogType},
+			#{blogTitle},
+			#{blogContext},
+			#{createTime},
+			#{blogSource},
+			#{blogAuthor},
+			#{blogStatus}
+		)
+	</insert>
 	<update id="updateBlog" parameterType="Blog">
 		update cr_blog set 
 		blog_type = #{blogType},

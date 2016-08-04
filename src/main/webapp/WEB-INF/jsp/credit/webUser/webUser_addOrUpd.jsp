@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <form class="form-horizontal" action="webUser/addOrUpd" method="post"
 	id="defForm" callfn="refreshTable" enctype="multipart/form-data">
 	<div class="modal-header">
@@ -8,7 +9,9 @@
 			<div class='bootstrap-dialog-close-button' style='display: block;'>
 				<button class='close' data-dismiss='modal' aria-label='Close'>×</button>
 			</div>
-			<div class='bootstrap-dialog-title'>新增专家顾问</div>
+			<div class='bootstrap-dialog-title'>
+				<c:if test="${empty user.id}">新增</c:if><c:if test="${not empty user.id}">编辑</c:if>专家顾问
+			</div>
 		</div>
 	</div>
 	<input type="hidden" name="userHeadImages" value="${user.userHeadImages}"/>
