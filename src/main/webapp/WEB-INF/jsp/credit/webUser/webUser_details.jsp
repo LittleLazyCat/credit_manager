@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>快易收-您的债权管理专家</title>
+    <title>快易收-专注债权处置</title>
     <jsp:include page="/common/_meta.jsp"></jsp:include>
 
 </head>
