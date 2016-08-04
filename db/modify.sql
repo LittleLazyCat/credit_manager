@@ -16,4 +16,4 @@ INSERT INTO `sys_menu` VALUES (59, '资源下载', '', 55, 3, NULL, 2, 1, NULL, 
 INSERT INTO `sys_menu` VALUES (60, '反馈管理', '#', 0, 8, NULL, 1, 1, NULL, 1);
 INSERT INTO `sys_menu` VALUES (61, '案例及用户心声', '', 55, 2, NULL, 2, 1, NULL, 1);
 INSERT INTO `sys_menu` VALUES (62, '债权转让', 'credit', 57, 2, NULL, 2, 1, NULL, 1);
-INSERT INTO `sys_menu` VALUES (63, '反馈管理', NULL, 60, 1, NULL, 2, 1, NULL, 1);
+INSERT INTO `sys_menu` VALUES (63, '反馈管理', 'feedback', 60, 1, NULL, 2, 1, NULL, 1);

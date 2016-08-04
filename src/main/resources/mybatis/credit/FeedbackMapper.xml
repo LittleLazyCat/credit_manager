@@ -12,18 +12,34 @@
 		<result column="context" property="context"/>
 	</resultMap>
 	
-	<insert id="save" parameterType="PageData">
-		insert into cr_feedback (
-			user_name,
-			phone,
-			user_email,
-			context
-		) values (
-			#{userName},
-			#{phone},
-			#{userEmail},
-			#{context}
-		)
-	</insert>
+	<select id="findById" parameterType="PageData" resultType="Feedback" useCache="false">
+	    select
+	   <include refid="commonColumns"></include>
+		from cr_feedback
+		where id = #{id}
+	</select>
+	
+	
+   <select id="count" parameterType="PageData" resultType="int">
+		select count(1)
+		from cr_feedback u
+		where 1=1
+		<if test="keyword != null and keyword != ''">
+	  	and	CONCAT(IFNULL(u.user_name,''),IFNULL(u.phone,'')) like #{keyword}
+		</if>
+	</select>
+	
+	<select id="list" parameterType="PageData" resultType="Feedback">
+	     select
+	    <include refid="commonColumns"></include>
+		 from cr_feedback u
+		where 1=1
+		<if test="keyword != null and keyword != ''">
+	  	and	CONCAT(IFNULL(u.user_name,''),IFNULL(u.phone,'')) like #{keyword}
+		</if>
+		order by u.id desc
+		limit #{from},#{size}
+	</select>
+
 	
 </mapper>
