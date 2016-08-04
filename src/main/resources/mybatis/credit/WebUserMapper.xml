@@ -79,7 +79,7 @@
 			and u.user_Type = #{userType}
 		</if>
 		<if test="keyword != null and keyword != ''">
-	  	and	CONCAT(IFNULL(u.user_phone,''),IFNULL(u.user_email,'')) like #{keyword}
+	  	and	CONCAT(IFNULL(u.user_phone,''),IFNULL(u.user_email,''),IFNULL(u.nickname,'')) like #{keyword}
 		</if>
 	</select>
 	
@@ -104,7 +104,7 @@
 			and u.user_Type = #{userType}
 		</if>
 		<if test="keyword != null and keyword != ''">
-	  	and	CONCAT(IFNULL(u.user_phone,''),IFNULL(u.user_email,'')) like #{keyword}
+	  	and	CONCAT(IFNULL(u.user_phone,''),IFNULL(u.user_email,''),IFNULL(u.nickname,'')) like #{keyword}
 		</if>
 		<if test="from != null and size != null">
 			limit #{from},#{size}
@@ -112,7 +112,7 @@
 	</select>
 	
 	
-	<insert id="saveUserInfo" parameterType="PageData">
+	<insert id="saveUserInfo" parameterType="CrUser">
 		insert into cr_user (
 			user_email,
 			user_phone,
@@ -120,6 +120,7 @@
 			nickname,
 			user_pwd,
 			user_level,
+			user_head_images,
 			user_status,
 			description
 		) values (
@@ -129,6 +130,7 @@
 			#{nickname},
 			#{userPwd},
 			#{userLevel},
+			#{userHeadImages},
 			#{userStatus},
 			#{description}
 		)
@@ -140,10 +142,23 @@
 		where
 			id		= #{id}
 	</update>
+	<update id="updateUser" parameterType="CrUser">
+		update cr_user set
+			nickname	= #{nickname},
+			user_head_images	= #{userHeadImages},
+			user_status	= #{userStatus},
+			description	= #{description}
+		where
+			id		= #{id}
+	</update>
 	<update id="disableUser" parameterType="PageData">
 		update cr_user set
 			user_status	= -1
 		where
 			id	= #{id}
 	</update>
+	
+	<delete id="deleteById" parameterType="Integer">
+		delete from cr_user where id = #{id}
+	</delete>
 </mapper>

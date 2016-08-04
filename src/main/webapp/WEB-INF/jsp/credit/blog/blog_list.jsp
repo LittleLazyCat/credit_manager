@@ -8,7 +8,7 @@
 %>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<gvtv:navigater path="webUser/cr_page"></gvtv:navigater>
+	<gvtv:navigater path="blog/page"></gvtv:navigater>
 </section>
 
 <!-- Main content -->
@@ -17,18 +17,9 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<%-- <shiro:hasPermission name="user/add">
-						<button type="button" data-url="user/add" data-model="dialog" class="btn btn-sm btn-primary">
-							<i class="fa fa-fw fa-plus"></i>新增
-						</button>
-					</shiro:hasPermission>
-					<shiro:hasPermission name="user/batchDelete">
-						<button type="button" data-url="user/batchDelete"
-							data-msg="确定批量删除吗？" data-model="ajaxToDo" class="btn btn-sm btn-danger"
-							data-checkbox-name="chx_default" data-callback="refreshTable">
-							<i class="fa fa-fw fa-remove"></i>批量删除
-						</button>
-					</shiro:hasPermission> --%>
+					<button type="button" data-url="blog/toAddOrUpd" data-model="dialog" class="btn btn-sm btn-primary">
+						<i class="fa fa-fw fa-plus"></i>新增
+					</button>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -38,10 +29,12 @@
 							<tr>
 								<th width="10px" style="padding-right: 12px;"><input type='checkbox' id="defaultCheck" /></th>
 								<th width="20px" style="padding-right: 12px;"></th>
-								<th>用户昵称(邮箱)</th>
-								<th>用户手机</th>
-								<th>用户类型</th>
-								<th>用户状态</th>
+								<th>标题</th>
+								<th>类型</th>
+								<th>作者</th>
+								<th>来源</th>
+								<th>发布状态</th>
+								<th>内容</th>
 							</tr>
 						</thead>
 					</table>
@@ -65,7 +58,7 @@
 			"processing" : true,
 			"serverSide" : true,
 			"ajax" : {
-				"url" : "webUser/cr_list",
+				"url" : "blog/list",
 				"type" : "post",
 				"data" : function(data) {
 					data.keyword = $("#keyword").val();
@@ -81,42 +74,56 @@
 			"columns" : [ 
 			              {"data" : "id"},
 			              {"data" : null},
-			              {"data" : "userEmail"}, 
-			              {"data" : "userPhone"}, 
-			              {"data" : "userType"}, 
-			              {"data" : "userStatus"}
+			              {"data" : "blogTitle"},
+			              {"data" : "blogType"}, 
+			              {"data" : "blogAuthor"},
+			              {"data" : "blogSource"},
+			              {"data" : "blogStatus"},
+			              {"data" : "blogContext"}
 			            ],
 			"columnDefs" : [ {
 				"targets" : 1,
 				"render" : function(data, type, row) {
 					var html = htmlTpl.dropdown.prefix
-		           	//<shiro:hasPermission name="user/edit">
-		            	  + '  <li><a href="webUser/resetPass?id='+row.id+'" data-msg="重置后新密码为123456!" data-model="ajaxToDo" data-callback=""><i class="fa fa-pencil"></i>重置密码</a></li>'
-		            //</shiro:hasPermission>
-		            //<shiro:hasPermission name="user/delete">
-		            	  + '  <li><a href="webUser/disable?id='+row.id+'" data-msg="删除该用户后将不能再登录网站!" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
-		            //</shiro:hasPermission>
+		            	  + '  <li><a href="blog/toAddOrUpd?id='+row.id+'" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
+		            	  + '  <li><a href="blog/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
+		            	  + '  <li class="divider"></li>'
+		            	  if(row.blogStatus == '0'){
+		            		  html += '<li><a href="blog/updStatus?blogStatus=1&id='+row.id+'" data-msg="确定发布吗？" data-model="ajaxToDo" data-callback="refreshTable">发布</a></li>'
+		            	  }else if(row.blogStatus == '1'){
+		            		  html += '<li><a href="blog/updStatus?blogStatus=0&id='+row.id+'" data-msg="确定取消发布吗？" data-model="ajaxToDo" data-callback="refreshTable">取消发布</a></li>'
+		            	  }
 		            	  + htmlTpl.dropdown.suffix;
 					return html;
 				}
 			},
 			{
-				"targets" : 4,
+				"targets" : 3,
 				"render" : function(data, type, row) {
-					if(data == '0'){
-						return "债权用户";
-					}else{
-						return "处置用户";
+					if(data == '1'){
+						return "<font color='orange'>媒体报道</font>";
+					}else if(data == '2'){
+						return "<font color='#6495ED'>业务文章</font>";
 					}
 				}
 			},
 			{
-				"targets" : 5,
+				"targets" : 6,
 				"render" : function(data, type, row) {
-					if(data == -1){
-						return "<font color='red'>无效</font>";
+					if(data == '0'){
+						return "<font color='red'>未发布</font>";
+					}else if(data == '1'){
+						return "<font color='blue'>发布中</font>";
+					}
+				}
+			},
+			{
+				"targets" : 7,
+				"render" : function(data, type, row) {
+					if(data.length > 60){
+						return data.substring(0,50)+"...";
 					}else{
-						return "<font color='blue'>有效</font>";
+						return data;
 					}
 				}
 			}],
@@ -124,7 +131,7 @@
 				drawICheck('defaultCheck', 'chx_default');
 	      	},
 			"initComplete": function () {
-				initSearchForm("", "搜索昵称和手机");
+				initSearchForm("", "搜索标题、来源、作者");
 				$("#startTime").datetimepicker({
 					format : 'yyyy-mm-dd hh:ii',
 					language : 'zh',

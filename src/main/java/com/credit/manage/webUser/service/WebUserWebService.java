@@ -42,14 +42,14 @@ public class WebUserWebService {
 	}
 	
 	/**
-	 * 用户注册
+	 * 保存专家顾问
 	 * @author huixiong 
 	 * @param pd
 	 * @return
 	 * @throws Exception
 	 */
-	public Boolean register(PageData pd) throws Exception{
-		int num = dao.save("WebUserMapper.saveUserInfo", pd);
+	public Boolean saveUser(WebUser webUser) throws Exception{
+		int num = dao.save("WebUserMapper.saveUserInfo", webUser);
 		if (num > 0) {
 			return true;
 		}
@@ -113,5 +113,23 @@ public class WebUserWebService {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * 禁用用户
+	 * @param webUser
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean updateUser(WebUser webUser) throws Exception{
+		int num = dao.update("WebUserMapper.updateUser", webUser);
+		if (num > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public Integer deleteById(Integer id) throws Exception {
+		return (Integer)dao.delete("WebUserMapper.deleteById", id);
 	}
 }

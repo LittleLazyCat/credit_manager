@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BlogMapper">
-	<sql id="commonColumns">select id,blog_type,blog_title,blog_context,create_time,blog_source,blog_author </sql>
+	<sql id="commonColumns">select id,blog_type,blog_title,blog_context,create_time,blog_source,blog_author,blog_status </sql>
 
 	<resultMap type="Blog" id="userResultMap">
 		<id column="id" property="id"/>
@@ -13,6 +13,7 @@
 		<result column="create_time" property="createTime"/>
 		<result column="blog_source" property="blogSource"/>
 		<result column="blog_author" property="blogAuthor"/>
+		<result column="blog_status" property="blogStatus"/>
 	</resultMap>
 	
 	    <!-- 根据id获取债权信息 -->
@@ -30,6 +31,9 @@
 		<if test="blogType != null and blogType != ''">
 			and u.blog_type = #{blogType}
 		</if>
+		<if test="keyword != null and keyword != ''">
+	  		and	CONCAT(IFNULL(u.blog_title,''),IFNULL(u.blog_source,''),IFNULL(u.blog_author,'')) like #{keyword}
+		</if>
 	</select>
 	
 	<select id="list" parameterType="PageData" resultType="Blog">
@@ -39,8 +43,28 @@
 		<if test="blogType != null and blogType != ''">
 			and u.blog_type = #{blogType}
 		</if>
+		<if test="keyword != null and keyword != ''">
+	  		and	CONCAT(IFNULL(u.blog_title,''),IFNULL(u.blog_source,''),IFNULL(u.blog_author,'')) like #{keyword}
+		</if>
+		order by u.id desc
 		limit #{from},#{size}
 	</select>
 	
+	<update id="updateBlog" parameterType="Blog">
+		update cr_blog set 
+		blog_type = #{blogType},
+		blog_title = #{blogTitle},
+		blog_context = #{blogContext},
+		blog_source = #{blogSource},
+		blog_author = #{blogAuthor}
+		where id = #{id}
+	</update>
+	<update id="updateBlogStatus" parameterType="Blog">
+		update cr_blog set blog_status = #{blogStatus} where id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="Integer">
+		delete from cr_blog where id = #{id}
+	</delete>
 	
 </mapper>

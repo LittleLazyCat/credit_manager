@@ -8,7 +8,7 @@
 %>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<gvtv:navigater path="user"></gvtv:navigater>
+	<gvtv:navigater path="webUser/ex_page"></gvtv:navigater>
 </section>
 
 <!-- Main content -->
@@ -17,19 +17,9 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<shiro:hasPermission name="user/add">
-						<button type="button" data-url="user/add" data-model="dialog"
-							class="btn btn-sm btn-primary">
-							<i class="fa fa-fw fa-plus"></i>新增
-						</button>
-					</shiro:hasPermission>
-					<shiro:hasPermission name="user/batchDelete">
-						<button type="button" data-url="user/batchDelete"
-							data-msg="确定批量删除吗？" data-model="ajaxToDo" class="btn btn-sm btn-danger"
-							data-checkbox-name="chx_default" data-callback="refreshTable">
-							<i class="fa fa-fw fa-remove"></i>批量删除
-						</button>
-					</shiro:hasPermission>
+					<button type="button" data-url="webUser/toAddOrUpd" data-model="dialog" class="btn btn-sm btn-primary">
+						<i class="fa fa-fw fa-plus"></i>新增
+					</button>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -89,12 +79,8 @@
 				"targets" : 1,
 				"render" : function(data, type, row) {
 					var html = htmlTpl.dropdown.prefix
-		           	<shiro:hasPermission name="user/edit">
-		            	  + '  <li><a href="user/edit?userId='+row.id+'" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
-		            </shiro:hasPermission>
-		            <shiro:hasPermission name="user/delete">
-		            	  + '  <li><a href="user/delete?userId='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
-		            </shiro:hasPermission>
+		            	  + '  <li><a href="webUser/toAddOrUpd?id='+row.id+'" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
+		            	  + '  <li><a href="webUser/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
 		            	  + htmlTpl.dropdown.suffix;
 					return html;
 				}
@@ -107,7 +93,7 @@
 					}else if(data == '8'){
 						return "<font color='#6495ED'>资深诉讼律师</font>";
 					}else{
-						return "<font color='#008080'>资深财经、法治媒体人</font>";
+						return "<font color='#008080'>资深财经法治媒体人</font>";
 					}
 				}
 			},
@@ -125,7 +111,7 @@
 				drawICheck('defaultCheck', 'chx_default');
 	      	},
 			"initComplete": function () {
-				initSearchForm("", "搜索昵称和手机");
+				initSearchForm("", "搜索名称");
 				$("#startTime").datetimepicker({
 					format : 'yyyy-mm-dd hh:ii',
 					language : 'zh',

@@ -1,5 +1,7 @@
 package com.credit.manage.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class WebUser {
 
 	private Integer id;
@@ -13,6 +15,7 @@ public class WebUser {
 	private String userHeadImages;
 	private String description;
 	private Short userStatus;
+	private MultipartFile uploadFile;
 
 	public Integer getId() {
 		return id;
@@ -100,6 +103,14 @@ public class WebUser {
 
 	public void setUserStatus(Short userStatus) {
 		this.userStatus = userStatus;
+	}
+
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
 	}
 
 }

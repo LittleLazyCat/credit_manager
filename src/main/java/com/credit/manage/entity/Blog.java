@@ -11,6 +11,7 @@ public class Blog {
 	private Date createTime;
 	private String blogSource;
 	private String blogAuthor;
+	private Short blogStatus;
 
 	public Blog() {
 
@@ -82,6 +83,14 @@ public class Blog {
 
 	public void setBlogAuthor(String blogAuthor) {
 		this.blogAuthor = blogAuthor;
+	}
+
+	public Short getBlogStatus() {
+		return blogStatus;
+	}
+
+	public void setBlogStatus(Short blogStatus) {
+		this.blogStatus = blogStatus;
 	}
 
 }
