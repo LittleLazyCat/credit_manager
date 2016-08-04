@@ -12,7 +12,7 @@ INSERT INTO `sys_menu` VALUES (55, '资讯管理', '#', 0, 6, NULL, 1, 1, NULL, 
 INSERT INTO `sys_menu` VALUES (56, '媒体报道和文章', 'blog/page', 55, 1, NULL, 2, 1, NULL, 1);
 INSERT INTO `sys_menu` VALUES (57, '债权及悬赏管理', '#', 0, 4, NULL, 1, 1, NULL, 1);
 INSERT INTO `sys_menu` VALUES (58, '悬赏管理', '', 57, 3, NULL, 2, 1, NULL, 1);
-INSERT INTO `sys_menu` VALUES (59, '资源下载', '', 55, 3, NULL, 2, 1, NULL, 1);
+INSERT INTO `sys_menu` VALUES (59, '资源下载', 'filemanager', 55, 3, NULL, 2, 1, NULL, 1);
 INSERT INTO `sys_menu` VALUES (60, '反馈管理', '#', 0, 8, NULL, 1, 1, NULL, 1);
 INSERT INTO `sys_menu` VALUES (61, '案例及用户心声', '', 55, 2, NULL, 2, 1, NULL, 1);
 INSERT INTO `sys_menu` VALUES (62, '债权转让', 'credit', 57, 2, NULL, 2, 1, NULL, 1);
