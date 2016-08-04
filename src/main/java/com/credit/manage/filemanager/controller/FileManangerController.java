@@ -30,7 +30,7 @@ public class FileManangerController extends BaseController{
 	@RequestMapping
 	public ModelAndView page(){
 		ModelAndView mv = super.getModelAndView();
-		mv.setViewName("credit/fileManager/fileManager_list");
+		mv.setViewName("credit/filemanager/filemanager_list");
 		return mv;
 	}
 	
@@ -67,7 +67,7 @@ public class FileManangerController extends BaseController{
 		}
 		ModelAndView mv = super.getModelAndView();
 		mv.addObject("fileManager", fileManager);
-		mv.setViewName("credit/fileManager/fileManager_details");
+		mv.setViewName("credit/filemanager/filemanager_details");
 		return mv;
 	}
 	
@@ -79,7 +79,7 @@ public class FileManangerController extends BaseController{
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public ModelAndView toAdd(){
 		ModelAndView mv = super.getModelAndView();
-		mv.setViewName("credit/fileManager/fileManager_add");
+		mv.setViewName("credit/filemanager/filemanager_add");
 		return mv;
 	}
 	
@@ -119,7 +119,7 @@ public class FileManangerController extends BaseController{
 		}
 		ModelAndView mv = super.getModelAndView();
 		mv.addObject("fileManager", fileManager);
-		mv.setViewName("credit/fileManager/fileManager_edit");
+		mv.setViewName("credit/filemanager/filemanager_edit");
 		return mv;
 	}
 	

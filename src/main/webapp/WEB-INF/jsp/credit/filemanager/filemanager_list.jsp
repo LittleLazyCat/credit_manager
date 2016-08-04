@@ -19,19 +19,15 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-				<shiro:hasPermission name="filemanager/add">
 						<button type="button" data-url="filemanager/add" data-model="dialog"
 							class="btn btn-sm btn-primary">
 							<i class="fa fa-fw fa-plus"></i>新增
-						</button>
-					</shiro:hasPermission>
-					<shiro:hasPermission name="filemanager/batchDelete">
+						</button>			
 						<button type="button" data-url="filemanager/batchDelete"
 							data-msg="确定批量删除吗？" data-model="ajaxToDo" class="btn btn-sm btn-danger"
 							data-checkbox-name="chx_default" data-callback="refreshTable">
 							<i class="fa fa-fw fa-remove"></i>批量删除
 						</button>
-					</shiro:hasPermission>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -91,7 +87,6 @@
 				"targets" : 1,
 				"render" : function(data, type, row) {
 					var html = htmlTpl.dropdown.prefix
-		           	
 		            	  + '  <li><a href="filemanager/edit?id='+row.id+'" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
 		            	  + '  <li><a href="filemanager/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
 		            	  + htmlTpl.dropdown.suffix;
