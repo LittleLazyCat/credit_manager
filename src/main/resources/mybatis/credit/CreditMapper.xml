@@ -75,6 +75,9 @@
 		<if test="contactName!=nul and contactName!=''">
 		and contact_name like CONCAT(CONCAT('%',#{contactName}),'%')
 		</if>
+		<if test="keyword != null and keyword != ''">
+	  	and	CONCAT(IFNULL(u.file_type,''),IFNULL(u.file_title,'')) like #{keyword}
+		</if>
 	</select>
 	
 	<select id="list" parameterType="PageData" resultType="Credit">
@@ -96,12 +99,15 @@
 		<if test="contactName!=nul and contactName!=''">
 		and contact_name like CONCAT(CONCAT('%',#{contactName}),'%')
 		</if>
+		<if test="keyword != null and keyword != ''">
+	  	and	CONCAT(IFNULL(u.file_type,''),IFNULL(u.file_title,'')) like #{keyword}
+		</if>
 		order by u.id desc
 		limit #{from},#{size}
 	</select>
 	
 	
-	<insert id="creditSave" parameterType="credit">
+	<insert id="save" parameterType="credit">
 		insert into cr_credit (
 			 user_id,
 			 cr_type,
@@ -144,5 +150,40 @@
 			#{creditType}
 		)
 	</insert>	
+
+	<update id="update" parameterType="credit">
+			update cr_credit set 
+             user_id=#{userId},
+			 cr_type=#{crType},
+			 cr_amount=#{crAmount},
+			 cr_status=#{crStatus},
+			 disposal_type=#{disposalType},
+			 commision_range=#{commisionRange},
+			 contact_name=#{contactName},
+			 contact_number=#{contactNumber},
+			 debt_name=#{debtName},
+			 debt_province=#{debtProvince},
+			 debt_city=#{debtCity},
+			 debt_phone=#{debtPhone},
+			 debt_proof=#{debtProof},
+			 description=#{description},
+			 create_date=#{createDate},
+			 end_date=#{endDate},
+			 open_date=#{openDate},
+			 agreed_date=#{agreedDate},
+			 credit_type=#{creditType}
+			 where id = #{id}
+	</update>
+	
+	<update id="delete" parameterType="Integer" >
+            update  cr_credit set cr_status=-1 where id=#{id}
+    </update>
+	
+	<update id="batchDelete" parameterType="java.util.List">
+		 update  cr_credit set cr_status=-1
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
 
 </mapper>

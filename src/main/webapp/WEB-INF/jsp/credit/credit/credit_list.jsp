@@ -19,14 +19,14 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<shiro:hasPermission name="user/add">
-						<button type="button" data-url="user/add" data-model="dialog"
+					<shiro:hasPermission name="credit/add">
+						<button type="button" data-url="credit/add" data-model="dialog"
 							class="btn btn-sm btn-primary">
 							<i class="fa fa-fw fa-plus"></i>新增
 						</button>
 					</shiro:hasPermission>
-					<shiro:hasPermission name="user/batchDelete">
-						<button type="button" data-url="user/batchDelete"
+					<shiro:hasPermission name="credit/batchDelete">
+						<button type="button" data-url="credit/batchDelete"
 							data-msg="确定批量删除吗？" data-model="ajaxToDo" class="btn btn-sm btn-danger"
 							data-checkbox-name="chx_default" data-callback="refreshTable">
 							<i class="fa fa-fw fa-remove"></i>批量删除
@@ -82,7 +82,7 @@
 			"createdRow" : function(row, data, index) {
 				$('td:eq(0)', row).html("<input type='checkbox' name='chx_default' value='" + data.userId + "'/>");
 			},
-			"lengthMenu": [[2, 4, 6], [2, 4, 6]],
+			"lengthMenu": [[10, 20, 50], [10, 20, 50]],
 			"columns" : [ 
 			              {"data" : "id"},
 			              {"data" : null},
@@ -97,15 +97,15 @@
 				"targets" : 1,
 				"render" : function(data, type, row) {
 					var html = htmlTpl.dropdown.prefix
-		           	<shiro:hasPermission name="user/edit">
-		            	  + '  <li><a href="user/edit?userId='+row.id+'" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
+		           	<shiro:hasPermission name="credit/edit">
+		            	  + '  <li><a href="credit/edit?id='+row.id+'" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
 		            </shiro:hasPermission>
-		            <shiro:hasPermission name="user/delete">
-		            	  + '  <li><a href="user/delete?userId='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
+		            <shiro:hasPermission name="credit/delete">
+		            	  + '  <li><a href="credit/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
 		            </shiro:hasPermission>
-		            <shiro:hasPermission name="user/editRole">
+		            <shiro:hasPermission name="credit/updateAudit">
 		            	  + '  <li class="divider"></li>'
-		            	  + '  <li><a href="user/editRole?userId='+row.id+'" data-model="dialog">分配角色</a></li>'
+		            	  + '  <li><a href="credit/updateAudit?id='+row.id+'" data-model="dialog">分配角色</a></li>'
 		            </shiro:hasPermission>
 		            	  + htmlTpl.dropdown.suffix;
 					return html;

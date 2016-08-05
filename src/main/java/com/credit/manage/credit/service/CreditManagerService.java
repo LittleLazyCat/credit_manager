@@ -1,5 +1,6 @@
 package com.credit.manage.credit.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.credit.manage.entity.Credit;
 import com.gvtv.manage.base.dao.BaseDao;
-import com.gvtv.manage.base.util.AppUtil;
 import com.gvtv.manage.base.util.Const;
 import com.gvtv.manage.base.util.PageData;
 
@@ -39,5 +39,38 @@ public class CreditManagerService {
 		result.put(Const.RECORDSFILTERED, totalNum);
 		result.put(Const.NDATA, pds);
 		return result;
+	}
+	
+	public Credit findById(Integer id) throws Exception {
+		return (Credit) dao.findForObject("CreditMapper.findById", id);
+	}
+	
+	@Transactional(rollbackFor = { Throwable.class }, readOnly = false)
+	public int save(Credit credit) throws Exception{
+		return dao.save("CreditMapper.save", credit);
+	}
+	
+	@Transactional(rollbackFor = { Throwable.class }, readOnly = false)
+	public int update(Credit credit) throws Exception{
+		return dao.update("CreditMapper.update", credit);
+	}
+	
+	@Transactional(rollbackFor = { Throwable.class }, readOnly = false)
+	public int delete(Integer id) throws Exception{
+		return dao.delete("CreditMapper.delete", id);
+	}
+	
+	@Transactional(rollbackFor = { Throwable.class }, readOnly = false)
+	public void batchDelete(String ids) throws Exception {
+		if (StringUtils.isNotBlank(ids)) {
+			String[] idArr = ids.split(",");
+			if (idArr.length > 0) {
+				List<Integer> idList = new ArrayList<Integer>();
+				for (String idStr : idArr) {
+					idList.add(Integer.valueOf(idStr));
+				}
+				dao.delete("CreditMapper.batchDelete", idList);
+			}
+		}
 	}
 }
