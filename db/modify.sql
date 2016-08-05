@@ -19,7 +19,7 @@ INSERT INTO `sys_menu` VALUES (62, '债权转让', 'credit', 57, 2, NULL, 2, 1, 
 INSERT INTO `sys_menu` VALUES (63, '反馈管理', 'feedback', 60, 1, NULL, 2, 1, NULL, 1);
 
 /***********2016-08-05***************/
-CREATE TABLE `NewTable` (
+CREATE TABLE `cr_sample` (
 `id`  int(11) NOT NULL AUTO_INCREMENT COMMENT '状态' ,
 `sam_name`  varchar(30) NULL COMMENT '名称' ,
 `trade`  varchar(60) NULL COMMENT '行业' ,

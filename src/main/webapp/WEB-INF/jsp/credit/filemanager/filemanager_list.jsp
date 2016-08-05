@@ -92,16 +92,29 @@
 		            	  + htmlTpl.dropdown.suffix;
 					return html;
 				}
-			} ],
+			},
+			{
+				"targets" : 2,
+				"render" : function(data, type, row) {
+					if(data == '1'){
+						return "<font color='orange'>法律文书</font>";
+					}else if(data == '2'){
+						return "<font color='blue'>合同模版</font>";
+					}else if(data == '3'){
+						return "<font color='red'>实用文件</font>";
+					}
+				}
+			}],
 			"drawCallback": function (settings) {
 				drawICheck('defaultCheck', 'chx_default');
 	      	},
 			"initComplete": function () {
 			var others = '<div class="input-group input-group-sm input-adjust">'
 					+ '<span class="input-group-addon">类型</span>'
-					+ '<select class="form-control">'
-					+ '	<option>option 1</option>'
-					+ '	<option>option 2</option>'
+					+ '<select class="form-control" name="fileType">'
+					+ '	<option value="1">法律文书</option>'
+					+ '	<option value="2">合同模版</option>'
+					+ '	<option value="3">实用文件</option>'
 					+ '</select>'
 					+ '</div>';
 				initSearchForm(others, "文件名称");
