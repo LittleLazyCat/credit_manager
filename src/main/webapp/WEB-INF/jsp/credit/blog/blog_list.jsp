@@ -10,7 +10,11 @@
 <section class="content-header">
 	<gvtv:navigater path="blog/page"></gvtv:navigater>
 </section>
-
+<style>
+.modal-dialog{
+	width: 1024px;
+}
+</style>
 <!-- Main content -->
 <section class="content">
 	<div class="row">
@@ -119,8 +123,13 @@
 			{
 				"targets" : 7,
 				"render" : function(data, type, row) {
-					if(data.length > 60){
-						return data.substring(0,50)+"...";
+					if(data != '' && data.length > 60){
+						var index = data.indexOf(">");
+						if(index != -1){
+							return data.substring((index+1),(index+50))+"...";
+						}else{
+							return data.substring(0,50)+"...";
+						}
 					}else{
 						return data;
 					}

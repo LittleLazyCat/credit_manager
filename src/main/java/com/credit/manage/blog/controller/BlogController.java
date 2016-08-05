@@ -30,8 +30,18 @@ public class BlogController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value="/toAddOrUpd")
-	public ModelAndView addOrUpd(){
+	public ModelAndView addOrUpd(Integer id){
 		ModelAndView mv = super.getModelAndView();
+		if(null != id){
+			try{
+				Blog blog = blogWebService.findById(Integer.valueOf(id));
+				mv.addObject("blog",blog);
+			}catch(Exception e){
+				logger.error("toadd blog error", e);
+			}
+		}else{
+			
+		}
 		mv.setViewName("credit/blog/blog_addOrUpd");
 		return mv;
 	}
