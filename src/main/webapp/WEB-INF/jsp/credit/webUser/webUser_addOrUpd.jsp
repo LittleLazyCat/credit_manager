@@ -43,7 +43,7 @@
 			<div class="form-group">
 				<label for="description" class="col-sm-3 control-label">描述:</label>
 				<div class="col-sm-7">
-					<textarea id="description" name="description" class="form-control required" rows="5" maxlength="1000">${user.description}</textarea>
+					<textarea id="description" name="description" class="form-control required" rows="7" maxlength="1000">${user.description}</textarea>
 				</div>
 			</div>
 		</div>

@@ -1,58 +1,61 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
-<form class="form-horizontal" action="webUser/addOrUpd" method="post"
-	id="defForm" callfn="refreshTable" enctype="multipart/form-data">
-	<div class="modal-header">
-		<div class='bootstrap-dialog-header'>
-			<div class='bootstrap-dialog-close-button' style='display: block;'>
-				<button class='close' data-dismiss='modal' aria-label='Close'>×</button>
-			</div>
-			<div class='bootstrap-dialog-title'>新增专家顾问</div>
-		</div>
-	</div>
-	<input type="hidden" name="userHeadImages" value="${user.userHeadImages}"/>
-	<input type="hidden" name="id" value="${user.id}"/>
-	<div class="modal-body">
-		<div class="container-fluid">
-			<div class="form-group">
-				<label for="loginName" class="col-sm-3 control-label">专家顾问名称：</label>
-				<div class="col-sm-7">
-					<input id="nickname" name="nickname" type="text" maxlength="10" value="${user.nickname}" class="form-control required" placeholder="请输入专家顾问名称"/>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="password" class="col-sm-3 control-label">专家顾问分类:</label>
-				<div class="col-sm-7">
-					<select name="userStatus" id="userStatus" class="form-control">
-						<option value="7">资产处置专家</option>
-						<option value="8">资深诉讼律师</option>
-						<option value="9">资深财经法治媒体人</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="name" class="col-sm-3 control-label">图片:</label>
-				<div class="col-sm-7">
-					<input class="form-control required" type="file" name="uploadFile" id="uploadFile" accept=".jpg,.png,.jpeg,.gif,.bmp"/>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="description" class="col-sm-3 control-label">描述:</label>
-				<div class="col-sm-7">
-					<textarea id="description" name="description" class="form-control required" rows="5" maxlength="1000">${user.description}</textarea>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-		<button type="submit" class="btn btn-primary">保存</button>
-	</div>
-</form>
-<script>
-	if('${user.userStatus}' != ''){
-		$("#userStatus").val('${user.userStatus}');
-	}
-	$("#defForm").validate();
-</script>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="${ctx}/static/AdminLTE/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="${ctx}/static/AdminLTE/dist/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<script src="${ctx}/static/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	<script src="${ctx}/static/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <title>${blog.blogTitle}</title>
+
+</head>
+<body class="gray-bg top-navigation">
+    <div id="wrapper">
+        <div id="page-wrapper" class="gray-bg">
+            
+            <div class="wrapper wrapper-content">
+                <div class="container">                    
+                    <div class="row">
+			            <div class="col-sm-12">
+			                <div class="ibox">
+			                    <div class="ibox-content">
+			                        <div class="text-center article-title">
+			                            <h1>
+			                            	${blog.blogTitle }
+			                            </h1>
+			                        </div>
+			                        <div style="text-align: center;">
+			                            <span class="btn btn-white btn-xs">来源：${blog.blogSource}</span>
+			                            <span class="btn btn-white btn-xs">作者：${blog.blogAuthor}</span>
+			                            <span class="btn btn-white btn-xs"><fmt:formatDate value="${blog.createTime}" type="date" dateStyle="long"/></span>
+			                        </div><br/>
+			                        <hr>
+			                        <p style="font-size: 16px">
+			                        	${blog.blogContext}
+			                        </p>
+			                        <hr>
+			
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+
+                     </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

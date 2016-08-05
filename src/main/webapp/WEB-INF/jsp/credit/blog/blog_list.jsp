@@ -101,6 +101,12 @@
 				}
 			},
 			{
+				"targets" : 2,
+				"render" : function(data, type, row) {
+					return "<a href='blog/details?id="+row.id+"' target='_blank'>"+data+"</a>";
+				}
+			},
+			{
 				"targets" : 3,
 				"render" : function(data, type, row) {
 					if(data == '1'){

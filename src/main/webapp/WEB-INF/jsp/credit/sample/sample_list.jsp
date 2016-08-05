@@ -8,7 +8,7 @@
 %>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<gvtv:navigater path="webUser/ex_page"></gvtv:navigater>
+	<gvtv:navigater path="sample/page"></gvtv:navigater>
 </section>
 
 <!-- Main content -->
@@ -17,7 +17,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<button type="button" data-url="webUser/toAddOrUpd" data-model="dialog" class="btn btn-sm btn-primary">
+					<button type="button" data-url="sample/toAddOrUpd" data-model="dialog" class="btn btn-sm btn-primary">
 						<i class="fa fa-fw fa-plus"></i>新增
 					</button>
 				</div>
@@ -29,9 +29,12 @@
 							<tr>
 								<th width="10px" style="padding-right: 12px;"><input type='checkbox' id="defaultCheck" /></th>
 								<th width="20px" style="padding-right: 12px;"></th>
+								<th>类型</th>
 								<th>名称</th>
-								<th>专家分类</th>
-								<th>简介</th>
+								<th>行业</th>
+								<th>金额</th>
+								<th>状态</th>
+								<th>说明</th>
 							</tr>
 						</thead>
 					</table>
@@ -55,7 +58,7 @@
 			"processing" : true,
 			"serverSide" : true,
 			"ajax" : {
-				"url" : "webUser/ex_list",
+				"url" : "sample/list",
 				"type" : "post",
 				"data" : function(data) {
 					data.keyword = $("#keyword").val();
@@ -71,16 +74,25 @@
 			"columns" : [ 
 			              {"data" : "id"},
 			              {"data" : null},
-			              {"data" : "nickname"},
-			              {"data" : "userStatus"}, 
+			              {"data" : "samType"},
+			              {"data" : "samName"}, 
+			              {"data" : "trade"},
+			              {"data" : "amount"},
+			              {"data" : "status"},
 			              {"data" : "description"}
 			            ],
 			"columnDefs" : [ {
 				"targets" : 1,
 				"render" : function(data, type, row) {
 					var html = htmlTpl.dropdown.prefix
-		            	  + '  <li><a href="webUser/toAddOrUpd?id='+row.id+'" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
-		            	  + '  <li><a href="webUser/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
+		            	  + '  <li><a href="sample/toAddOrUpd?id='+row.id+'" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
+		            	  + '  <li><a href="sample/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
+		            	  + '  <li class="divider"></li>'
+            			  if(row.status == '0'){
+		            		  html += '<li><a href="sample/updStatus?status=1&id='+row.id+'" data-msg="确定发布吗？" data-model="ajaxToDo" data-callback="refreshTable">发布</a></li>'
+		            	  }else if(row.status == '1'){
+		            		  html += '<li><a href="sample/updStatus?status=0&id='+row.id+'" data-msg="确定取消发布吗？" data-model="ajaxToDo" data-callback="refreshTable">取消发布</a></li>'
+		            	  }
 		            	  + htmlTpl.dropdown.suffix;
 					return html;
 				}
@@ -88,23 +100,37 @@
 			{
 				"targets" : 2,
 				"render" : function(data, type, row) {
-					return '<a href="webUser/expertDetail?id='+row.id+'" data-model="dialog">'+data+'</a>';
+					if(data == '1'){
+						return "<font color='orange'>成功案例</font>";
+					}else if(data == '2'){
+						return "<font color='blue'>用户心声</font>";
+					}
 				}
 			},
 			{
 				"targets" : 3,
 				"render" : function(data, type, row) {
-					if(data == '7'){
-						return "<font color='orange'>资产处置专家</font>";
-					}else if(data == '8'){
-						return "<font color='#6495ED'>资深诉讼律师</font>";
-					}else{
-						return "<font color='#008080'>资深财经法治媒体人</font>";
+					return '<a href="sample/detail?id='+row.id+'" data-model="dialog">'+data+'</a>';
+				}
+			},
+			{
+				"targets" : 5,
+				"render" : function(data, type, row) {
+					return data+' 元';
+				}
+			},
+			{
+				"targets" : 6,
+				"render" : function(data, type, row) {
+					if(data == '0'){
+						return "<font color='red'>未发布</font>";
+					}else if(data == '1'){
+						return "<font color='blue'>发布中</font>";
 					}
 				}
 			},
 			{
-				"targets" : 4,
+				"targets" : 7,
 				"render" : function(data, type, row) {
 					if(data.length > 60){
 						return data.substring(0,60)+"...";
@@ -117,7 +143,7 @@
 				drawICheck('defaultCheck', 'chx_default');
 	      	},
 			"initComplete": function () {
-				initSearchForm("", "搜索名称");
+				initSearchForm("", "搜索名称或行业");
 				$("#startTime").datetimepicker({
 					format : 'yyyy-mm-dd hh:ii',
 					language : 'zh',

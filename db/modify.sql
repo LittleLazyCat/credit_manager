@@ -17,3 +17,18 @@ INSERT INTO `sys_menu` VALUES (60, '反馈管理', '#', 0, 8, NULL, 1, 1, NULL, 
 INSERT INTO `sys_menu` VALUES (61, '案例及用户心声', '', 55, 2, NULL, 2, 1, NULL, 1);
 INSERT INTO `sys_menu` VALUES (62, '债权转让', 'credit', 57, 2, NULL, 2, 1, NULL, 1);
 INSERT INTO `sys_menu` VALUES (63, '反馈管理', 'feedback', 60, 1, NULL, 2, 1, NULL, 1);
+
+/***********2016-08-05***************/
+CREATE TABLE `NewTable` (
+`id`  int(11) NOT NULL AUTO_INCREMENT COMMENT '状态' ,
+`sam_name`  varchar(30) NULL COMMENT '名称' ,
+`trade`  varchar(60) NULL COMMENT '行业' ,
+`amount`  double NULL COMMENT '金额' ,
+`sam_type`  smallint(3) NULL COMMENT '类型(1案例、2用户心声)' ,
+`sam_img`  varchar(300) NULL COMMENT '图片路径' ,
+`description`  varchar(600) NULL COMMENT '描述' ,
+`status`  smallint NULL COMMENT '状态' ,
+PRIMARY KEY (`id`)
+)
+;
+

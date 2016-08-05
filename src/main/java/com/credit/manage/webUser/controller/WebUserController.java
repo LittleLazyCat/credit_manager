@@ -18,6 +18,7 @@ import com.gvtv.manage.base.controller.BaseController;
 import com.gvtv.manage.base.util.DataUtil;
 import com.gvtv.manage.base.util.MD5;
 import com.gvtv.manage.base.util.PageData;
+import com.gvtv.manage.base.util.PropertiesUtil;
 
 @Controller
 @RequestMapping(value="/webUser")
@@ -34,7 +35,7 @@ public class WebUserController extends BaseController{
 	/**
 	 * 图片上传保存路径
 	 */
-	private final String IMG_UPLOAD_URL = "D:/workspace/credit_web/src/main/webapp/"; 
+	private final String IMG_UPLOAD_URL = PropertiesUtil.getValue("saveImgPath"); 
 	
 	/**
 	 * 跳转到注册用户列表
@@ -126,9 +127,10 @@ public class WebUserController extends BaseController{
 		ModelAndView mv = this.getModelAndView();
 		if(null != id && !"".equals(id)){
 			WebUser user = webUserWebService.getUserById(Integer.valueOf(id));
+			user.setUserHeadImages(PropertiesUtil.getValue("showImgPath")+user.getUserHeadImages());
 			mv.addObject("user",user);
 		}
-		mv.setViewName("/expert_details");
+		mv.setViewName("credit/webUser/webUser_detail");
 		return mv;
 	}
 	
