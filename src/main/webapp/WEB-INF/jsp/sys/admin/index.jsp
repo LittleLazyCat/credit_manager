@@ -65,6 +65,7 @@
 	<script src="${ctx}/static/js/jquery.validate.min.js" type="text/javascript"></script>
 	<script src="${ctx}/static/js/jquery-gv-validate.js" type="text/javascript"></script>
 	<script src="${ctx}/static/AdminLTE/plugins/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+	<script src="${ctx}/static/AdminLTE/bootstrap/js/bootstrap-datetimepicker.zh-CN.js"></script>
 	<!-- DataTables plugin -->
 	<script src="${ctx}/static/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script src="${ctx}/static/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js"></script>

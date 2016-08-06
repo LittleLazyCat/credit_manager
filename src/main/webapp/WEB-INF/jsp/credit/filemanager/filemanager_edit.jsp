@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <form class="form-horizontal" action="filemanager/edit" method="post" id="defForm" callfn="refreshTable">
 	<div class="modal-header">
 		<div class='bootstrap-dialog-header'>
@@ -15,7 +16,7 @@
 		<div class="container-fluid">
 			<div class="form-group">
 				<label for="loginName" class="col-sm-2 control-label">文件类型</label>
-				<div class="col-sm-7">${fileManager.fileType }
+				<div class="col-sm-7">
 						<select name="fileType" id="fileType" class="form-control required" >
 						<option value="1"  <c:if test="${fileManager.fileType == 1}">selected="selected"</c:if>>法律文书</option>
 						<option value="2"  <c:if test="${fileManager.fileType == 2}">selected="selected"</c:if>>合同模版</option>

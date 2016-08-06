@@ -105,5 +105,30 @@
 			#{userId}
 		)
 	</insert>	
+	
+	<update id="updateReward" parameterType="reward">
+		update cr_reward set
+			reward_type = #{rewardType},
+			 reward_amount = #{rewardAmount},
+			 reward_name = #{rewardName},
+			 cart_id = #{cartId},
+			 car_brand = #{carBrand},
+			 province = #{province},
+			 city = #{city},
+			 images = #{images},
+			 end_time = #{endTime},
+			 description = #{description}
+		where id = #{id}
+	</update>	
+	
+	<delete id="deleteById" parameterType="Integer">
+		delete from cr_reward where id = #{id}
+	</delete>
+	
+	<update id="updateStatus" parameterType="reward">
+		update cr_reward set
+			 reward_status = #{rewardStatus}
+		where id = #{id}
+	</update>	
 
 </mapper>
