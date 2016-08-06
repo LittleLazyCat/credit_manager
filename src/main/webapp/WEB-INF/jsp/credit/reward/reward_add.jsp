@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
 <%
 String path = request.getContextPath();
 // 获得本项目的地址(例如: http://localhost:8080/MyApp/)赋值给basePath变量
@@ -29,36 +30,36 @@ pageContext.setAttribute("basePath",basePath);
                  <label class="col-sm-3 control-label">悬赏类型：</label>
                  <div class="col-sm-8">
                       <select  name="rewardType" class="form-control" required="required" aria-required="true"  id="rewardType" onchange="changeRewardType()">
-							<option value="0">找人</option>
-							<option value="1">找车辆</option>
-							<option value="2">找房产</option>
-							<option value="3">找应收款</option>
-							<option value="4">其他</option>
+							<option value="0" <c:if test="${reward.rewardType eq 0}">selected</c:if>></option>
+							<option value="1" <c:if test="${reward.rewardType eq 1}">selected</c:if>>找车辆</option>
+							<option value="2" <c:if test="${reward.rewardType eq 2}">selected</c:if>>找房产</option>
+							<option value="3" <c:if test="${reward.rewardType eq 3}">selected</c:if>>找应收款</option>
+							<option value="4" <c:if test="${reward.rewardType eq 4}">selected</c:if>>其他</option>
 					  </select>
                  </div>
              </div>
              <div class="form-group">
                  <label class="col-sm-3 control-label">悬赏金额(元)：</label>
                  <div class="col-sm-8">
-                     <input id="rewardAmount" name="rewardAmount" class="form-control" required="required" type="text" aria-required="true" class="valid"/>
+                     <input id="rewardAmount" name="rewardAmount" class="form-control" required="required" type="text" aria-required="true" class="valid" value="${reward.rewardAmount}"/>
                  </div>
              </div>
              <div class="form-group">
                  <label class="col-sm-3 control-label">姓名：</label>
                  <div class="col-sm-8">
-                     <input id="rewardName" name="rewardName" class="form-control" type="text" required="required" aria-required="true" class="valid">
+                     <input id="rewardName" name="rewardName" class="form-control" type="text" required="required" aria-required="true" class="valid" value="${reward.rewardName}">
                  </div>
              </div>
              <div class="form-group">
                  <label class="col-sm-3 control-label">身份证：</label>
                  <div class="col-sm-8">
-                       <input id="cartId" name="cartId" class="form-control" type="text" required="required" aria-required="true" class="valid">
+                       <input id="cartId" name="cartId" class="form-control" type="text" required="required" aria-required="true" class="valid" value="${reward.cartId}">
                  </div>
              </div>
              <div class="form-group" style="display:none" id="carBrandDiv">
               <label class="col-sm-3 control-label">车牌号：</label>
                  <div class="col-sm-8">
-                       <input id="carBrand" name="carBrand" class="form-control" type="text"  >
+                       <input id="carBrand" name="carBrand" class="form-control" type="text" value="${reward.carBrand}"/>
                  </div>
              </div>
               <b><font color="blue">其他信息</font></b>
@@ -66,11 +67,11 @@ pageContext.setAttribute("basePath",basePath);
 		      <div class="form-group">
                      <label class="col-sm-3 control-label">所在地：</label>
                      <div class="col-sm-4">
-					<select onchange="loadCity(this)" id="debtProvince" name="province" class="form-control input-sm"  required="required" aria-required="true">
+					<select onchange="loadCity(this.value)" id="debtProvince" name="province" class="form-control input-sm"  required="required" aria-required="true">
 							 <option value="1">请选择</option>
 							 <c:forEach items="${provinceList}" var="item">
-						 <option value="${item}">${item}</option>
-						 </c:forEach>
+							 	<option value="${item}" >${item}</option>
+							 </c:forEach>
                 	</select>
 					</div>
 					<div class="col-sm-4">
@@ -83,7 +84,7 @@ pageContext.setAttribute("basePath",basePath);
                     <div class="form-group">
                         <label class="col-sm-3 control-label">照片：</label>
                         <div class="col-sm-8">
-                             <input class="form-control required" type="file" name="uploadFiles" accept=".jpg,.png,.jpeg,.gif,.bmp"/>
+                             <input class="form-control" type="file" name="uploadFiles" accept=".jpg,.png,.jpeg,.gif,.bmp"/>
                              <div id="addFileUpload"></div>
                              <span class="help-block m-b-none">
                              	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()"><span class="glyphicon glyphicon-plus-sign">继续添加</span></button>
@@ -93,13 +94,13 @@ pageContext.setAttribute("basePath",basePath);
                 <div class="form-group" id="data_1">
                  <label class="col-sm-3 control-label">悬赏有效日期：</label>
                 <div class="col-sm-8">
-                     <input class="form-control" type="text" name="endTime" id="datetimepicker" aria-required="true" required="required">
+                     <input class="form-control" type="text" name="endTime" id="datetimepicker" aria-required="true" required="required" value="<fmt:formatDate value="${reward.endTime }" pattern="yyyy-MM-dd"/>"/>
                  </div>
                </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">悬赏描述：</label>
                     <div class="col-sm-8">
-                        <textarea id="description" name="description" class="form-control" rows="3"></textarea>
+                        <textarea id="description" name="description" class="form-control" rows="3">${reward.description}</textarea>
                     </div>
                 </div>
 		</div>
@@ -114,8 +115,8 @@ pageContext.setAttribute("basePath",basePath);
 	function addFileUpload(){
 		$("#addFileUpload").append('<input class="form-control" type="file" name="uploadFiles" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');
 	}
-	function loadCity(obj) {
-		var proName = $(obj).val();
+	function loadCity(value) {
+		var proName = value;
 		//$("#provinceSel1").val(province);
 		$.ajax({
 			url : 'reward/loadCity',
@@ -129,7 +130,11 @@ pageContext.setAttribute("basePath",basePath);
 				$("#debtCity").empty();
 				$('#debtCity').append('<option>请选择</option>');
 				$.each(data, function (i,item) {
-					$('#debtCity').append('<option value='+item+'>'+item+'</option>');
+					if('${reward.city}' == item){
+						$('#debtCity').append('<option value='+item+' selected>'+item+'</option>');
+					}else{
+						$('#debtCity').append('<option value='+item+'>'+item+'</option>');
+					}
 			    });
 			},
 			error : function() {
@@ -145,6 +150,11 @@ pageContext.setAttribute("basePath",basePath);
 	    	language: 'zh-CN',
 	    	autoclose:true
 	    });
+	    changeRewardType();
+	    if('${reward.province}' != ''){
+	    	$("#debtProvince").val('${reward.province}');
+	    	loadCity('${reward.province}');
+	    }
 	});
 
 	function changeRewardType(){

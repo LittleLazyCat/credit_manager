@@ -78,12 +78,16 @@ public class RewardController extends BaseController{
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/saveReward",method =RequestMethod.GET)
-	public ModelAndView toSaveReward(Integer userId) throws Exception{
+	public ModelAndView toSaveReward(Integer userId,Integer id) throws Exception{
 		
 		List<String> provinceList = ProvinceEnum.takeAllValues();//省份list
 		ModelAndView mv = this.getModelAndView();
 		mv.addObject("provinceList", provinceList);
 		mv.addObject("userId", userId);
+		if(null != id){
+			Reward reward = rewardWebService.findById(id);
+			mv.addObject("reward", reward);
+		}
 		mv.setViewName("credit/reward/reward_add");
 		return mv;
 	}
@@ -151,13 +155,31 @@ public class RewardController extends BaseController{
 			rewardWebService.updateStatus(reward);
 			result.put("status", 1);
 		}catch(Exception e){
-			logger.error("delete sample error", e);
+			logger.error("updStatus sample error", e);
+			result.put("status", 0);
+			result.put("msg", "更新失败");
+		}
+		return result;
+	}
+	@RequestMapping(value="/delete")
+	@ResponseBody
+	public PageData delete(Integer id){
+		PageData result = new PageData();
+		try{
+			Boolean bool = rewardWebService.deleteById(id);
+			if(bool){
+				result.put("status", 1);
+			}else{
+				result.put("status", 0);
+				result.put("msg", "删除失败或者为不可删除状态");
+			}
+		}catch(Exception e){
+			logger.error("delete reward error", e);
 			result.put("status", 0);
 			result.put("msg", "删除失败");
 		}
 		return result;
 	}
-	
 	/**
 	 * 查询悬赏详情
 	 * @return
