@@ -1,5 +1,8 @@
 package com.credit.manage.credit.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -14,9 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.credit.manage.credit.service.CreditManagerService;
 import com.credit.manage.entity.Credit;
 import com.credit.manage.entity.FileManager;
+import com.credit.manage.filemanager.service.UploadFileService;
+import com.credit.manage.util.ProvinceEnum;
 import com.gvtv.manage.base.controller.BaseController;
 import com.gvtv.manage.base.system.controller.UserController;
+import com.gvtv.manage.base.util.DataUtil;
 import com.gvtv.manage.base.util.PageData;
+import com.gvtv.manage.base.util.PropertiesUtil;
 
 @Controller
 @RequestMapping(value = "/credit")
@@ -24,10 +31,14 @@ public class CreditManagerController extends BaseController{
 	private static Logger logger = LoggerFactory.getLogger(CreditManagerController.class);
 	@Resource
 	private CreditManagerService creditManagerService;
+	@Resource
+	private UploadFileService uploadFileService;
 
 	@RequestMapping
 	public ModelAndView page() {
+		PageData pd = super.getPageData();
 		ModelAndView mv = super.getModelAndView();
+		mv.addObject("pd", pd);
 		mv.setViewName("credit/credit/credit_list");
 		return mv;
 	}
@@ -74,7 +85,11 @@ public class CreditManagerController extends BaseController{
      */
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public ModelAndView toAdd(){
-		ModelAndView mv = super.getModelAndView();
+		List<String> provinceList = ProvinceEnum.takeAllValues();//省份list
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = super.getPageData();
+		mv.addObject("pd", pd);
+		mv.addObject("provinceList", provinceList);
 		mv.setViewName("credit/credit/credit_add");
 		return mv;
 	}
@@ -89,6 +104,25 @@ public class CreditManagerController extends BaseController{
 		PageData result = new PageData();
 		try {
 			PageData pd = super.getPageData();
+			String images = "";
+			if(null != credit.getUploadFiles()){
+				for(int i=0;i< credit.getUploadFiles().length;i++){
+					if(0 != credit.getUploadFiles()[i].getSize()){
+						String newFileName = DataUtil.getRandomStr();
+						String fileName = credit.getUploadFiles()[i].getOriginalFilename();
+						fileName = "reward"+newFileName + fileName.substring(fileName.lastIndexOf("."), fileName.length());
+						uploadFileService.uploadFile(PropertiesUtil.getValue("saveImgPath")+"uploadFile/reward", credit.getUploadFiles()[i], fileName);
+						if(i == 0){
+							images += "uploadFile/reward/"+fileName;
+						}else{
+							images += ";uploadFile/reward/"+fileName;
+						}
+					}
+				}
+			}
+			credit.setDebtProof(images);
+			credit.setCreateDate(new Date());
+			credit.setCrStatus((short)1);
 			int num= creditManagerService.save(credit);
 			if(num>0){
 				result.put("status", 1);
@@ -114,8 +148,9 @@ public class CreditManagerController extends BaseController{
 			logger.error("get fileManager error", e);
 		}
 		ModelAndView mv = super.getModelAndView();
+		List<String> provinceList = ProvinceEnum.takeAllValues();//省份list
+		mv.addObject("provinceList", provinceList);
 		mv.addObject("credit", credit);
-		mv.setViewName("credit/filemanager/filemanager_edit");
 		mv.setViewName("credit/credit/credit_edit");
 		return mv;
 	}

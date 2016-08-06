@@ -19,19 +19,15 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<shiro:hasPermission name="credit/add">
-						<button type="button" data-url="credit/add" data-model="dialog"
+						<button type="button" data-url="credit/add?creditType=${pd.creditType }" data-model="dialog"
 							class="btn btn-sm btn-primary">
 							<i class="fa fa-fw fa-plus"></i>新增
 						</button>
-					</shiro:hasPermission>
-					<shiro:hasPermission name="credit/batchDelete">
 						<button type="button" data-url="credit/batchDelete"
 							data-msg="确定批量删除吗？" data-model="ajaxToDo" class="btn btn-sm btn-danger"
 							data-checkbox-name="chx_default" data-callback="refreshTable">
 							<i class="fa fa-fw fa-remove"></i>批量删除
 						</button>
-					</shiro:hasPermission>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -70,7 +66,7 @@
 			"processing" : true,
 			"serverSide" : true,
 			"ajax" : {
-				"url" : "credit/list",
+				"url" : "credit/list?creditType=${pd.creditType}",
 				"type" : "post",
 				"data" : function(data) {
 					data.keyword = $("#keyword").val();
@@ -103,6 +99,7 @@
 		            <shiro:hasPermission name="credit/delete">
 		            	  + '  <li><a href="credit/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
 		            </shiro:hasPermission>
+		            	  + '  <li><a href="credit/details?id='+row.id+'" data-model="dialog" data-callback="refreshTable"><i class="fa fa-pencil"></i>详情</a></li>'
 		            <shiro:hasPermission name="credit/updateAudit">
 		            	  + '  <li class="divider"></li>'
 		            	  + '  <li><a href="credit/updateAudit?id='+row.id+'" data-model="dialog">分配角色</a></li>'
@@ -110,7 +107,44 @@
 		            	  + htmlTpl.dropdown.suffix;
 					return html;
 				}
-			} ],
+			} ,
+			{
+				"targets" : 2,
+				"render" : function(data, type, row) {
+					if(data == 1){
+						return "民间借贷";
+					}else if(data == 2){
+						return "应收账款";
+					}else if(data == 3){
+						return "银行借贷";
+					}else if(data == 4){
+						return "互联网金融";
+					}else if(data == 5){
+						return "小额信贷";
+					}else if(data == 6){
+						return "典当担保";
+					}else if(data == 7){
+						return "司法裁决";
+					}else if(data == 8){
+						return "资产包债权";
+					}else if(data == 9){
+						return "单笔债权";
+					}
+				}
+			},{
+				"targets" : 7,
+				"render" : function(data, type, row) {
+					if(data == '1'){
+						return "招标中";
+					}else if(data == '2'){
+						return "处置中";
+					}else if(data == '3'){
+						return "还款中";
+					}else if(data == '4'){
+						return "已结束";
+					}
+				}
+			}],
 			"drawCallback": function (settings) {
 				drawICheck('defaultCheck', 'chx_default');
 	      	},
@@ -124,11 +158,18 @@
 				others += '<div class="input-group input-group-sm input-adjust">'
 					+ '<span class="input-group-addon">类型</span>'
 					+ '<select class="form-control">'
-					+ '	<option>option 1</option>'
-					+ '	<option>option 2</option>'
+					+ '	<option value="1">民间借贷</option>'
+					+ '	<option value="2">应收账款</option>'
+					+ '	<option value="3">银行借贷</option>'
+					+ '	<option value="4">互联网金融</option>'
+					+ '	<option value="5">小额信贷</option>'
+					+ '	<option value="6">典当担保</option>'
+					+ '	<option value="7">司法裁决</option>'
+					+ '	<option value="8">资产包债权</option>'
+					+ '	<option value="9">单笔债权</option>'
 					+ '</select>'
 					+ '</div>';
-				initSearchForm(others, "搜索用户名和姓名");
+				initSearchForm(others, "搜索债权人名称");
 				$("#startTime").datetimepicker({
 					format : 'yyyy-mm-dd hh:ii',
 					language : 'zh',
