@@ -1,6 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<form class="form-horizontal" action="sample/addOrUpdate" method="post" id="defForm" callfn="refreshTable" enctype="multipart/form-data">
+<form class="form-horizontal" action="sample/addOrUpdate" method="post"
+	id="defForm" callfn="refreshTable" enctype="multipart/form-data">
 	<div class="modal-header">
 		<div class='bootstrap-dialog-header'>
 			<div class='bootstrap-dialog-close-button' style='display: block;'>
@@ -11,25 +14,26 @@
 			</div>
 		</div>
 	</div>
-	<input type="hidden" name="id" value="${sample.id}"/>
 	<input type="hidden" name="samImg" value="${sample.samImg}"/>
+	<input type="hidden" name="id" value="${sample.id}"/>
 	<div class="modal-body">
 		<div class="container-fluid">
 			<div class="form-group">
-				<label for="password" class="col-sm-2 control-label">分类:</label>
+				<label for="samType" class="col-sm-2 control-label">分类:</label>
 				<div class="col-sm-7">
-					<select name="samType" id="samType" class="form-control">
+					<select name="samType" id="samType" class="form-control" onclick="showAndHide(this.value)">
 						<option value="1" <c:if test="${sample.samType eq 1}">selected</c:if>>成功案例</option>
 						<option value="2" <c:if test="${sample.samType eq 2}">selected</c:if>>用户心声</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="samName" class="col-sm-2 control-label">名称：</label>
+				<label for="samName" class="col-sm-2 control-label">名称:</label>
 				<div class="col-sm-7">
-					<input id="samName" name="samName" type="text" maxlength="20" value="${sample.samName}" class="form-control" placeholder="请输入名称"/>
+					<input id="samName" name="samName" type="text" maxlength="20" value="${sample.samName}" class="form-control required" placeholder="请输入名称"/>
 				</div>
 			</div>
+			<div id="typeDiv">
 			<div class="form-group">
 				<label for="trade" class="col-sm-2 control-label">行业:</label>
 				<div class="col-sm-7">
@@ -43,10 +47,10 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="uploadFile" class="col-sm-2 control-label">图片:</label>
-				<div class="col-sm-7">
-					<input class="form-control" type="file" name="uploadFile" id="uploadFile" accept=".jpg,.png,.jpeg,.gif,.bmp"/>
+				<label for="headImgFile" class="col-sm-2 control-label">图片:</label>
+				<div class="col-sm-7" id="fileSelect">
 				</div>
+			</div>
 			</div>
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">描述:</label>
@@ -63,4 +67,14 @@
 </form>
 <script>
 	$("#defForm").validate();
+	$("#typeDiv").hide();
+	function showAndHide(value){
+		if(value == '1'){
+			$("#typeDiv").hide();
+			$("#fileSelect").html("");
+		}else{
+			$("#typeDiv").show();
+			$("#fileSelect").html('<input class="form-control required" type="file" name="headImgFile" id="headImgFile" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');
+		}
+	}
 </script>

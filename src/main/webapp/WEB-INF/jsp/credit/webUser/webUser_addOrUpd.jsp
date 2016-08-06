@@ -19,13 +19,13 @@
 	<div class="modal-body">
 		<div class="container-fluid">
 			<div class="form-group">
-				<label for="loginName" class="col-sm-3 control-label">专家顾问名称：</label>
+				<label for="loginName" class="col-sm-2 control-label">专家名称：</label>
 				<div class="col-sm-7">
 					<input id="nickname" name="nickname" type="text" maxlength="10" value="${user.nickname}" class="form-control required" placeholder="请输入专家顾问名称"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="password" class="col-sm-3 control-label">专家顾问分类:</label>
+				<label for="password" class="col-sm-2 control-label">专家分类:</label>
 				<div class="col-sm-7">
 					<select name="userStatus" id="userStatus" class="form-control">
 						<option value="7">资产处置专家</option>
@@ -35,13 +35,13 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="name" class="col-sm-3 control-label">图片:</label>
+				<label for="name" class="col-sm-2 control-label">图片:</label>
 				<div class="col-sm-7">
 					<input class="form-control required" type="file" name="uploadFile" id="uploadFile" accept=".jpg,.png,.jpeg,.gif,.bmp"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="description" class="col-sm-3 control-label">描述:</label>
+				<label for="description" class="col-sm-2 control-label">描述:</label>
 				<div class="col-sm-7">
 					<textarea id="description" name="description" class="form-control required" rows="7" maxlength="1000">${user.description}</textarea>
 				</div>

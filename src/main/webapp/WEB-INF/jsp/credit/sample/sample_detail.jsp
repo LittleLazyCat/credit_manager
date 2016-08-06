@@ -17,10 +17,12 @@
 	
 	<div class="modal-body">
 		<div class="container-fluid">
-            <dl class="dl-horizontal">
-                 <dt>图片:</dt>
-                 <dd><img alt="" src="${sample.samImg}" width="100px" height="130px"></dd>
-            </dl>
+			<c:if test="${sample.samType eq 2}">
+	            <dl class="dl-horizontal">
+	                 <dt>图片:</dt>
+	                 <dd><img alt="" src="${sample.samImg}" width="100px" height="130px"></dd>
+	            </dl>
+            </c:if>
             <dl class="dl-horizontal">
                  <dt>分类:</dt>
                  <dd><c:if test="${sample.samType eq 1}">成功案例</c:if>
@@ -31,6 +33,7 @@
                  <dt>名称:</dt>
                  <dd>${sample.samName}</dd>
             </dl>
+            <c:if test="${sample.samType eq 2}">
             <dl class="dl-horizontal">
                  <dt>行业:</dt>
                  <dd>${sample.trade}</dd>
@@ -39,6 +42,7 @@
                  <dt>金额:</dt>
                  <dd>${sample.amount} (元)</dd>
             </dl>
+            </c:if>
             <dl class="dl-horizontal">
                 <dt>简介:</dt>
                 <dd>${sample.description}</dd>

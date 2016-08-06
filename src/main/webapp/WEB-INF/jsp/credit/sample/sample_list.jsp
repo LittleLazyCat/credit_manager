@@ -116,7 +116,7 @@
 			{
 				"targets" : 5,
 				"render" : function(data, type, row) {
-					return data+' 元';
+					return data > 0 ? data : 0+' 元';
 				}
 			},
 			{

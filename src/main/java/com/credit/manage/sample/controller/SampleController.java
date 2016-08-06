@@ -90,14 +90,14 @@ public class SampleController extends BaseController{
 	public PageData saveOrUpd(Sample sample){
 		PageData result = new PageData();
 		try{
-			if(null != sample.getUploadFile() && 0 != sample.getUploadFile().getSize()){
+			if(null != sample.getHeadImgFile() && 0 != sample.getHeadImgFile().getSize()){
 				
 				String newFileName = DataUtil.getRandomStr();
-				String fileName = sample.getUploadFile().getOriginalFilename();
+				String fileName = sample.getHeadImgFile().getOriginalFilename();
 				newFileName = "hplus/img/sample/" + newFileName;
 				fileName = newFileName + fileName.substring(fileName.lastIndexOf("."), fileName.length());
 				
-				uploadFileService.uploadFile(PropertiesUtil.getValue("saveImgPath"), sample.getUploadFile(), fileName);
+				uploadFileService.uploadFile(PropertiesUtil.getValue("saveImgPath"), sample.getHeadImgFile(), fileName);
 				sample.setSamImg(fileName);
 			}
 			if(null != sample.getId() && 0 != sample.getId()){
@@ -164,7 +164,9 @@ public class SampleController extends BaseController{
 		
 		Sample sample = sampleWebService.findById(id);
 		ModelAndView mv = this.getModelAndView();
-		sample.setSamImg(PropertiesUtil.getValue("showImgPath")+sample.getSamImg());
+		if(null != sample.getSamImg()){
+			sample.setSamImg(PropertiesUtil.getValue("showImgPath")+sample.getSamImg());
+		}
 		mv.addObject(sample);
 		mv.setViewName("credit/sample/sample_detail");
 		return mv;

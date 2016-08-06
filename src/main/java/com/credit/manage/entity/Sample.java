@@ -17,11 +17,8 @@ public class Sample {
 	private String description;
 	private String samImg;
 	private Short status;//状态(1发布、0未发布)
-	private MultipartFile uploadFile;
+	private MultipartFile headImgFile;
 	
-	public Sample(){
-		
-	}
 	public Integer getId() {
 		return id;
 	}
@@ -70,11 +67,11 @@ public class Sample {
 	public void setStatus(Short status) {
 		this.status = status;
 	}
-	public MultipartFile getUploadFile() {
-		return uploadFile;
+	public MultipartFile getHeadImgFile() {
+		return headImgFile;
 	}
-	public void setUploadFile(MultipartFile uploadFile) {
-		this.uploadFile = uploadFile;
+	public void setHeadImgFile(MultipartFile headImgFile) {
+		this.headImgFile = headImgFile;
 	}
 	
 	
