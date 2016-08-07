@@ -51,6 +51,7 @@ public class Credit {
 	private String[] debtProofs;
 	// 债权类型（1债权处置，2债权转让）
 	private Integer creditType;
+	private Integer isAudit;
 	
 	public Credit() {
 
@@ -61,7 +62,8 @@ public class Credit {
 			String contactName, String contactNumber, String debtName,
 			String debtProvince, String debtCity, String debtPhone,
 			String debtProof, String description, Date createDate,
-			Date endDate, Date openDate, Date agreedDate,MultipartFile[] uploadFiles,Integer creditType) {
+			Date endDate, Date openDate, Date agreedDate,MultipartFile[] uploadFiles,
+			Integer creditType,Integer isAudit) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -84,6 +86,7 @@ public class Credit {
 		this.agreedDate = agreedDate;
 		this.uploadFiles = uploadFiles;
 		this.creditType = creditType;
+		this.isAudit =this.isAudit;
 	}
 
 	public Integer getId() {
@@ -270,6 +273,12 @@ public class Credit {
 		this.debtProofs = debtProofs;
 	}
 
+	public Integer getIsAudit() {
+		return isAudit;
+	}
 
+	public void setIsAudit(Integer isAudit) {
+		this.isAudit = isAudit;
+	}
 	
 }

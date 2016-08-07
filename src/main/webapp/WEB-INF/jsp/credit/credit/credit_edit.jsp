@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<form class="form-horizontal" action="credit/edit" method="post" id="defForm" callfn="refreshTable">
+<form class="form-horizontal" action="credit/edit" method="post" id="defForm" callfn="refreshTable" enctype="multipart/form-data">
 	<div class="modal-header">
 		<div class='bootstrap-dialog-header'>
 			<div class='bootstrap-dialog-close-button'
 				style='display: block;'>
 				<button class='close' data-dismiss='modal' aria-label='Close'>×</button>
 			</div>
-			<div class='bootstrap-dialog-title'>新增债权</div>
+			<div class='bootstrap-dialog-title'>修改债权</div>
 		</div>
 	</div>
 	<div class="modal-body">
@@ -17,13 +17,13 @@
                                 <label class="col-sm-3 control-label">债权类型：</label>
                                 <div class="col-sm-8">
                                         <select  name="crType" class="form-control">
-													<option value="1">民间借贷</option>
-													<option value="2">应收账款</option>
-													<option value="3">银行借贷</option>
-													<option value="4">互联网金融</option>
-													<option value="5">小额信贷</option>
-													<option value="6">典当担保</option>
-													<option value="7">司法裁决</option>
+													<option value="1" <c:if test="${credit.crType == 1}">selected</c:if>>民间借贷</option>
+													<option value="2" <c:if test="${credit.crType == 2}">selected</c:if>>应收账款</option>
+													<option value="3" <c:if test="${credit.crType == 3}">selected</c:if>>银行借贷</option>
+													<option value="4" <c:if test="${credit.crType == 4}">selected</c:if>>互联网金融</option>
+													<option value="5" <c:if test="${credit.crType == 5}">selected</c:if>>小额信贷</option>
+													<option value="6" <c:if test="${credit.crType == 6}">selected</c:if>>典当担保</option>
+													<option value="7" <c:if test="${credit.crType == 7}">selected</c:if>>司法裁决</option>
 										</select>
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                                 <label class="col-sm-3 control-label">支付佣金范围：</label>
                                 <div class="col-sm-8">
                                      <select name="commisionRange" class="form-control" required="required" aria-required="true">
-									 <option value="10%" >10%</option>
+									 <option value="10%"  <c:if test="${credit.commisionRange == '10%'}">selected</c:if>>10%</option>
 									 <option value="10%-20%">10%-20%</option>
 									 <option value="20%-30%" selected="selected">20%-30%</option>
 									 <option value="30%-40%">30%-40%</option>
@@ -62,7 +62,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">联系人姓名：</label>
                                 <div class="col-sm-8">
-                                    <input id="contactName" name="contactName" class="form-control" type="text" placeholder="可以是本人也可以委托他人" required="required" aria-required="true" value="${credit.contractName }">
+                                    <input id="contactName" name="contactName" class="form-control" type="text" placeholder="可以是本人也可以委托他人" required="required" aria-required="true" value="${credit.contactName }">
                                     <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>可以是本人也可以委托他人</span>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                          <div class="form-group">
                                 <label class="col-sm-3 control-label">债务方名称：</label>
                                 <div class="col-sm-8">
-                                    <input id="debtName" name="debtName" class="form-control" type="text" required="required" aria-required="true">
+                                    <input id="debtName" name="debtName" class="form-control" type="text" required="required" aria-required="true" value="${credit.debtName }">
                                     <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 这里写点提示的内容</span>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">债务方联系电话：</label>
                                 <div class="col-sm-8">
-                                    <input id="debtPhone" name="debtPhone" class="form-control" type="text" required="required" aria-required="true">
+                                    <input id="debtPhone" name="debtPhone" class="form-control" type="text" required="required" aria-required="true" value="${credit.debtPhone }">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -122,13 +122,13 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">债权开始日期：</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" name="openDate" id="datetimepicker" required="required" aria-required="true">
+                                    <input class="form-control" type="text" name="openDate" id="datetimepicker" required="required" aria-required="true" value="${credit.openDate }">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">债权描述：</label>
                                 <div class="col-sm-8">
-                                    <textarea id="description" name="description" class="form-control" rows="3"></textarea>
+                                    <textarea id="description" name="description" class="form-control" rows="3">${credit.description }</textarea>
                                 </div>
                             </div>
                      
@@ -139,30 +139,3 @@
 			<button type="submit" class="btn btn-primary">保存</button>
 	</div>
 </form>
-<script type="text/javascript">
-$('#defForm').validate({
-	rules: {
-		loginName: {
-            required: true,
-            remote: {
-                type: "post",
-                url: "user/checkName",
-                dataType: "json",
-                dataFilter: function(data, type) {
-                    if (data == 1){
-                    	return false;
-                    }else{
-                    	return true;
-                    }  
-                }
-            }
-    	}
-    },
-    messages: {
-    	loginName: {
-            required: "请输入用户名",
-            remote: "用户名重复"
-        }
-    }
-});
-</script>

@@ -10,7 +10,7 @@
 %>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<gvtv:navigater path="user"></gvtv:navigater>
+	<gvtv:navigater path="credit?creditType=${pd.creditType }"></gvtv:navigater>
 </section>
 
 <!-- Main content -->
@@ -42,6 +42,7 @@
 								<th>债务人</th>
 								<th>债权金额(万元)</th>
 								<th>债权佣金</th>
+								<th>债权审核状态</th>
 								<th>债权状态</th>
 							</tr>
 						</thead>
@@ -76,7 +77,7 @@
 				"url" : "<%=basePath%>static/AdminLTE/plugins/datatables/cn.txt"
 			},
 			"createdRow" : function(row, data, index) {
-				$('td:eq(0)', row).html("<input type='checkbox' name='chx_default' value='" + data.userId + "'/>");
+				$('td:eq(0)', row).html("<input type='checkbox' name='chx_default' value='" + data.id + "'/>");
 			},
 			"lengthMenu": [[10, 20, 50], [10, 20, 50]],
 			"columns" : [ 
@@ -86,7 +87,8 @@
 			              {"data" : "debtCity"}, 
 			              {"data" : "debtName"}, 
 			              {"data" : "crAmount"}, 
-			              {"data" : "commisionRange"}, 
+			              {"data" : "commisionRange"},
+			              {"data" : "isAudit"}, 
 			              {"data" : "crStatus"}, 
 			            ],
 			"columnDefs" : [ {
@@ -99,11 +101,12 @@
 		            <shiro:hasPermission name="credit/delete">
 		            	  + '  <li><a href="credit/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
 		            </shiro:hasPermission>
-		            	  + '  <li><a href="credit/details?id='+row.id+'" data-model="dialog" data-callback="refreshTable"><i class="fa fa-pencil"></i>详情</a></li>'
+		            	  + '  <li><a href="credit/details?id='+row.id+'" data-model="dialog" data-callback="refreshTable"><i class="fa fa-info"></i>&nbsp;详情</a></li>'
 		            <shiro:hasPermission name="credit/updateAudit">
 		            	  + '  <li class="divider"></li>'
-		            	  + '  <li><a href="credit/updateAudit?id='+row.id+'" data-model="dialog">分配角色</a></li>'
+		            	  + '  <li><a href="credit/audit?id='+row.id+'" data-model="dialog">债权审核</a></li>'
 		            </shiro:hasPermission>
+		            	  + '  <li><a href="credit/updateStatus?crStatus=5&id='+row.id+'"  data-msg="确定已签约吗？" data-model="ajaxToDo" data-callback="refreshTable">债权签约</a></li>'
 		            	  + htmlTpl.dropdown.suffix;
 					return html;
 				}
@@ -133,6 +136,17 @@
 				}
 			},{
 				"targets" : 7,
+				"render" : function(data, type, row) {
+					if(data == '1'){
+						return "审核通过";
+					}else if(data == '0'){
+						return "待审核";
+					}else if(data == '-1'){
+						return "审核不通过";
+					}
+				}
+			},{
+				"targets" : 8,
 				"render" : function(data, type, row) {
 					if(data == '1'){
 						return "招标中";

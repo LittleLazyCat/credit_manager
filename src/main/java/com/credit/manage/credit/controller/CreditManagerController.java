@@ -110,12 +110,12 @@ public class CreditManagerController extends BaseController{
 					if(0 != credit.getUploadFiles()[i].getSize()){
 						String newFileName = DataUtil.getRandomStr();
 						String fileName = credit.getUploadFiles()[i].getOriginalFilename();
-						fileName = "reward"+newFileName + fileName.substring(fileName.lastIndexOf("."), fileName.length());
-						uploadFileService.uploadFile(PropertiesUtil.getValue("saveImgPath")+"uploadFile/reward", credit.getUploadFiles()[i], fileName);
+						fileName = "credit"+newFileName + fileName.substring(fileName.lastIndexOf("."), fileName.length());
+						uploadFileService.uploadFile(PropertiesUtil.getValue("saveImgPath")+"uploadFile/credit", credit.getUploadFiles()[i], fileName);
 						if(i == 0){
-							images += "uploadFile/reward/"+fileName;
+							images += "uploadFile/credit/"+fileName;
 						}else{
-							images += ";uploadFile/reward/"+fileName;
+							images += ";uploadFile/credit/"+fileName;
 						}
 					}
 				}
@@ -123,6 +123,7 @@ public class CreditManagerController extends BaseController{
 			credit.setDebtProof(images);
 			credit.setCreateDate(new Date());
 			credit.setCrStatus((short)1);
+			credit.setIsAudit(0);
 			int num= creditManagerService.save(credit);
 			if(num>0){
 				result.put("status", 1);
@@ -176,6 +177,69 @@ public class CreditManagerController extends BaseController{
 		return result;
 	}
 	
+	
+	/**
+	 * 跳转到更新法律文件信息页面
+	 * @return
+	 */
+	@RequestMapping(value="/audit", method=RequestMethod.GET)
+	public ModelAndView toAudit(@RequestParam Integer id){
+		Credit credit = null;
+		try {
+			credit = creditManagerService.findById(id);
+		} catch (Exception e) {
+			logger.error("get fileManager error", e);
+		}
+		ModelAndView mv = super.getModelAndView();
+		mv.addObject("credit", credit);
+		mv.setViewName("credit/credit/credit_audit");
+		return mv;
+	}
+	
+	/**
+	 * 更新法律文件信息
+	 * @return
+	 */
+	@RequestMapping(value="/audit", method=RequestMethod.POST)
+	@ResponseBody
+	public PageData audit(Credit credit){
+		PageData result = new PageData();
+		try {
+			int num= creditManagerService.updateAudit(credit);
+			if(num>0){
+				result.put("status", 1);
+				result.put("msg", "审核成功");
+			}
+		} catch (Exception e) {
+			logger.error("edit filemanager error", e);
+			result.put("status", 0);
+			result.put("msg", "审核失败");
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * 修改债权状态
+	 * @param credit
+	 * @return
+	 */
+	@RequestMapping(value="/updateStatus")
+	@ResponseBody
+	public PageData updateStatus(Credit credit){
+		PageData result = new PageData();
+		try {
+			int num= creditManagerService.updateStatus(credit);
+			if(num>0){
+				result.put("status", 1);
+			}
+		} catch (Exception e) {
+			logger.error("edit credit error", e);
+			result.put("status", 0);
+			result.put("msg", "更新失败");
+		}
+		return result;
+	}
 	/**
 	 *删除法律文件信息
 	 * @return

@@ -56,6 +56,16 @@ public class CreditManagerService {
 	}
 	
 	@Transactional(rollbackFor = { Throwable.class }, readOnly = false)
+	public int updateStatus(Credit credit)throws Exception{
+		return dao.update("CreditMapper.updateStatus", credit);
+	}
+	
+	@Transactional(rollbackFor = { Throwable.class }, readOnly = false)
+	public int updateAudit(Credit credit)throws Exception{
+		return dao.update("CreditMapper.updateAudit", credit);
+	}
+	
+	@Transactional(rollbackFor = { Throwable.class }, readOnly = false)
 	public int delete(Integer id) throws Exception{
 		return dao.delete("CreditMapper.delete", id);
 	}

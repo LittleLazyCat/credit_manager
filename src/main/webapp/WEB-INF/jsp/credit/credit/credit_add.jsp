@@ -20,7 +20,7 @@
                           <div class="form-group">
                                 <label class="col-sm-3 control-label">债权类型：</label>
                                 <div class="col-sm-8">
-                                        <select  name="crType" class="form-control">
+                                        <select  name="crType" class="form-control required">
 													<option value="1">民间借贷</option>
 													<option value="2">应收账款</option>
 													<option value="3">银行借贷</option>
@@ -34,7 +34,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">债权金额：</label>
                                 <div class="col-sm-8">
-                                    <input id="crAmount" name="crAmount" class="form-control" type="text" required="required" aria-required="true" class="valid">
+                                    <input id="crAmount" name="crAmount" class="form-control required" type="text">
                                     <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 注意：金额币种人民币(￥)</span>
                                 </div>
                             </div>

@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
 
-<form id="commonForm" class="form-horizontal" method="post" action="user/editPwd" role="form">
 <div class="modal-header">
     <div class='bootstrap-dialog-header'>
 		<div class='bootstrap-dialog-close-button'
@@ -107,4 +106,3 @@
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 </div>
-</form>
