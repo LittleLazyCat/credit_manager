@@ -64,6 +64,8 @@
 				"type" : "post",
 				"data" : function(data) {
 					data.keyword = $("#keyword").val();
+					data.createTime = $("#createTime").val();
+					data.rewardType = $("#rewardType").val();
 				}
 			},
 			"language" : {
@@ -119,7 +121,7 @@
 			{
 				"targets" : 3,
 				"render" : function(data, type, row) {
-					return "<a href='reward/details?id="+row.id+"' target='_blank'>"+data+"</a>";
+					return "<a href='reward/detail?id="+row.id+"' data-model='dialog'>"+data+"</a>";
 				}
 			},
 			{
@@ -160,16 +162,34 @@
 				drawICheck('defaultCheck', 'chx_default');
 	      	},
 			"initComplete": function () {
-				initSearchForm("", "搜索悬赏人、省份");
-				$("#startTime").datetimepicker({
-					format : 'yyyy-mm-dd hh:ii',
+				var others = '<div class="input-group input-group-sm input-adjust">'
+					+ '<div class="input-group-addon">'
+					+ '<label for="startTime"><i class="fa fa-calendar"></i></label>'
+					+ '</div>' 
+					+ '<input id="createTime" readonly name="createTime" type="text" class="form-control" placeholder="请输入发布日期" />'
+					+ '</div>';
+				others += '<div class="input-group input-group-sm input-adjust">'
+					+ '<span class="input-group-addon">类型</span>'
+					+ '<select class="form-control" name="rewardType" id="rewardType">'
+					+ '<option value="">所有类型</option>'
+					+ '<option value="0">找人</option>'
+					+ '<option value="1">找车辆</option>'
+					+ '<option value="2">找房产</option>'
+					+ '<option value="3">找应收款</option>'
+					+ '<option value="4">其他</option>'
+					+ '</select>'
+					+ '</div>';
+					
+				initSearchForm(others, "搜索悬赏人、省份");
+				$("#createTime").datetimepicker({
+					format : 'yyyy-mm-dd',
 					language : 'zh',
 					weekStart : 1,
 					todayBtn : 1,
 					autoclose : 1,
 					todayHighlight : 1,
 					startView : 2,
-					minView : 0,
+					minView : 'month',
 					forceParse : 0,
 					showMeridian : 0,
 					pickerPosition : "bottom-left"
@@ -185,7 +205,6 @@
 			return "";
 		}
 	}
-	FormatDate("Tue Jul 16 01:07:00 CST 2013");
 	function refreshTable(toFirst) {
 		//defaultTable.ajax.reload();
 		if(toFirst){//表格重绘，并跳转到第一页

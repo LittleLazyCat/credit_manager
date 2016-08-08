@@ -103,7 +103,7 @@ public class RewardController extends BaseController{
 	public PageData saveReward(Reward reward) throws Exception{
 		PageData result = new PageData();
 		try{
-			reward.setRewardStatus((short)1);
+			reward.setRewardStatus((short)0);
 			reward.setCreateTime(new Date());
 			String images = "";
 			if(null != reward.getUploadFiles()){
@@ -185,15 +185,15 @@ public class RewardController extends BaseController{
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/rewardDetails",method =RequestMethod.GET)
-	public ModelAndView rewardDetails() throws Exception{
-		String id =super.getRequest().getParameter("id");
+	@RequestMapping(value="/detail",method =RequestMethod.GET)
+	public ModelAndView rewardDetails(String id) throws Exception{
 		if(id!=null&&id!=""){
 			WebUser user = null;
 			Reward reward = rewardWebService.findById(Integer.valueOf(id));
 			if(null != reward.getUserId()){
 				user = webUserWebService.getUserById(reward.getUserId());
 			}
+			String showImgPath = PropertiesUtil.getValue("showImgPath");
 			if(null != reward.getImages()){
 				reward.setImagesArry(reward.getImages().split(";"));
 			}
@@ -202,9 +202,10 @@ public class RewardController extends BaseController{
 				user.setNickname("未找到发布者信息");
 			}
 			ModelAndView mv = this.getModelAndView();
+			mv.addObject("showImgPath",showImgPath);
 			mv.addObject("user",user);
 			mv.addObject("reward", reward);
-			mv.setViewName("/user/user_reward_details");
+			mv.setViewName("credit/reward/reward_detail");
 			return mv;
 		}
 		return null;
@@ -238,6 +239,14 @@ public class RewardController extends BaseController{
 	public List<String> loadCityData(String proName){
 		List<String> list = CitiesEnum.getCityByProvince(proName);
 		return list;
+	}
+	
+	@RequestMapping(value="/imgDetail")
+	public ModelAndView imageDetail(String imageUrl){
+		ModelAndView mv = super.getModelAndView();
+		mv.addObject("rewardImg",imageUrl);
+		mv.setViewName("credit/reward/image_detail");
+		return mv;
 	}
 	
 }

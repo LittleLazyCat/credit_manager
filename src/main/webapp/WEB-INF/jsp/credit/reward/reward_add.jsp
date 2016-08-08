@@ -30,7 +30,7 @@ pageContext.setAttribute("basePath",basePath);
                  <label class="col-sm-3 control-label">悬赏类型：</label>
                  <div class="col-sm-8">
                       <select  name="rewardType" class="form-control" required="required" aria-required="true"  id="rewardType" onchange="changeRewardType()">
-							<option value="0" <c:if test="${reward.rewardType eq 0}">selected</c:if>></option>
+							<option value="0" <c:if test="${reward.rewardType eq 0}">selected</c:if>>找人</option>
 							<option value="1" <c:if test="${reward.rewardType eq 1}">selected</c:if>>找车辆</option>
 							<option value="2" <c:if test="${reward.rewardType eq 2}">selected</c:if>>找房产</option>
 							<option value="3" <c:if test="${reward.rewardType eq 3}">selected</c:if>>找应收款</option>

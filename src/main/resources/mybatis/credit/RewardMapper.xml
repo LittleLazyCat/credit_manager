@@ -50,9 +50,15 @@
    <select id="count" parameterType="PageData" resultType="int">
 		select count(1)
 		from cr_reward u
-		where u.reward_status != -1
+		where 1 = 1
 		<if test="userId != null and userId != ''">
 		and user_id=#{userId}
+		</if>
+		<if test="rewardType != null and rewardType != ''">
+		and reward_type=#{rewardType}
+		</if>
+		<if test="createTime != null and createTime != ''">
+		and create_time <![CDATA[<=]]>#{createTime}
 		</if>
 		<if test="rewardName!=nul and rewardName!=''">
 		and reward_name like CONCAT(CONCAT('%',#{rewardName}),'%')
@@ -62,9 +68,15 @@
 	<select id="list" parameterType="PageData" resultType="Reward">
 	   <include refid="commonColumns"></include>
 		from cr_reward u
-		where u.reward_status != -1
+		where 1 = 1
 		<if test="userId != null and userId != ''">
 		and user_id=#{userId}
+		</if>
+		<if test="rewardType != null and rewardType != ''">
+		and reward_type=#{rewardType}
+		</if>
+		<if test="createTime != null and createTime != ''">
+		and create_time <![CDATA[<=]]>#{createTime}
 		</if>
 		<if test="rewardName!=nul and rewardName!=''">
 		and reward_name like CONCAT(CONCAT('%',#{rewardName}),'%')
