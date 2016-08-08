@@ -93,11 +93,12 @@
 		            	  + '  <li><a href="reward/saveReward?id='+row.id+'&userId=${sessionUser.userId}" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
 		            	  + '  <li><a href="reward/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
 		            	  + '  <li class="divider"></li>'
-		            	  if(row.rewardStatus == '0'){
+		            	  /* if(row.rewardStatus == '0'){
 		            		  html += '<li><a href="reward/updStatus?rewardStatus=1&id='+row.id+'" data-msg="确定发布吗？" data-model="ajaxToDo" data-callback="refreshTable">发布</a></li>'
 		            	  }else if(row.rewardStatus == '1'){
 		            		  html += '<li><a href="reward/updStatus?rewardStatus=0&id='+row.id+'" data-msg="确定取消发布吗？" data-model="ajaxToDo" data-callback="refreshTable">取消发布</a></li>'
-		            	  }
+		            	  } */
+		            	  + '<li><a href="reward/updStatus?rewardStatus=-1&id='+row.id+'" data-msg="确定审核结束该悬赏吗？" data-model="ajaxToDo" data-callback="refreshTable">审核(结束)</a></li>'
 		            	  + htmlTpl.dropdown.suffix;
 					return html;
 				}

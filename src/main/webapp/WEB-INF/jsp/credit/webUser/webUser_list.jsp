@@ -42,6 +42,7 @@
 								<th>用户手机</th>
 								<th>用户类型</th>
 								<th>用户状态</th>
+								<th>用户说明</th>
 							</tr>
 						</thead>
 					</table>
@@ -69,6 +70,8 @@
 				"type" : "post",
 				"data" : function(data) {
 					data.keyword = $("#keyword").val();
+					data.userType = $("#userType").val();
+					data.userStatus = $("#userStatus").val();
 				}
 			},
 			"language" : {
@@ -84,18 +87,16 @@
 			              {"data" : "userEmail"}, 
 			              {"data" : "userPhone"}, 
 			              {"data" : "userType"}, 
-			              {"data" : "userStatus"}
+			              {"data" : "userStatus"},
+			              {"data" : "description"}
 			            ],
 			"columnDefs" : [ {
 				"targets" : 1,
 				"render" : function(data, type, row) {
 					var html = htmlTpl.dropdown.prefix
-		           	//<shiro:hasPermission name="user/edit">
+					+ '  <li><a href="webUser/update?id='+row.id+'"  data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
 		            	  + '  <li><a href="webUser/resetPass?id='+row.id+'" data-msg="重置后新密码为123456!" data-model="ajaxToDo" data-callback=""><i class="fa fa-pencil"></i>重置密码</a></li>'
-		            //</shiro:hasPermission>
-		            //<shiro:hasPermission name="user/delete">
 		            	  + '  <li><a href="webUser/disable?id='+row.id+'" data-msg="删除该用户后将不能再登录网站!" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
-		            //</shiro:hasPermission>
 		            	  + htmlTpl.dropdown.suffix;
 					return html;
 				}
@@ -124,20 +125,23 @@
 				drawICheck('defaultCheck', 'chx_default');
 	      	},
 			"initComplete": function () {
-				initSearchForm("", "搜索昵称和手机");
-				$("#startTime").datetimepicker({
-					format : 'yyyy-mm-dd hh:ii',
-					language : 'zh',
-					weekStart : 1,
-					todayBtn : 1,
-					autoclose : 1,
-					todayHighlight : 1,
-					startView : 2,
-					minView : 0,
-					forceParse : 0,
-					showMeridian : 0,
-					pickerPosition : "bottom-left"
-				});
+				var others = '<div class="input-group input-group-sm input-adjust">'
+					+ '<span class="input-group-addon">用户类型</span>'
+					+ '<select class="form-control" name="userType" id="userType">'
+					+ '<option value="">全部</option>'
+					+ '<option value="0">债权用户</option>'
+					+ '<option value="1">处置用户</option>'
+					+ '</select>'
+					+ '</div>';
+					others += '<div class="input-group input-group-sm input-adjust">'
+					+ '<span class="input-group-addon">用户状态</span>'
+					+ '<select class="form-control" name="userStatus" id="userStatus">'
+					+ '<option value="">全部</option>'
+					+ '<option value="1">有效</option>'
+					+ '<option value="-1">无效</option>'
+					+ '</select>'
+					+ '</div>';
+				initSearchForm(others, "搜索昵称和手机");
 			}
 		});
 	});

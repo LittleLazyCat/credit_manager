@@ -116,13 +116,26 @@ public class WebUserWebService {
 	}
 	
 	/**
-	 * 禁用用户
+	 * 修改专家顾问
 	 * @param webUser
 	 * @return
 	 * @throws Exception
 	 */
 	public Boolean updateUser(WebUser webUser) throws Exception{
 		int num = dao.update("WebUserMapper.updateUser", webUser);
+		if (num > 0) {
+			return true;
+		}
+		return false;
+	}
+	/**
+	 * 修改用户
+	 * @param webUser
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean updateWebUser(WebUser webUser) throws Exception{
+		int num = dao.update("WebUserMapper.updateWebUser", webUser);
 		if (num > 0) {
 			return true;
 		}

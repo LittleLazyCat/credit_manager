@@ -62,33 +62,8 @@
 	<select id="count" parameterType="PageData" resultType="int">
 		select count(1)
 		from cr_user u
-		where u.user_status != -1
-		<if test="userStatus != null">
-			and u.user_status = #{userStatus}
-		</if>
-		<if test="userLevel != null">
-			and u.user_level = #{userLevel}
-		</if>
-		<if test="userEmail != null and userEmail != ''">
-			and u.user_email = #{userEmail}
-		</if>
-		<if test="userPhone != null">
-			and u.user_phone = #{userPhone}
-		</if>
-		<if test="userType != null">
-			and u.user_Type = #{userType}
-		</if>
-		<if test="keyword != null and keyword != ''">
-	  	and	CONCAT(IFNULL(u.user_phone,''),IFNULL(u.user_email,''),IFNULL(u.nickname,'')) like #{keyword}
-		</if>
-	</select>
-	
-	<select id="list" parameterType="PageData" resultType="CrUser">
-		select  
-		 <include refid="userColumns"></include>
-		from cr_user u
-		where u.user_status != -1
-		<if test="userStatus != null">
+		where 1=1
+		<if test="userStatus != null and userStatus != ''">
 			and u.user_status = #{userStatus}
 		</if>
 		<if test="userLevel != null">
@@ -100,7 +75,32 @@
 		<if test="userPhone != null and userPhone != ''">
 			and u.user_phone = #{userPhone}
 		</if>
-		<if test="userType != null">
+		<if test="userType != null and userType != ''">
+			and u.user_Type = #{userType}
+		</if>
+		<if test="keyword != null and keyword != ''">
+	  	and	CONCAT(IFNULL(u.user_phone,''),IFNULL(u.user_email,''),IFNULL(u.nickname,'')) like #{keyword}
+		</if>
+	</select>
+	
+	<select id="list" parameterType="PageData" resultType="CrUser">
+		select  
+		 <include refid="userColumns"></include>
+		from cr_user u
+		where 1=1
+		<if test="userStatus != null and userStatus != ''">
+			and u.user_status = #{userStatus}
+		</if>
+		<if test="userLevel != null">
+			and u.user_level = #{userLevel}
+		</if>
+		<if test="userEmail != null and userEmail != ''">
+			and u.user_email = #{userEmail}
+		</if>
+		<if test="userPhone != null and userPhone != ''">
+			and u.user_phone = #{userPhone}
+		</if>
+		<if test="userType != null and userType != ''">
 			and u.user_Type = #{userType}
 		</if>
 		<if test="keyword != null and keyword != ''">
@@ -139,6 +139,16 @@
 	<update id="updatePassword" parameterType="PageData">
 		update cr_user set
 			user_pwd	= #{newEncodePwd}
+		where
+			id		= #{id}
+	</update>
+	<update id="updateWebUser" parameterType="CrUser">
+		update cr_user set
+			user_email	= #{userEmail},
+			user_phone	= #{userPhone},
+			user_type   = #{userType},
+			user_status	= #{userStatus},
+			description	= #{description}
 		where
 			id		= #{id}
 	</update>

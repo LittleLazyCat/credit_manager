@@ -92,7 +92,7 @@
 		            	  + '  <li><a href="blog/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
 		            	  + '  <li class="divider"></li>'
 		            	  if(row.blogStatus == '0'){
-		            		  html += '<li><a href="blog/updStatus?blogStatus=1&id='+row.id+'" data-msg="确定发布吗？" data-model="ajaxToDo" data-callback="refreshTable">发布</a></li>'
+		            		  html += '<li><a href="blog/updStatus?blogStatus=1&id='+row.id+'" data-msg="确定发布吗？" data-model="ajaxToDo" data-callback="refreshTable">审核(发布)</a></li>'
 		            	  }else if(row.blogStatus == '1'){
 		            		  html += '<li><a href="blog/updStatus?blogStatus=0&id='+row.id+'" data-msg="确定取消发布吗？" data-model="ajaxToDo" data-callback="refreshTable">取消发布</a></li>'
 		            	  }

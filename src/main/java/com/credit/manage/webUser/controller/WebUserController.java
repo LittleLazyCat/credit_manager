@@ -184,6 +184,47 @@ public class WebUserController extends BaseController{
 	}
 	
 	/**
+	 * 跳转到用户修改页面
+	 * @return
+	 */
+	@RequestMapping(value="/update",method=RequestMethod.GET)
+	public ModelAndView toUserUpdate(Integer id){
+		ModelAndView mv = super.getModelAndView();
+		if(null != id){
+			try{
+				WebUser user = webUserWebService.getUserById(Integer.valueOf(id));
+				mv.addObject("user",user);
+			}catch(Exception e){
+				logger.error("toupdate webUser error", e);
+			}
+		}else{
+			
+		}
+		mv.setViewName("credit/webUser/webUser_update");
+		return mv;
+	}
+	
+	/**
+	 * 修改用户
+	 * @return
+	 */
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	@ResponseBody
+	public PageData userUpdate(WebUser user){
+		PageData result = new PageData();
+		try{
+			webUserWebService.updateWebUser(user);
+			result.put("status", 1);
+		}catch(Exception e){
+			logger.error("updaet webUser error", e);
+			result.put("status", 0);
+			result.put("msg", "操作失败");
+		}
+			
+		return result;
+	}
+	
+	/**
 	 * 跳转到专家顾问新增修改页面
 	 * @return
 	 */

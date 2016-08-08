@@ -89,7 +89,7 @@
 		            	  + '  <li><a href="sample/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
 		            	  + '  <li class="divider"></li>'
             			  if(row.status == '0'){
-		            		  html += '<li><a href="sample/updStatus?status=1&id='+row.id+'" data-msg="确定发布吗？" data-model="ajaxToDo" data-callback="refreshTable">发布</a></li>'
+		            		  html += '<li><a href="sample/updStatus?status=1&id='+row.id+'" data-msg="确定发布吗？" data-model="ajaxToDo" data-callback="refreshTable">审核(发布)</a></li>'
 		            	  }else if(row.status == '1'){
 		            		  html += '<li><a href="sample/updStatus?status=0&id='+row.id+'" data-msg="确定取消发布吗？" data-model="ajaxToDo" data-callback="refreshTable">取消发布</a></li>'
 		            	  }

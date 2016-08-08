@@ -103,7 +103,7 @@ public class RewardController extends BaseController{
 	public PageData saveReward(Reward reward) throws Exception{
 		PageData result = new PageData();
 		try{
-			reward.setRewardStatus((short)0);
+			reward.setRewardStatus((short)1);
 			reward.setCreateTime(new Date());
 			String images = "";
 			if(null != reward.getUploadFiles()){
