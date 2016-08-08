@@ -68,14 +68,14 @@
 		<if test="crStatus != null and crStatus != ''">
 		and cr_status=#{crStatus}
 		</if>
+		<if test="createTime != null and createTime != ''">
+		and create_date <![CDATA[>=]]>#{createTime}
+		</if>
 		<if test="crType != null and crType != ''">
 		and cr_type=#{crType}
 		</if>
 		<if test="creditType != null and creditType != ''">
 		and credit_type=#{creditType}
-		</if>
-		<if test="contactName!=nul and contactName!=''">
-		and contact_name like CONCAT(CONCAT('%',#{contactName}),'%')
 		</if>
 		<if test="keyword != null and keyword != ''">
 	  	and	CONCAT(IFNULL(u.contact_name,''),IFNULL(u.debt_name,'')) like #{keyword}
@@ -92,14 +92,14 @@
 		<if test="crStatus != null and crStatus != ''">
 		and cr_status=#{crStatus}
 		</if>
+		<if test="createTime != null and createTime != ''">
+		and create_date <![CDATA[>=]]>#{createTime}
+		</if>
 		<if test="crType != null and crType != ''">
 		and cr_type=#{crType}
 		</if>
 		<if test="creditType != null and creditType != ''">
 		and credit_type=#{creditType}
-		</if>
-		<if test="contactName!=nul and contactName!=''">
-		and contact_name like CONCAT(CONCAT('%',#{contactName}),'%')
 		</if>
 		<if test="keyword != null and keyword != ''">
         and	CONCAT(IFNULL(u.contact_name,''),IFNULL(u.debt_name,'')) like #{keyword}

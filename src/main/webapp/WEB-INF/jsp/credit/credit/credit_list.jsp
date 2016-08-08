@@ -71,6 +71,8 @@
 				"type" : "post",
 				"data" : function(data) {
 					data.keyword = $("#keyword").val();
+					data.createTime = $("#createTime").val();
+					data.crType = $("#crType").val();
 				}
 			},
 			"language" : {
@@ -95,12 +97,8 @@
 				"targets" : 1,
 				"render" : function(data, type, row) {
 					var html = htmlTpl.dropdown.prefix
-		           	<shiro:hasPermission name="credit/edit">
 		            	  + '  <li><a href="credit/edit?id='+row.id+'" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
-		            </shiro:hasPermission>
-		            <shiro:hasPermission name="credit/delete">
 		            	  + '  <li><a href="credit/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
-		            </shiro:hasPermission>
 		            	  + '  <li><a href="credit/details?id='+row.id+'" data-model="dialog" data-callback="refreshTable"><i class="fa fa-info"></i>&nbsp;详情</a></li>'
 		            <shiro:hasPermission name="credit/updateAudit">
 		            	  + '  <li class="divider"></li>'
@@ -167,11 +165,12 @@
 					+ '<div class="input-group-addon">'
 					+ '<label for="startTime"><i class="fa fa-calendar"></i></label>'
 					+ '</div>' 
-					+ '<input id="startTime" readonly name="startTime" type="text" class="form-control" placeholder="请输入开始时间" />'
+					+ '<input id="createTime" readonly name="createTime" type="text" class="form-control" placeholder="请输入开始时间" />'
 					+ '</div>';
 				others += '<div class="input-group input-group-sm input-adjust">'
 					+ '<span class="input-group-addon">类型</span>'
-					+ '<select class="form-control">'
+					+ '<select class="form-control" name="crType" id="crType">'
+					+ '	<option value=""></option>'
 					+ '	<option value="1">民间借贷</option>'
 					+ '	<option value="2">应收账款</option>'
 					+ '	<option value="3">银行借贷</option>'
@@ -184,7 +183,7 @@
 					+ '</select>'
 					+ '</div>';
 				initSearchForm(others, "搜索债权人名称");
-				$("#startTime").datetimepicker({
+				$("#createTime").datetimepicker({
 					format : 'yyyy-mm-dd hh:ii',
 					language : 'zh',
 					weekStart : 1,

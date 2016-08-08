@@ -90,8 +90,8 @@
 									<dt>债权凭证：</dt>
 									<dd><c:forEach items="${credit.debtProofs}" var="item">
 										<c:if test="${not empty item}">
-										<a onclick="showBigImage('${basePath}${item}')">
-											<img alt="" src="${basePath}${item}" width="50px" height="50px"/>&nbsp;&nbsp;
+										<a href="reward/imgDetail?imageUrl=${showImgPath}${item}" target="_blank">
+											<img alt="" src="${showImgPath}${item}" width="50px" height="50px"/>&nbsp;&nbsp;
 										</a>
 										</c:if>
 									</c:forEach></dd>

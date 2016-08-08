@@ -3,6 +3,7 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <form class="form-horizontal" action="filemanager/edit" method="post" id="defForm" callfn="refreshTable">
+<input type="hidden" name="id" value="${fileManager.id }">
 	<div class="modal-header">
 		<div class='bootstrap-dialog-header'>
 			<div class='bootstrap-dialog-close-button'

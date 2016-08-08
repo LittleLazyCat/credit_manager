@@ -72,7 +72,9 @@ public class CreditManagerController extends BaseController{
 		} catch (Exception e) {
 			logger.error("get fileManager error", e);
 		}
+		String showImgPath = PropertiesUtil.getValue("showImgPath");
 		ModelAndView mv = super.getModelAndView();
+		mv.addObject("showImgPath", showImgPath);
 		mv.addObject("credit", credit);
 		mv.setViewName("credit/credit/credit_details");
 		return mv;
@@ -165,19 +167,35 @@ public class CreditManagerController extends BaseController{
 	public PageData edit(Credit credit){
 		PageData result = new PageData();
 		try {
+			String images = "";
+			if(null != credit.getUploadFiles()){
+				for(int i=0;i< credit.getUploadFiles().length;i++){
+					if(0 != credit.getUploadFiles()[i].getSize()){
+						String newFileName = DataUtil.getRandomStr();
+						String fileName = credit.getUploadFiles()[i].getOriginalFilename();
+						fileName = "credit"+newFileName + fileName.substring(fileName.lastIndexOf("."), fileName.length());
+						uploadFileService.uploadFile(PropertiesUtil.getValue("saveImgPath")+"uploadFile/credit", credit.getUploadFiles()[i], fileName);
+						if(i == 0){
+							images += "uploadFile/credit/"+fileName;
+						}else{
+							images += ";uploadFile/credit/"+fileName;
+						}
+					}
+				}
+			}
+			credit.setDebtProof(images);
 			int num= creditManagerService.update(credit);
 			if(num>0){
 				result.put("status", 1);
 			}
 		} catch (Exception e) {
-			logger.error("edit filemanager error", e);
+			logger.error("edit credit error", e);
 			result.put("status", 0);
 			result.put("msg", "更新失败");
 		}
 		return result;
 	}
-	
-	
+		
 	/**
 	 * 跳转到更新法律文件信息页面
 	 * @return

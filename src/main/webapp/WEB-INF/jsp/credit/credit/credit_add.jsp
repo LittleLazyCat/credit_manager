@@ -109,16 +109,15 @@
                                     <input id="debtPhone" name="debtPhone" class="form-control" type="text" required="required" aria-required="true">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">债务凭证：</label>
-                                <div class="col-sm-8">
-                                     <input class="form-control" type="file" name="uploadFiles" id="uploadFile" accept=".jpg,.png,.jpeg,.gif,.bmp"/>
-                                     <div id="addFileUploadDiv"></div>
-                                     <span class="help-block m-b-none">
-                                     	<button type="button" class="btn btn-white btn-xs" onclick="addUploadFile()"><span class="glyphicon glyphicon-plus-sign">继续添加</span></button>
-                                     </span>
-                                </div>
-                            </div>
+		                    <div class="form-group">
+		                        <label class="col-sm-3 control-label">照片：</label>
+		                        <div class="col-sm-8">
+		                             <input class="form-control" type="file" name="uploadFiles" accept=".jpg,.png,.jpeg,.gif,.bmp"/>
+		                             <div id="addFileUpload"></div>
+		                             <span class="help-block m-b-none">
+		                             	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()"><span class="glyphicon glyphicon-plus-sign">继续添加</span></button>
+		                         </span>
+		                    </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">债权开始日期：</label>
                                 <div class="col-sm-8">
@@ -139,6 +138,9 @@
 			<button type="submit" class="btn btn-primary">保存</button>
 	</div>
 </form>
+<script type="text/javascript">
+$("#defForm").validate();
+</script>
 <script type="text/javascript">
 function addFileUpload(){
 	$("#addFileUpload").append('<input class="form-control" type="file" name="uploadFiles" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');

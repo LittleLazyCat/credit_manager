@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+ 
 <form class="form-horizontal" action="credit/edit" method="post" id="defForm" callfn="refreshTable" enctype="multipart/form-data">
+<input type="hidden" name="creditType" value="${credit.creditType }">
+<input type="hidden" name="crStatus" value="${credit.crStatus}">
+<input type="hidden" name="id" value="${credit.id}">
 	<div class="modal-header">
 		<div class='bootstrap-dialog-header'>
 			<div class='bootstrap-dialog-close-button'
@@ -12,7 +17,7 @@
 		</div>
 	</div>
 	<div class="modal-body">
-		<div class="container-fluid">
+	<div class="container-fluid">
                           <div class="form-group">
                                 <label class="col-sm-3 control-label">债权类型：</label>
                                 <div class="col-sm-8">
@@ -78,6 +83,7 @@
 					         债务方信息
 					      </h4>
 					      </a><br/>
+					     
                          <div class="form-group">
                                 <label class="col-sm-3 control-label">债务方名称：</label>
                                 <div class="col-sm-8">
@@ -92,12 +98,18 @@
 													 <option value="1">请选择</option>
 													 <c:forEach items="${provinceList}" var="item">
 													 <option value="${item}">${item}</option>
+													<c:if test="${not empty credit.debtProvince }">
+							                        <option value="${credit.debtProvince }" selected="selected">${credit.debtProvince}</option>
+							                        </c:if>
 													 </c:forEach>
 							                       </select>
 								</div>
 								<div class="col-sm-4">
 									 <select id="debtCity" name="debtCity" class="form-control input-sm" style="width: 120px;">
 							              <option value="">请选择</option>
+							               <c:if test="${not empty credit.debtCity }">
+							               <option value="${credit.debtCity }" selected="selected">${credit.debtCity}</option>
+							               </c:if>
 							          </select>
 								</div>
                             </div>
@@ -109,20 +121,21 @@
                                     <input id="debtPhone" name="debtPhone" class="form-control" type="text" required="required" aria-required="true" value="${credit.debtPhone }">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">债务凭证：</label>
-                                <div class="col-sm-8">
-                                     <input class="form-control" type="file" name="uploadFiles" id="uploadFile" accept=".jpg,.png,.jpeg,.gif,.bmp"/>
-                                     <div id="addFileUploadDiv"></div>
-                                     <span class="help-block m-b-none">
-                                     	<button type="button" class="btn btn-white btn-xs" onclick="addUploadFile()"><span class="glyphicon glyphicon-plus-sign">继续添加</span></button>
-                                     </span>
-                                </div>
-                            </div>
+                             <%-- --%>
+		                    <div class="form-group">
+		                        <label class="col-sm-3 control-label">照片：</label>
+		                        <div class="col-sm-8">
+		                             <input class="form-control" type="file" name="uploadFiles" accept=".jpg,.png,.jpeg,.gif,.bmp"/>
+		                             <div id="addFileUpload"></div>
+		                             <span class="help-block m-b-none">
+		                             	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()"><span class="glyphicon glyphicon-plus-sign">继续添加</span></button>
+		                         </span>
+		                    </div>
+		                               
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">债权开始日期：</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" name="openDate" id="datetimepicker" required="required" aria-required="true" value="${credit.openDate }">
+                                    <input class="form-control required" type="text" name="openDate" id="datetimepicker"  value="<fmt:formatDate value="${credit.openDate }" pattern="yyyy-MM-dd"/>">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -131,7 +144,7 @@
                                     <textarea id="description" name="description" class="form-control" rows="3">${credit.description }</textarea>
                                 </div>
                             </div>
-                     
+          
 		</div>
 	</div>
 	<div class="modal-footer">
@@ -139,3 +152,34 @@
 			<button type="submit" class="btn btn-primary">保存</button>
 	</div>
 </form>
+<script type="text/javascript">
+$("#defForm").validate();
+</script>
+
+<script type="text/javascript">
+function addFileUpload(){
+	$("#addFileUpload").append('<input class="form-control" type="file" name="uploadFiles" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');
+}
+function loadCity(obj) {
+	var proName = $(obj).val();
+	$.ajax({
+		url : 'reward/loadCity',
+		async : false,
+		data : {
+			"proName" : proName
+		},
+		type : "POST",
+		success : function(data) {
+			
+			$("#debtCity").empty();
+			$('#debtCity').append('<option>请选择</option>');
+			$.each(data, function (i,item) {
+				$('#debtCity').append('<option value='+item+'>'+item+'</option>');
+		    });
+		},
+		error : function() {
+			alert("获取城市数据失败");
+		}
+	});
+}
+</script>
