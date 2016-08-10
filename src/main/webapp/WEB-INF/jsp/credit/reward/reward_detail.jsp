@@ -86,41 +86,18 @@
 				<dt> 图片：</dt>
 				<dd><c:forEach items="${reward.imagesArry}" var="item">
 					<c:if test="${not empty item}">
-					<span onMouseOver="javascript:show(this,'mydiv1','${showImgPath}${item}');" onMouseOut="hide(this,'mydiv1')">
 					<a href="reward/imgDetail?imageUrl=${showImgPath}${item}" target="_blank">
 						<img alt="" src="${showImgPath}${item}" id="rewardImg" width="50px" height="50px"/>&nbsp;&nbsp;
 					</a>
-					</span>
 					</c:if>
 				</c:forEach></dd>
 			</dl>
 			<dl class="dl-horizontal">
 				<dt>悬赏描述：</dt>
-				<dd>${user.description}</dd>
+				<dd>${reward.description}</dd>
 			</dl>
 		</div>
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 	</div>
-	<div id="mydiv1" style="position:absolute;display:none;border:1px solid silver;background:silver;">
-		<img alt="" src="" id="rewardImg" width="480px" height="330px"/>
-	</div>
-<script type="text/javascript">
-    function showBigImage(url){
-		$("#rewardBigImg").attr("src",url);
-		$("#rewardImgModal").modal('show');
-	}
-	function show(obj,id,url) {    
-	    var objDiv = $("#"+id+"");
-	    $("#rewardImg").attr('src',url);
-	    $(objDiv).css("display","block");
-	    $(objDiv).css("left", 60);
-	    $(objDiv).css("top", 210);
-	}
-
-	function hide(obj,id) {
-	    var objDiv = $("#"+id+"");
-	    $(objDiv).css("display", "none");
-	} 
-</script>

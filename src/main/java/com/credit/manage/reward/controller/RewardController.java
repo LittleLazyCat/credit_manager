@@ -78,12 +78,17 @@ public class RewardController extends BaseController{
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/saveReward",method =RequestMethod.GET)
-	public ModelAndView toSaveReward(Integer userId,Integer id) throws Exception{
+	public ModelAndView toSaveReward(Integer id) throws Exception{
 		
 		List<String> provinceList = ProvinceEnum.takeAllValues();//省份list
 		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd.put("userLevel", 0);//注册用户
+		pd.put("userStatus", 1);
+		List<WebUser> userList = webUserWebService.findUserList(pd);
+		
 		mv.addObject("provinceList", provinceList);
-		mv.addObject("userId", userId);
+		mv.addObject("userList", userList);
 		if(null != id){
 			Reward reward = rewardWebService.findById(id);
 			mv.addObject("reward", reward);

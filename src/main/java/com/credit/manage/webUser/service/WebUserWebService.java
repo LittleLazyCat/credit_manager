@@ -72,15 +72,15 @@ public class WebUserWebService {
 	}
 	
 	/**
-	 * 根据手机或者邮箱查找用户
-	 * @author huixiong 
+	 * 查找网站用户(不分页)
+	 * @author  
 	 * @param pd
 	 * @return
 	 * @throws Exception
 	 */
-	public WebUser findUserByPhoneOrEmail(PageData pd) throws Exception{
-		WebUser user = dao.findForObject("WebUserMapper.getUserByPhoneOrEmail", pd);
-		return user;
+	public List<WebUser> findUserList(PageData pd) throws Exception{
+		List<WebUser> userList = dao.findForList("WebUserMapper.list", pd);
+		return userList;
 	}
 	
 	public PageData findPartUserList(PageData pd) throws Exception{

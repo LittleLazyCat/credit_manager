@@ -21,7 +21,7 @@
 			<div class="form-group">
 				<label for="samType" class="col-sm-2 control-label">分类:</label>
 				<div class="col-sm-7">
-					<select name="samType" id="samType" class="form-control" onclick="showAndHide(this.value)">
+					<select name="samType" id="samType" class="form-control" onchange="showAndHide(this.value)">
 						<option value="1" <c:if test="${sample.samType eq 1}">selected</c:if>>成功案例</option>
 						<option value="2" <c:if test="${sample.samType eq 2}">selected</c:if>>用户心声</option>
 					</select>
@@ -50,6 +50,9 @@
 				<label for="headImgFile" class="col-sm-2 control-label">图片:</label>
 				<div class="col-sm-7" id="fileSelect">
 				</div>
+                <span class="help-block m-b-none">
+                	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()" id="addFileBtn"><span class="glyphicon glyphicon-plus-sign">添加文件</span></button> 
+           		</span>
 			</div>
 			</div>
 			<div class="form-group">
@@ -67,14 +70,26 @@
 </form>
 <script>
 	$("#defForm").validate();
-	$("#typeDiv").hide();
+	$(function(){
+		$("#typeDiv").hide();
+		showAndHide($('#samType').val());
+	});
+	
 	function showAndHide(value){
 		if(value == '1'){
 			$("#typeDiv").hide();
 			$("#fileSelect").html("");
 		}else{
 			$("#typeDiv").show();
-			$("#fileSelect").html('<input class="form-control required" type="file" name="headImgFile" id="headImgFile" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');
+			$("#addFileBtn").show();
+			//$("#fileSelect").html('<input class="form-control required" type="file" name="headImgFile" id="headImgFile" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');
 		}
+	}
+	var i=0;
+	function addFileUpload(){
+		$("#fileSelect").append('<input class="form-control" type="file" name="headImgFile" id="headImgFile'+i+'" required="required" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');
+		$("#headImgFile"+i).click();
+		$("#addFileBtn").hide();
+		i++;
 	}
 </script>

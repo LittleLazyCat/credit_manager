@@ -82,7 +82,9 @@
 		and	CONCAT(IFNULL(u.reward_name,''),IFNULL(u.province,'')) like #{keyword}
 		</if>
 		ORDER BY u.create_time desc 
-		limit #{from},#{size}
+		<if test="from!=null and size!=null">
+			limit #{from},#{size}
+		</if>
 	</select>
 	
 	

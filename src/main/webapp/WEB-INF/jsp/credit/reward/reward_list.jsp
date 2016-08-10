@@ -12,6 +12,9 @@
 	<gvtv:navigater path="reward"></gvtv:navigater>
 </section>
 <style>
+	.modal-dialog{
+		width: 720px;
+	}
 </style>
 <!-- Main content -->
 <section class="content">
@@ -19,7 +22,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<button type="button" data-url="reward/saveReward?userId=${sessionUser.userId}" data-model="dialog" class="btn btn-sm btn-primary">
+					<button type="button" data-url="reward/saveReward" data-model="dialog" class="btn btn-sm btn-primary">
 						<i class="fa fa-fw fa-plus"></i>新增
 					</button>
 				</div>
@@ -90,7 +93,7 @@
 				"targets" : 1,
 				"render" : function(data, type, row) {
 					var html = htmlTpl.dropdown.prefix
-		            	  + '  <li><a href="reward/saveReward?id='+row.id+'&userId=${sessionUser.userId}" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
+		            	  + '  <li><a href="reward/saveReward?id='+row.id+'" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
 		            	  + '  <li><a href="reward/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
 		            	  + '  <li class="divider"></li>'
 		            	  /* if(row.rewardStatus == '0'){
