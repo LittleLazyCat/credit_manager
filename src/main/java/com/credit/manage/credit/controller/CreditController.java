@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.credit.manage.credit.service.CreditManagerService;
+import com.credit.manage.credit.service.CreditService;
 import com.credit.manage.entity.Credit;
 import com.credit.manage.entity.FileManager;
+import com.credit.manage.entity.WebUser;
 import com.credit.manage.filemanager.service.UploadFileService;
 import com.credit.manage.util.ProvinceEnum;
+import com.credit.manage.webUser.service.WebUserWebService;
 import com.gvtv.manage.base.controller.BaseController;
 import com.gvtv.manage.base.system.controller.UserController;
 import com.gvtv.manage.base.util.DataUtil;
@@ -27,10 +29,12 @@ import com.gvtv.manage.base.util.PropertiesUtil;
 
 @Controller
 @RequestMapping(value = "/credit")
-public class CreditManagerController extends BaseController{
-	private static Logger logger = LoggerFactory.getLogger(CreditManagerController.class);
+public class CreditController extends BaseController{
+	private static Logger logger = LoggerFactory.getLogger(CreditController.class);
 	@Resource
-	private CreditManagerService creditManagerService;
+	private CreditService creditService;
+	@Resource
+	private WebUserWebService webUserWebService;
 	@Resource
 	private UploadFileService uploadFileService;
 
@@ -49,7 +53,7 @@ public class CreditManagerController extends BaseController{
 		PageData result = null;
 		try {
 			PageData pd = super.getPageData();
-			result = creditManagerService.list(pd);
+			result = creditService.list(pd);
 		} catch (Exception e) {
 			logger.error("list user error", e);
 			result = new PageData();
@@ -68,7 +72,7 @@ public class CreditManagerController extends BaseController{
 	public ModelAndView toDetails(@RequestParam Integer id){
 		Credit credit = null;
 		try {
-			credit = creditManagerService.findById(id);
+			credit = creditService.findById(id);
 		} catch (Exception e) {
 			logger.error("get fileManager error", e);
 		}
@@ -84,13 +88,19 @@ public class CreditManagerController extends BaseController{
     /**
      * 跳转到新增页面
      * @return
+     * @throws Exception 
      */
 	@RequestMapping(value="/add", method=RequestMethod.GET)
-	public ModelAndView toAdd(){
+	public ModelAndView toAdd() throws Exception{
 		List<String> provinceList = ProvinceEnum.takeAllValues();//省份list
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = super.getPageData();
+		pd.put("userLevel", 0);//注册用户
+		pd.put("userStatus", 1);
+		List<WebUser> userList = webUserWebService.findUserList(pd);
+		
 		mv.addObject("pd", pd);
+		mv.addObject("userList", userList);
 		mv.addObject("provinceList", provinceList);
 		mv.setViewName("credit/credit/credit_add");
 		return mv;
@@ -126,7 +136,7 @@ public class CreditManagerController extends BaseController{
 			credit.setCreateDate(new Date());
 			credit.setCrStatus((short)1);
 			credit.setIsAudit(0);
-			int num= creditManagerService.save(credit);
+			int num= creditService.save(credit);
 			if(num>0){
 				result.put("status", 1);
 			}
@@ -146,7 +156,7 @@ public class CreditManagerController extends BaseController{
 	public ModelAndView toEdit(@RequestParam Integer id){
 		Credit credit = null;
 		try {
-			credit = creditManagerService.findById(id);
+			credit = creditService.findById(id);
 		} catch (Exception e) {
 			logger.error("get fileManager error", e);
 		}
@@ -184,7 +194,7 @@ public class CreditManagerController extends BaseController{
 				}
 			}
 			credit.setDebtProof(images);
-			int num= creditManagerService.update(credit);
+			int num= creditService.update(credit);
 			if(num>0){
 				result.put("status", 1);
 			}
@@ -204,7 +214,7 @@ public class CreditManagerController extends BaseController{
 	public ModelAndView toAudit(@RequestParam Integer id){
 		Credit credit = null;
 		try {
-			credit = creditManagerService.findById(id);
+			credit = creditService.findById(id);
 		} catch (Exception e) {
 			logger.error("get fileManager error", e);
 		}
@@ -223,7 +233,7 @@ public class CreditManagerController extends BaseController{
 	public PageData audit(Credit credit){
 		PageData result = new PageData();
 		try {
-			int num= creditManagerService.updateAudit(credit);
+			int num= creditService.updateAudit(credit);
 			if(num>0){
 				result.put("status", 1);
 				result.put("msg", "审核成功");
@@ -247,7 +257,7 @@ public class CreditManagerController extends BaseController{
 	public PageData updateStatus(Credit credit){
 		PageData result = new PageData();
 		try {
-			int num= creditManagerService.updateStatus(credit);
+			int num= creditService.updateStatus(credit);
 			if(num>0){
 				result.put("status", 1);
 			}
@@ -267,7 +277,7 @@ public class CreditManagerController extends BaseController{
 	public PageData delete(@RequestParam Integer id){
 		PageData result = new PageData();
 		try {
-			creditManagerService.delete(id);
+			creditService.delete(id);
 			result.put("status", 1);
 		} catch (Exception e) {
 			logger.error("delete filemanager error", e);
@@ -282,7 +292,7 @@ public class CreditManagerController extends BaseController{
 	public PageData batchDelete(@RequestParam String ids){
 		PageData result = new PageData();
 		try {
-			creditManagerService.batchDelete(ids);
+			creditService.batchDelete(ids);
 			result.put("status", 1);
 		} catch (Exception e) {
 			logger.error("batch delete user error", e);

@@ -32,6 +32,16 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-3 control-label">债权发布者：</label>
+                                <div class="col-sm-8">
+                                        <select  name="uerId" class="form-control required">
+                                        <c:forEach items="${userList }" var="user">
+													<option value="${user.id }">${user.nickname }</option>
+                                        </c:forEach>
+										</select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label">债权金额：</label>
                                 <div class="col-sm-8">
                                     <input id="crAmount" name="crAmount" class="form-control required" type="text">
@@ -167,4 +177,13 @@ function loadCity(obj) {
 		}
 	});
 }
+
+$(function () {
+    $('#datetimepicker').datetimepicker({
+    	minView: "month",//选择日期后，不会再跳转去选择时分秒 
+    	format: "yyyy-mm-dd",
+    	language: 'zh-CN',
+    	autoclose:true
+    });
+});
 </script>

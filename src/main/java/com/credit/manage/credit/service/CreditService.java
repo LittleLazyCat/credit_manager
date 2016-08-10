@@ -16,8 +16,8 @@ import com.gvtv.manage.base.util.PageData;
 
 
 @Transactional(readOnly=true)
-@Service("creditManagerService")
-public class CreditManagerService {
+@Service("creditService")
+public class CreditService {
 
 	@Resource(name = "BaseDao")
 	private BaseDao dao;
