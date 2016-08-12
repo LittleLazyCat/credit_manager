@@ -1,5 +1,7 @@
 package com.credit.manage.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class FileManager {
 
 	private Integer id;
@@ -9,6 +11,8 @@ public class FileManager {
 	private String fileTitle;
 	// 文件下载路径
 	private String downloadUrl;
+	
+	private MultipartFile uploadFile;
 
 	public FileManager() {
 
@@ -55,6 +59,12 @@ public class FileManager {
 		this.downloadUrl = downloadUrl;
 	}
 
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
 
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
 
 }

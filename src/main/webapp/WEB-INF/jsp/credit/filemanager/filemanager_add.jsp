@@ -26,49 +26,39 @@
 			<div class="form-group">
 				<label for="name" class="col-sm-2 control-label">文件名称</label>
 				<div class="col-sm-7">
-					<input id="fileTitle" name="fileTitle" type="text" maxlength="32" class="form-control required" placeholder="请输入姓名">
+					<input id="fileTitle" name="fileTitle" type="text" maxlength="32" class="form-control required" placeholder="请输入名称">
 				</div>
 			</div>
 			<div class="form-group">
+				<label for="headImgFile" class="col-sm-2 control-label">文件:</label>
+				<div class="col-sm-7">
+					<div id="fileSelect"></div>
+	                <span class="help-block m-b-none">
+	                	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()" id="addFileBtn"><span class="glyphicon glyphicon-plus-sign">添加文件</span></button> 
+	           		</span>
+				</div>
+			</div>
+			<!-- <div class="form-group">
 				<label for="description" class="col-sm-2 control-label">下载地址</label>
 				<div class="col-sm-7">
 					<textarea id="downloadUrl" name="downloadUrl" class="form-control"
 						rows="3"></textarea>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-		<shiro:hasPermission name="user/add">
-			<button type="submit" class="btn btn-primary">保存</button>
-		</shiro:hasPermission>
+		<button type="submit" class="btn btn-primary">保存</button>
 	</div>
 </form>
 <script type="text/javascript">
-$('#defForm').validate({
-	rules: {
-		loginName: {
-            required: true,
-            remote: {
-                type: "post",
-                url: "user/checkName",
-                dataType: "json",
-                dataFilter: function(data, type) {
-                    if (data == 1){
-                    	return false;
-                    }else{
-                    	return true;
-                    }  
-                }
-            }
-    	}
-    },
-    messages: {
-    	loginName: {
-            required: "请输入用户名",
-            remote: "用户名重复"
-        }
-    }
-});
+$('#defForm').validate();
+var i=0;
+function addFileUpload(){
+	$("#fileSelect").append('<input class="form-control" type="file" name="uploadFile" id="uploadFile'+i+'" required="required" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');
+	$("#addFileBtn").hide();
+	$("#uploadFile"+i).click();
+	i++;
+}
 </script>

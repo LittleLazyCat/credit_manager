@@ -104,6 +104,14 @@
 						return "<font color='red'>实用文件</font>";
 					}
 				}
+			},
+			{
+				"targets" : 4,
+				"render" : function(data, type, row,settings) {
+					if(data != ''){
+						return "<a href='${headUrl}/"+data+"' target='_blank'>${headUrl}"+data+"</a>";
+					}
+				}
 			}],
 			"drawCallback": function (settings) {
 				drawICheck('defaultCheck', 'chx_default');

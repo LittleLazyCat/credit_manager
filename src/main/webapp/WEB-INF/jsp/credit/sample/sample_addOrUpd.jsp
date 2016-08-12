@@ -48,11 +48,12 @@
 			</div>
 			<div class="form-group">
 				<label for="headImgFile" class="col-sm-2 control-label">图片:</label>
-				<div class="col-sm-7" id="fileSelect">
+				<div class="col-sm-7">
+					<div id="fileSelect"></div>
+	                <span class="help-block m-b-none">
+	                	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()" id="addFileBtn"><span class="glyphicon glyphicon-plus-sign">添加文件1</span></button> 
+	           		</span>
 				</div>
-                <span class="help-block m-b-none">
-                	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()" id="addFileBtn"><span class="glyphicon glyphicon-plus-sign">添加文件</span></button> 
-           		</span>
 			</div>
 			</div>
 			<div class="form-group">
@@ -88,8 +89,8 @@
 	var i=0;
 	function addFileUpload(){
 		$("#fileSelect").append('<input class="form-control" type="file" name="headImgFile" id="headImgFile'+i+'" required="required" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');
-		$("#headImgFile"+i).click();
 		$("#addFileBtn").hide();
+		$("#headImgFile"+i).click();
 		i++;
 	}
 </script>

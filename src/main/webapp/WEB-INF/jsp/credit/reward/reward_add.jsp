@@ -97,12 +97,12 @@ pageContext.setAttribute("basePath",basePath);
                  </div>
                </div>
                <div class="form-group">
-                     <label class="col-sm-3 control-label">发布用户：</label>
+                     <label class="col-sm-3 control-label">悬赏发布者：</label>
                      <div class="col-sm-6">
 						<select name="userId" class="form-control input-sm"  required="required" aria-required="true">
 							 <option value="">请选择</option>
 							 <c:forEach items="${userList}" var="item">
-							 	<option value="${item.id}" <c:if test="${reward.userId eq item.id}">selected</c:if>>${item.userEmail} - ${item.userPhone}</option>
+							 	<option value="${item.id}" <c:if test="${reward.userId eq item.id}">selected</c:if>>${item.userPhone} - ${item.userEmail}</option>
 							 </c:forEach>
                 		</select>
 					</div>

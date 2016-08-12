@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.credit.manage.entity.FileManager;
 import com.credit.manage.filemanager.service.FileManagerService;
+import com.credit.manage.filemanager.service.UploadFileService;
 import com.gvtv.manage.base.controller.BaseController;
+import com.gvtv.manage.base.util.DataUtil;
 import com.gvtv.manage.base.util.PageData;
+import com.gvtv.manage.base.util.PropertiesUtil;
 
 /**
  *  法律文件模版下载管理
@@ -26,10 +29,14 @@ public class FileManangerController extends BaseController{
 	private static Logger logger = LoggerFactory.getLogger(FileManangerController.class);
 	@Resource
 	private FileManagerService fileManagerService;
+	@Resource
+	private UploadFileService uploadFileService;
 	
 	@RequestMapping
 	public ModelAndView page(){
 		ModelAndView mv = super.getModelAndView();
+		String headUrl = PropertiesUtil.getValue("showImgPath");
+		mv.addObject("headUrl", headUrl);
 		mv.setViewName("credit/filemanager/filemanager_list");
 		return mv;
 	}
@@ -92,7 +99,22 @@ public class FileManangerController extends BaseController{
 	public PageData add(FileManager fileManager){
 		PageData result = new PageData();
 		try {
-			PageData pd = super.getPageData();
+			if(null != fileManager.getUploadFile() && 0 != fileManager.getUploadFile().getSize()){
+				
+				String newFileName = DataUtil.getRandomStr();
+				String fileName = fileManager.getUploadFile().getOriginalFilename();
+				if(fileManager.getFileType() == 1){
+					newFileName = "uploadFile/falvwenshu/" + newFileName;
+				}else if(fileManager.getFileType() == 2){
+					newFileName = "uploadFile/htwenshu/" + newFileName;
+				}else if(fileManager.getFileType() == 3){
+					newFileName = "uploadFile/qitawenshu/" + newFileName;
+				}
+				fileName = newFileName + fileName.substring(fileName.lastIndexOf("."), fileName.length());
+				
+				uploadFileService.uploadFile(PropertiesUtil.getValue("saveImgPath"), fileManager.getUploadFile(), fileName);
+				fileManager.setDownloadUrl(fileName);
+			}
 			int num= fileManagerService.save(fileManager);
 			if(num>0){
 				result.put("status", 1);

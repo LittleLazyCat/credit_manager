@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <form class="form-horizontal" action="filemanager/edit" method="post" id="defForm" callfn="refreshTable">
 <input type="hidden" name="id" value="${fileManager.id }">
+<input type="hidden" name="downloadUrl" value="${fileManager.downloadUrl }">
 	<div class="modal-header">
 		<div class='bootstrap-dialog-header'>
 			<div class='bootstrap-dialog-close-button'
@@ -32,12 +33,21 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label for="headImgFile" class="col-sm-2 control-label">文件:</label>
+				<div class="col-sm-7">
+					<div id="fileSelect"></div>
+	                <span class="help-block m-b-none">
+	                	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()" id="addFileBtn"><span class="glyphicon glyphicon-plus-sign">添加文件</span></button> 
+	           		</span>
+				</div>
+			</div>
+			<%-- <div class="form-group">
 				<label for="description" class="col-sm-2 control-label">下载地址</label>
 				<div class="col-sm-7">
 					<textarea id="downloadUrl" name="downloadUrl" class="form-control"
 						rows="3">${fileManager. downloadUrl}</textarea>
 				</div>
-			</div>
+			</div> --%>
 		</div>
 	</div>
 	<div class="modal-footer">
@@ -48,29 +58,12 @@
 	</div>
 </form>
 <script type="text/javascript">
-$('#defForm').validate({
-	rules: {
-		loginName: {
-            required: true,
-            remote: {
-                type: "post",
-                url: "user/checkName",
-                dataType: "json",
-                dataFilter: function(data, type) {
-                    if (data == 1){
-                    	return false;
-                    }else{
-                    	return true;
-                    }  
-                }
-            }
-    	}
-    },
-    messages: {
-    	loginName: {
-            required: "请输入用户名",
-            remote: "用户名重复"
-        }
-    }
-});
+$('#defForm').validate();
+var i=0;
+function addFileUpload(){
+	$("#fileSelect").append('<input class="form-control" type="file" name="uploadFile" id="uploadFile'+i+'" required="required" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');
+	$("#addFileBtn").hide();
+	$("#uploadFile"+i).click();
+	i++;
+}
 </script>
