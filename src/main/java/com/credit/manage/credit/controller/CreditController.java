@@ -16,13 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.credit.manage.credit.service.CreditService;
 import com.credit.manage.entity.Credit;
-import com.credit.manage.entity.FileManager;
 import com.credit.manage.entity.WebUser;
 import com.credit.manage.filemanager.service.UploadFileService;
 import com.credit.manage.util.ProvinceEnum;
 import com.credit.manage.webUser.service.WebUserWebService;
 import com.gvtv.manage.base.controller.BaseController;
-import com.gvtv.manage.base.system.controller.UserController;
 import com.gvtv.manage.base.util.DataUtil;
 import com.gvtv.manage.base.util.PageData;
 import com.gvtv.manage.base.util.PropertiesUtil;
@@ -115,7 +113,6 @@ public class CreditController extends BaseController{
 	public PageData add(Credit credit){
 		PageData result = new PageData();
 		try {
-			PageData pd = super.getPageData();
 			String images = "";
 			if(null != credit.getUploadFiles()){
 				for(int i=0;i< credit.getUploadFiles().length;i++){

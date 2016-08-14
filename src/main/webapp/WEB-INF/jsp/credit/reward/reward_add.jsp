@@ -40,7 +40,16 @@ pageContext.setAttribute("basePath",basePath);
              <div class="form-group">
                  <label class="col-sm-3 control-label">悬赏金额(元)：</label>
                  <div class="col-sm-6">
-                     <input id="rewardAmount" name="rewardAmount" class="form-control" required="required" type="text" aria-required="true" class="valid" value="${reward.rewardAmount}"/>
+                 	 <select id="amountSelect" class="form-control" onchange="amountChange(this.value)">
+                   		<option value="200-500">200-500元</option>
+                   		<option value="500-1000">500-1000元</option>
+                   		<option value="1000-1500">1000-1500元</option>
+                   		<option value="1500-2000">1500-2000元</option>
+                   		<option value="2000-3000">2000-3000元</option>
+                   		<option value="3000">3000元以上</option>
+                   		<option value="other">自定义</option>
+                   	</select>
+                     <input id="rewardAmount" name="rewardAmount" class="form-control" required="required" type="text" style="display:none" aria-required="true" class="valid" value="${reward.rewardAmount}"/>
                  </div>
              </div>
              <div class="form-group">
@@ -87,7 +96,7 @@ pageContext.setAttribute("basePath",basePath);
                              <div id="addFileUpload"></div>
                              <span class="help-block m-b-none">
                              	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()"><span class="glyphicon glyphicon-plus-sign">添加文件</span></button> 
-                         </span>
+                         	</span>
                     </div>
                 </div>
                 <div class="form-group" id="data_1">
@@ -122,6 +131,15 @@ pageContext.setAttribute("basePath",basePath);
 </form>
 	
 <script type="text/javascript">
+	function amountChange(value){
+		if(value == 'other'){
+			$("#rewardAmount").show();
+			$("#rewardAmount").val('');
+		}else{
+			$("#rewardAmount").hide();
+			$("#rewardAmount").val(value);
+		}
+	}
 	var i=0;
 	function addFileUpload(){
 		$("#addFileUpload").append('<input class="form-control" type="file" name="uploadFiles" id="uploadFiles'+i+'" required="required" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');
@@ -168,6 +186,7 @@ pageContext.setAttribute("basePath",basePath);
 	    	$("#debtProvince").val('${reward.province}');
 	    	loadCity('${reward.province}');
 	    }
+	    amountChange($("#amountSelect").val());
 	});
 
 	function changeRewardType(){

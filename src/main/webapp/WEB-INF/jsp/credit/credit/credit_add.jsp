@@ -106,12 +106,11 @@
 							                       </select>
 								</div>
 								<div class="col-sm-4">
-									 <select id="debtCity" name="debtCity" class="form-control input-sm" style="width: 120px;">
+									 <select id="debtCity" name="debtCity" class="form-control input-sm">
 							              <option value="">请选择</option>
 							          </select>
 								</div>
                             </div>
-                                
                                 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">债务方联系电话：</label>
@@ -122,11 +121,11 @@
 		                    <div class="form-group">
 		                        <label class="col-sm-3 control-label">照片：</label>
 		                        <div class="col-sm-8">
-		                             <input class="form-control" type="file" name="uploadFiles" accept=".jpg,.png,.jpeg,.gif,.bmp"/>
+		                             <!-- <input class="form-control" type="file" name="uploadFiles" accept=".jpg,.png,.jpeg,.gif,.bmp"/> -->
 		                             <div id="addFileUpload"></div>
 		                             <span class="help-block m-b-none">
-		                             	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()"><span class="glyphicon glyphicon-plus-sign">继续添加</span></button>
-		                         </span>
+		                             	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()"><span class="glyphicon glyphicon-plus-sign">添加图片</span></button>
+		                         	</span>
 		                    </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">债权开始日期：</label>
@@ -152,9 +151,16 @@
 $("#defForm").validate();
 </script>
 <script type="text/javascript">
+
+var i=0;
 function addFileUpload(){
-	$("#addFileUpload").append('<input class="form-control" type="file" name="uploadFiles" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');
+	$("#addFileUpload").append('<input class="form-control" type="file" name="uploadFiles" id="uploadFiles'+i+'" required="required" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');
+	$("#uploadFiles"+i).click();
+	i++;
 }
+/* function addFileUpload(){
+	$("#addFileUpload").append('<input class="form-control" type="file" name="uploadFiles" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');
+} */
 function loadCity(obj) {
 	var proName = $(obj).val();
 	$.ajax({

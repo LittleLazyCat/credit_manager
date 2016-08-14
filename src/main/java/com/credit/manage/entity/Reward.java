@@ -10,7 +10,7 @@ public class Reward {
 	// 悬赏类型
 	private Short rewardType;
 	// 悬赏金额a
-	private Double rewardAmount;
+	private String rewardAmount;
 	// 悬赏人
 	private String rewardName;
 	// 身份证
@@ -43,7 +43,7 @@ public class Reward {
 
 	}
 
-	public Reward(Integer id, Short rewardType, Double rewardAmount,
+	public Reward(Integer id, Short rewardType, String rewardAmount,
 			String rewardName, String cartId, String carBrand, String province,
 			String city, String images, Date createTime, Date endTime,
 			String description, Short rewardStatus, Integer userId,MultipartFile[] uploadFiles) {
@@ -81,11 +81,11 @@ public class Reward {
 		this.rewardType = rewardType;
 	}
 
-	public Double getRewardAmount() {
+	public String getRewardAmount() {
 		return rewardAmount;
 	}
 
-	public void setRewardAmount(Double rewardAmount) {
+	public void setRewardAmount(String rewardAmount) {
 		this.rewardAmount = rewardAmount;
 	}
 

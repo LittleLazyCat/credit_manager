@@ -69,6 +69,7 @@
 					data.keyword = $("#keyword").val();
 					data.createTime = $("#createTime").val();
 					data.rewardType = $("#rewardType").val();
+					data.rewardStatus = $("#rewardStatus").val();
 				}
 			},
 			"language" : {
@@ -131,7 +132,11 @@
 			{
 				"targets" : 4,
 				"render" : function(data, type, row) {
-					return (data > 0 ? data : 0) + " 元";
+					if(data == '3000'){
+						return data + " 元以上";
+					}else {
+						return data + " 元";
+					}
 				}
 			},
 			{
@@ -159,6 +164,8 @@
 						return "<font color='red'>未发布</font>";
 					}else if(data == '1'){
 						return "<font color='blue'>发布中</font>";
+					}else if(data == '-1'){
+						return "已结束";
 					}
 				}
 			}],
@@ -181,6 +188,15 @@
 					+ '<option value="2">找房产</option>'
 					+ '<option value="3">找应收款</option>'
 					+ '<option value="4">其他</option>'
+					+ '</select>'
+					+ '</div>';
+				others += '<div class="input-group input-group-sm input-adjust">'
+					+ '<span class="input-group-addon">状态</span>'
+					+ '<select class="form-control" name="rewardStatus" id="rewardStatus">'
+					+ '<option value="">全部</option>'
+					+ '<option value="0">未发布</option>'
+					+ '<option value="1">发布中</option>'
+					+ '<option value="-1">已结束</option>'
 					+ '</select>'
 					+ '</div>';
 					

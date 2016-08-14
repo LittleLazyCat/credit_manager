@@ -23,11 +23,11 @@
 							class="btn btn-sm btn-primary">
 							<i class="fa fa-fw fa-plus"></i>新增
 						</button>
-						<button type="button" data-url="credit/batchDelete"
+						<!-- <button type="button" data-url="credit/batchDelete"
 							data-msg="确定批量删除吗？" data-model="ajaxToDo" class="btn btn-sm btn-danger"
 							data-checkbox-name="chx_default" data-callback="refreshTable">
 							<i class="fa fa-fw fa-remove"></i>批量删除
-						</button>
+						</button> -->
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">

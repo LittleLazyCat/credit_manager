@@ -50,7 +50,10 @@
    <select id="count" parameterType="PageData" resultType="int">
 		select count(1)
 		from cr_reward u
-		where u.reward_status != -1
+		where 1 = 1
+		<if test="rewardStatus != null and rewardStatus != ''">
+		and reward_status = #{rewardStatus}
+		</if>
 		<if test="userId != null and userId != ''">
 		and user_id=#{userId}
 		</if>
@@ -68,7 +71,10 @@
 	<select id="list" parameterType="PageData" resultType="Reward">
 	   <include refid="commonColumns"></include>
 		from cr_reward u
-		where u.reward_status != -1
+		where 1 = 1
+		<if test="rewardStatus != null and rewardStatus != ''">
+		and reward_status = #{rewardStatus}
+		</if>
 		<if test="userId != null and userId != ''">
 		and user_id=#{userId}
 		</if>
