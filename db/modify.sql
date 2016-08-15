@@ -35,3 +35,10 @@ PRIMARY KEY (`id`)
 /***********2016-08-07***************/
 alter table cr_credit add COLUMN is_audit smallint(3)COMMENT '债权审核标志(1审核通过，-1审核不通过，0待审核)';
 UPDATE cr_credit SET is_audit=0;
+
+/***********2016-08-15***************/
+ALTER TABLE `cr_blog`
+MODIFY COLUMN `blog_source`  varchar(400) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '来源' AFTER `create_time`,
+MODIFY COLUMN `blog_author`  varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作者' AFTER `blog_source`;
+
+

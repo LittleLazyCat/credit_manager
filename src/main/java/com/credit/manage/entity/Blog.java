@@ -2,6 +2,8 @@ package com.credit.manage.entity;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Blog {
 
 	private Integer id;
@@ -12,7 +14,8 @@ public class Blog {
 	private String blogSource;
 	private String blogAuthor;
 	private Short blogStatus;
-
+	private MultipartFile uploadFile;
+	
 	public Blog() {
 
 	}
@@ -91,6 +94,14 @@ public class Blog {
 
 	public void setBlogStatus(Short blogStatus) {
 		this.blogStatus = blogStatus;
+	}
+
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
 	}
 
 }

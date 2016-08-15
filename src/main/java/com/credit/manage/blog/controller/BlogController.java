@@ -14,8 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.credit.manage.blog.service.BlogWebService;
 import com.credit.manage.entity.Blog;
+import com.credit.manage.filemanager.service.UploadFileService;
 import com.gvtv.manage.base.controller.BaseController;
+import com.gvtv.manage.base.util.DataUtil;
 import com.gvtv.manage.base.util.PageData;
+import com.gvtv.manage.base.util.PropertiesUtil;
 
 @Controller
 @RequestMapping(value="/blog")
@@ -24,7 +27,8 @@ public class BlogController extends BaseController{
 	private static Logger logger = LoggerFactory.getLogger(BlogController.class);
 	@Resource
 	private BlogWebService blogWebService;
-	
+	@Resource
+	private UploadFileService uploadFileService;
 	/**
 	 * 跳转到添加或修改页面
 	 * @return
@@ -53,6 +57,8 @@ public class BlogController extends BaseController{
 	@RequestMapping(value="/page")
 	public ModelAndView page(){
 		ModelAndView mv = super.getModelAndView();
+		String headUrl = PropertiesUtil.getValue("showImgPath");
+		mv.addObject("headUrl", headUrl);
 		mv.setViewName("credit/blog/blog_list");
 		return mv;
 	}
@@ -86,10 +92,20 @@ public class BlogController extends BaseController{
 	public PageData saveOrUpd(Blog blog){
 		PageData result = new PageData();
 		try{
-			blog.setCreateTime(new Date());
+			if(null != blog.getUploadFile() && 0 != blog.getUploadFile().getSize()){
+				
+				String newFileName = DataUtil.getRandomStr();
+				String fileName = blog.getUploadFile().getOriginalFilename();
+				newFileName = "hplus/img/sample/" + newFileName;
+				fileName = newFileName + fileName.substring(fileName.lastIndexOf("."), fileName.length());
+				
+				uploadFileService.uploadFile(PropertiesUtil.getValue("saveImgPath"), blog.getUploadFile(), fileName);
+				blog.setBlogAuthor(fileName);
+			}
 			if(null != blog.getId() && 0 != blog.getId()){
 				blogWebService.updateBlog(blog);
 			}else{
+				blog.setCreateTime(new Date());
 				blog.setBlogStatus((short)0);
 				blogWebService.saveUser(blog);
 			}

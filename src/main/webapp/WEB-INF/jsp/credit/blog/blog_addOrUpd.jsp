@@ -18,34 +18,37 @@
 	<div class="modal-body">
 		<div class="container-fluid">
 			<div class="form-group">
-				<label for="loginName" class="col-sm-1 control-label">标题:</label>
+				<label for="password" class="col-sm-1 control-label">类型</label>
+				<div class="col-sm-7">
+					<label for="blogType1">
+					<input name="blogType" type="radio" id="blogType1" value="1" onclick="blogTypeInput(this.value)"/>媒体报道</label>&nbsp;&nbsp;&nbsp;
+					<label for="blogType2">
+					<input name="blogType" type="radio" id="blogType2" value="2" onclick="blogTypeInput(this.value)"/>业务文章</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="loginName" class="col-sm-1 control-label">标题</label>
 				<div class="col-sm-7">
 					<input id="blogTitle" name="blogTitle" type="text" maxlength="30" value="${blog.blogTitle}" class="form-control required" placeholder="请输入标题"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="password" class="col-sm-1 control-label">类型:</label>
+				<label for="name" class="col-sm-1 control-label">来源</label>
 				<div class="col-sm-7">
-					<select name="blogType" id="blogType" class="form-control">
-						<option value="1" <c:if test="${blog.blogType eq 1}">selected</c:if>>媒体报道</option>
-						<option value="2" <c:if test="${blog.blogType eq 2}">selected</c:if>>业务文章</option>
-					</select>
+					<input class="form-control" type="text" maxlength="30" name="blogSource" id="blogSource" value="${blog.blogSource}" placeholder="请输入链接地址或来源名称"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="name" class="col-sm-1 control-label">作者:</label>
-				<div class="col-sm-7">
-					<input class="form-control required" type="text" maxlength="30" name="blogAuthor" id="blogAuthor" value="${blog.blogAuthor}"/>
+				<label for="name" class="col-sm-1 control-label" id="soureName">作者</label>
+				<div class="col-sm-7" id="fileSelect">
+					<input class="form-control" type="text" maxlength="30" name="blogAuthor" style="display:none" id="blogAuthor" value="${blog.blogAuthor}"/>
+					<span class="help-block m-b-none" id="fileAddBtn">
+	                	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()" ><span class="glyphicon glyphicon-plus-sign">添加文件</span></button> 
+	           		</span>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="name" class="col-sm-1 control-label">来源:</label>
-				<div class="col-sm-7">
-					<input class="form-control required" type="text" maxlength="30" name="blogSource" id="blogSource" value="${blog.blogSource}"/>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="description" class="col-sm-1 control-label">描述:</label>
+				<label for="description" class="col-sm-1 control-label">描述</label>
 				<div class="col-sm-7">
 					<textarea name="blogContext" id="blogContext" style="width:800px;height:400px;visibility:hidden;">${blog.blogContext}</textarea>
 				</div>
@@ -58,6 +61,26 @@
 	</div>
 </form>
 <script>
+	function blogTypeInput(value){
+		if(value == '1'){
+			$("#soureName").html("封面图片");
+			$("#fileAddBtn").show();
+			$("#blogAuthor").hide();
+			$("#blogAuthorDiv").hide();
+		}else{
+			$("#soureName").html("作者");
+			$("#fileAddBtn").hide();
+			$("#uploadFile").remove();
+			$("#blogAuthor").show();
+			$("#blogAuthorDiv").show();
+		}
+		
+	}
+	function addFileUpload(){
+		$("#fileSelect").append('<input class="form-control" type="file" name="uploadFile" id="uploadFile" required="required" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');
+		$("#fileAddBtn").hide();
+		$("#uploadFile").click();
+	}
 	$(function(){
 		var editor = KindEditor.create("#blogContext", {
 			resizeType : 1,
@@ -79,6 +102,14 @@
 				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
 				'insertunorderedlist', '|', 'emoticons', 'image', 'link']
 		});
+		if('${blog.blogType}' == ''){
+			$("#blogType1").attr('checked','checked');
+		}else if('${blog.blogType}' == '1'){
+			$("#blogType1").attr('checked','checked');
+		}else if('${blog.blogType}' == '2'){
+			$("#blogType2").attr('checked','checked');
+		}
+		blogTypeInput($('input:radio:checked').val());
 	});
 	$("#defForm").validate();
 </script>

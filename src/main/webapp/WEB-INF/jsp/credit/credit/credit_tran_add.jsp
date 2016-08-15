@@ -6,8 +6,7 @@
 <input type="hidden" name="creditType" value="${pd.creditType }">
 	<div class="modal-header">
 		<div class='bootstrap-dialog-header'>
-			<div class='bootstrap-dialog-close-button'
-				style='display: block;'>
+			<div class='bootstrap-dialog-close-button' style='display: block;'>
 				<button class='close' data-dismiss='modal' aria-label='Close'>×</button>
 			</div>
 			<div class='bootstrap-dialog-title'>新增债权</div>
@@ -21,13 +20,8 @@
                                 <label class="col-sm-3 control-label">债权类型：</label>
                                 <div class="col-sm-6">
                                         <select  name="crType" class="form-control required">
-													<option value="1">民间借贷</option>
-													<option value="2">应收账款</option>
-													<option value="3">银行借贷</option>
-													<option value="4">互联网金融</option>
-													<option value="5">小额信贷</option>
-													<option value="6">典当担保</option>
-													<option value="7">司法裁决</option>
+												<option value="8">资产包债权</option>
+												<option value="9">单笔债权</option>
 										</select>
                                 </div>
                             </div>
@@ -36,7 +30,7 @@
                                 <div class="col-sm-6">
                                         <select  name="uerId" class="form-control required">
                                         <c:forEach items="${userList }" var="user">
-													<option value="${user.id }">${item.userPhone} - ${item.userEmail}</option>
+													<option value="${user.id }">${user.userPhone} - ${user.userEmail}</option>
                                         </c:forEach>
 										</select>
                                 </div>
@@ -48,27 +42,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">你期望的处置方式：</label>
-                                <div class="col-sm-6">
-	                              <input name="disposalType" id="su1" class="exts1" type="checkbox" value="1"> 
-								  <span>诉讼</span>
-						          <input name="disposalType" id="fsu1" class="exts1" type="checkbox" checked="checked" value="2">
-								  <span>催收</span>
-						          <input name="disposalType" class="exts1" id="rang1" type="checkbox" value="3">
-						          <span>债权转让</span> 
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label class="col-sm-3 control-label">支付佣金范围：</label>
                                 <div class="col-sm-6">
                                      <select name="commisionRange" class="form-control" required="required" aria-required="true">
-									 <option value="10%">10%</option>
-									 <option value="10%-20%">10%-20%</option>
-									 <option value="20%-30%" selected="selected">20%-30%</option>
-									 <option value="30%-40%">30%-40%</option>
-									 <option value="40%-50%">40%-50%</option>
-									 <option value="50%-60%">50%-60%</option>
-									 <option value="60%以上">60%以上</option>
+									 <option value="1%-3%">1%-3%</option>
+									 <option value="3%-5%">3%-5%</option>
+									 <option value="5%-8%" selected="selected">5%-8%</option>
+									 <option value="8%-10%">8%-10%"</option>
 									 </select>
                                 </div>
                             </div>

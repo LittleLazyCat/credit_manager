@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -71,6 +72,14 @@ public class CreditController extends BaseController{
 		Credit credit = null;
 		try {
 			credit = creditService.findById(id);
+			if(StringUtils.isNotEmpty(credit.getDisposalType())){
+				String[] types = credit.getDisposalType().split(",");
+				credit.setDisTypes(types);
+			}
+			if(StringUtils.isNotEmpty(credit.getDebtProof())){
+				String[] Proofs = credit.getDebtProof().split(";");
+				credit.setDebtProofs(Proofs);
+			}
 		} catch (Exception e) {
 			logger.error("get fileManager error", e);
 		}
@@ -91,16 +100,22 @@ public class CreditController extends BaseController{
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public ModelAndView toAdd() throws Exception{
 		List<String> provinceList = ProvinceEnum.takeAllValues();//省份list
+		String creditType = super.getRequest().getParameter("creditType");
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = super.getPageData();
 		pd.put("userLevel", 0);//注册用户
 		pd.put("userStatus", 1);
+		pd.put("from", null);
 		List<WebUser> userList = webUserWebService.findUserList(pd);
 		
 		mv.addObject("pd", pd);
 		mv.addObject("userList", userList);
 		mv.addObject("provinceList", provinceList);
-		mv.setViewName("credit/credit/credit_add");
+		if(creditType.equals("1")){
+			mv.setViewName("credit/credit/credit_add");
+		}else if(creditType.equals("2")){
+			mv.setViewName("credit/credit/credit_tran_add");
+		}
 		return mv;
 	}
 	
@@ -152,16 +167,30 @@ public class CreditController extends BaseController{
 	@RequestMapping(value="/edit", method=RequestMethod.GET)
 	public ModelAndView toEdit(@RequestParam Integer id){
 		Credit credit = null;
+		List<WebUser> userList = null;
+		String creditType = super.getRequest().getParameter("creditType");
 		try {
 			credit = creditService.findById(id);
+			PageData pd = super.getPageData();
+			pd.put("userLevel", 0);//注册用户
+			pd.put("userStatus", 1);
+			pd.put("from", null);
+			userList = webUserWebService.findUserList(pd);
+			
 		} catch (Exception e) {
 			logger.error("get fileManager error", e);
 		}
 		ModelAndView mv = super.getModelAndView();
 		List<String> provinceList = ProvinceEnum.takeAllValues();//省份list
 		mv.addObject("provinceList", provinceList);
+		mv.addObject("userList", userList);
 		mv.addObject("credit", credit);
-		mv.setViewName("credit/credit/credit_edit");
+		if(creditType.equals("1")){
+			mv.setViewName("credit/credit/credit_edit");
+		}else if(creditType.equals("2")){
+			mv.setViewName("credit/credit/credit_tran_edit");
+		}
+		
 		return mv;
 	}
 	
@@ -189,8 +218,8 @@ public class CreditController extends BaseController{
 						}
 					}
 				}
+				credit.setDebtProof(images);
 			}
-			credit.setDebtProof(images);
 			int num= creditService.update(credit);
 			if(num>0){
 				result.put("status", 1);
@@ -297,5 +326,12 @@ public class CreditController extends BaseController{
 			result.put("msg", "批量删除失败");
 		}
 		return result;
+	}
+	@RequestMapping(value="/imgDetail")
+	public ModelAndView imageDetail(String imageUrl){
+		ModelAndView mv = super.getModelAndView();
+		mv.addObject("rewardImg",imageUrl);
+		mv.setViewName("credit/reward/image_detail");
+		return mv;
 	}
 }

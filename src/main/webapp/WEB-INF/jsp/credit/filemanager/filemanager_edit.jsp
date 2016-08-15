@@ -11,7 +11,7 @@
 				style='display: block;'>
 				<button class='close' data-dismiss='modal' aria-label='Close'>×</button>
 			</div>
-			<div class='bootstrap-dialog-title'>新增法律文件模版</div>
+			<div class='bootstrap-dialog-title'>编辑法律文件模版</div>
 		</div>
 	</div>
 	<div class="modal-body">

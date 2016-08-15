@@ -51,7 +51,7 @@
 				<div class="col-sm-7">
 					<div id="fileSelect"></div>
 	                <span class="help-block m-b-none">
-	                	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()" id="addFileBtn"><span class="glyphicon glyphicon-plus-sign">添加文件1</span></button> 
+	                	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()" id="addFileBtn"><span class="glyphicon glyphicon-plus-sign">添加文件</span></button> 
 	           		</span>
 				</div>
 			</div>

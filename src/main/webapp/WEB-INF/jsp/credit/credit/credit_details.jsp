@@ -25,22 +25,26 @@
 												    <c:if test="${credit.crType==5 }">小额信贷</c:if>
 												    <c:if test="${credit.crType==6 }">典当担保</c:if>
 												    <c:if test="${credit.crType==7 }">司法裁决</c:if>
+												    <c:if test="${credit.crType==8 }">资产包债权</c:if>
+												    <c:if test="${credit.crType==9 }">单笔债权</c:if>
                                     </dd>
                                </dl>
 								<dl class="dl-horizontal">
 									<dt>债权金额：</dt>
 									<dd> ${credit.crAmount }(万元)</dd>
 								</dl>
-                               <dl class="dl-horizontal">
-                                    <dt>处置方式：</dt>
-                                    <dd>
-                                    <c:forEach items="${credit.disTypes}" var="item">
-										<c:if test="${item eq '1'}">诉讼</c:if>
-										<c:if test="${item eq '2'}">催收</c:if>
-										<c:if test="${item eq '3'}">债权转让</c:if>
-									</c:forEach>
-                                    </dd>
-                               </dl>
+								<c:if test="${credit.creditType eq '1'}">
+	                               <dl class="dl-horizontal">
+	                                    <dt>处置方式：</dt>
+	                                    <dd>
+	                                    <c:forEach items="${credit.disTypes}" var="item">
+											<c:if test="${item eq '1'}">诉讼&nbsp;</c:if>
+											<c:if test="${item eq '2'}">催收&nbsp;</c:if>
+											<c:if test="${item eq '3'}">债权转让</c:if>
+										</c:forEach>
+	                                    </dd>
+	                               </dl>
+                               </c:if>
 								<dl class="dl-horizontal">
 									<dt>支付佣金范围：</dt>
 									<dd>${credit.commisionRange }</dd>
@@ -49,16 +53,21 @@
                                <dl class="dl-horizontal">
 									<dt>发布日期：</dt>
 									<dd>
-									<fmt:formatDate value="${credit.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+									<fmt:formatDate value="${credit.createDate }" pattern="yyyy-MM-dd"/>
 									</dd>
 								</dl>
 								<dl class="dl-horizontal">
 									<dt>债权开始日期：</dt>
 									<dd>
-									<fmt:formatDate value="${credit.openDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+									<fmt:formatDate value="${credit.openDate }" pattern="yyyy-MM-dd"/>
 									</dd>
 								</dl>
-
+								<dl class="dl-horizontal">
+									<dt>债权结束日期：</dt>
+									<dd>
+									<fmt:formatDate value="${credit.endDate }" pattern="yyyy-MM-dd"/>
+									</dd>
+								</dl>
 	                             <dl class="dl-horizontal">
 	                                    <dt>债务人名称：</dt>
 	                                    <dd> ${credit.contactName }</dd>
@@ -74,13 +83,9 @@
 									<dt>债权方联系人：</dt>
 									<dd> ${credit.debtName }</dd>
 								</dl>
-							    <dl class="dl-horizontal">
-                                    <dt>所在省份：</dt>
-                                    <dd>${credit.debtProvince }</dd>
-                                </dl>
 								<dl class="dl-horizontal">
 									<dt>所在城市：</dt>
-									<dd>${credit.debtCity }</dd>
+									<dd>${credit.debtProvince } ${credit.debtCity }</dd>
 								</dl>
 								<dl class="dl-horizontal">
 									<dt>债权方联系电话：</dt>
@@ -90,7 +95,7 @@
 									<dt>债权凭证：</dt>
 									<dd><c:forEach items="${credit.debtProofs}" var="item">
 										<c:if test="${not empty item}">
-										<a href="reward/imgDetail?imageUrl=${showImgPath}${item}" target="_blank">
+										<a href="credit/imgDetail?imageUrl=${showImgPath}${item}" target="_blank">
 											<img alt="" src="${showImgPath}${item}" width="50px" height="50px"/>&nbsp;&nbsp;
 										</a>
 										</c:if>

@@ -129,7 +129,8 @@
 			 end_date,
 			 open_date,
 			 agreed_date,
-			 credit_type
+			 credit_type,
+			 is_audit
 		) values (
 			#{userId},
 			#{crType},
@@ -149,7 +150,8 @@
 			#{endDate},
 			#{openDate},
 			#{agreedDate},
-			#{creditType}
+			#{creditType},
+			#{isAudit}
 		)
 	</insert>	
 
@@ -169,7 +171,6 @@
 			 debt_phone=#{debtPhone},
 			 debt_proof=#{debtProof},
 			 description=#{description},
-			 create_date=#{createDate},
 			 end_date=#{endDate},
 			 open_date=#{openDate},
 			 agreed_date=#{agreedDate},

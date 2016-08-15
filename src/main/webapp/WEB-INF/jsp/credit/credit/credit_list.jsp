@@ -12,15 +12,18 @@
 <section class="content-header">
 	<gvtv:navigater path="credit?creditType=${pd.creditType }"></gvtv:navigater>
 </section>
-
+<style>
+	.modal-dialog{
+		width: 720px;
+	}
+</style>
 <!-- Main content -->
 <section class="content">
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-						<button type="button" data-url="credit/add?creditType=${pd.creditType }" data-model="dialog"
-							class="btn btn-sm btn-primary">
+						<button type="button" data-url="credit/add?creditType=${pd.creditType }" data-model="dialog" class="btn btn-sm btn-primary">
 							<i class="fa fa-fw fa-plus"></i>新增
 						</button>
 						<!-- <button type="button" data-url="credit/batchDelete"
@@ -97,7 +100,7 @@
 				"targets" : 1,
 				"render" : function(data, type, row) {
 					var html = htmlTpl.dropdown.prefix
-		            	  + '  <li><a href="credit/edit?id='+row.id+'" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
+		            	  + '  <li><a href="credit/edit?id='+row.id+'&creditType=${pd.creditType }" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
 		            	  + '  <li><a href="credit/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
 		            	  + '  <li><a href="credit/details?id='+row.id+'" data-model="dialog" data-callback="refreshTable"><i class="fa fa-info"></i>&nbsp;详情</a></li>'
 		            <shiro:hasPermission name="credit/updateAudit">

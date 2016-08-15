@@ -14,6 +14,10 @@
 .modal-dialog{
 	width: 1024px;
 }
+.us{display:none;width:80px;height:90px;
+padding:10px;position:relative;top:0px;left:50px;
+background-color:#0099FF;
+}
 </style>
 <!-- Main content -->
 <section class="content">
@@ -50,7 +54,9 @@
 	</div>
 	<!-- /.row -->
 </section>
-
+<div id="mydiv1" style="position:absolute;display:none;border:1px solid silver;background:silver;"> 
+<img src="" id="mouseTips" width="200px" height="160px"/>
+</div>
 <script type="text/javascript">
 	var defTable;
 	$(document).ready(function() {
@@ -103,7 +109,11 @@
 			{
 				"targets" : 2,
 				"render" : function(data, type, row) {
-					return "<a href='blog/details?id="+row.id+"' target='_blank'>"+data+"</a>";
+					if(row.blogType == '1'){
+						return "<a href='"+row.blogSource+"' target='_blank'>"+data+"</a>";
+					}else if(row.blogType == '2'){
+						return "<a href='blog/details?id="+row.id+"' target='_blank'>"+data+"</a>";
+					}
 				}
 			},
 			{
@@ -113,6 +123,29 @@
 						return "<font color='orange'>媒体报道</font>";
 					}else if(data == '2'){
 						return "<font color='#6495ED'>业务文章</font>";
+					}
+				}
+			},
+			{
+				"targets" : 4,
+				"render" : function(data, type, row) {
+					if(row.blogType == '1'){
+						var content = "<img src='${headUrl}"+data+"' width='30px' height='25px' onmouseover='showImg(this);' onmouseout='hideImg()' />";
+						return content;
+					}else if(row.blogType == '2'){
+						return data;
+					}
+				}
+			},
+			{
+				"targets" : 5,
+				"render" : function(data, type, row) {
+					if(!data || data == ''){
+						return data;
+					}else if(data.length > 11){
+						return data.substring(0,10)+"..";;
+					}else {
+						return data;
 					}
 				}
 			},
@@ -162,7 +195,17 @@
 			}
 		});
 	});
-
+	
+	function showImg(obj) {
+		$("#mouseTips").attr('src',$(obj).attr('src'));
+		$("#mydiv1").css("display","block"); 
+		$("#mydiv1").css("left", event.clientX-50); 
+		$("#mydiv1").css("top", event.clientY - 200); 
+	} 
+	function hideImg() { 
+		$("#mydiv1").css("display", "none"); 
+	}
+		
 	function refreshTable(toFirst) {
 		//defaultTable.ajax.reload();
 		if(toFirst){//表格重绘，并跳转到第一页
