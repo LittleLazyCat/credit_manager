@@ -16,6 +16,7 @@
 	</div>
 	<input type="hidden" name="userHeadImages" value="${user.userHeadImages}"/>
 	<input type="hidden" name="id" value="${user.id}"/>
+	<input type="hidden" name="userStatus" value="${user.userStatus}"/>
 	<div class="modal-body">
 		<div class="container-fluid">
 			<div class="form-group">
@@ -28,16 +29,20 @@
 				<label for="password" class="col-sm-2 control-label">专家分类:</label>
 				<div class="col-sm-7">
 					<select name="userStatus" id="userStatus" class="form-control">
-						<option value="7">资产处置专家</option>
-						<option value="8">资深诉讼律师</option>
-						<option value="9">资深财经法治媒体人</option>
+						<option value="7" <c:if test="${user.userStatus eq '7'}">selected</c:if> >资产处置专家</option>
+						<option value="8" <c:if test="${user.userStatus eq '8'}">selected</c:if>>资深诉讼律师</option>
+						<option value="9" <c:if test="${user.userStatus eq '9'}">selected</c:if>>资深财经法治媒体人</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="name" class="col-sm-2 control-label">图片:</label>
 				<div class="col-sm-7">
-					<input class="form-control required" type="file" name="uploadFile" id="uploadFile" accept=".jpg,.png,.jpeg,.gif,.bmp"/>
+					<div id="fileSelect"></div>
+	                <span class="help-block m-b-none">
+	                	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()" id="addFileBtn"><span class="glyphicon glyphicon-plus-sign">添加文件</span></button> 
+	           		</span>
+					<!-- <input class="form-control required" type="file" name="uploadFile" id="uploadFile" accept=".jpg,.png,.jpeg,.gif,.bmp"/> -->
 				</div>
 			</div>
 			<div class="form-group">
@@ -54,8 +59,10 @@
 	</div>
 </form>
 <script>
-	if('${user.userStatus}' != ''){
-		$("#userStatus").val('${user.userStatus}');
-	}
 	$("#defForm").validate();
+	function addFileUpload(){
+		$("#fileSelect").append('<input class="form-control" type="file" name="uploadFile" id="uploadFile" required="required" accept=".jpg,.png,.jpeg,.gif,.bmp"/>');
+		$("#addFileBtn").hide();
+		$("#uploadFile").click();
+	}
 </script>

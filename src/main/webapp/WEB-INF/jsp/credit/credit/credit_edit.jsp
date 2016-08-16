@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">债权发布者：</label>
                                 <div class="col-sm-6">
-                                        <select  name="uerId" class="form-control required">
+                                        <select  name="userId" class="form-control required">
                                         <c:forEach items="${userList }" var="user">
 													<option value="${user.id }" <c:if test="${credit.userId eq user.id}">selected</c:if>>${user.userPhone} - ${user.userEmail}</option>
                                         </c:forEach>

@@ -16,6 +16,7 @@
 	</div>
 	<input type="hidden" name="samImg" value="${sample.samImg}"/>
 	<input type="hidden" name="id" value="${sample.id}"/>
+	<input type="hidden" name="status" value="${sample.status}"/>
 	<div class="modal-body">
 		<div class="container-fluid">
 			<div class="form-group">
