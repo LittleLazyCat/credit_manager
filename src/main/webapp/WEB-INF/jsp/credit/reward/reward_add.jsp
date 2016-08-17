@@ -15,7 +15,7 @@ pageContext.setAttribute("basePath",basePath);
 				<button class='close' data-dismiss='modal' aria-label='Close'>×</button>
 			</div>
 			<div class='bootstrap-dialog-title'>
-				<c:if test="${empty blog.id}">新增</c:if><c:if test="${not empty blog.id}">编辑</c:if>悬赏
+				<c:if test="${empty reward.id}">新增</c:if><c:if test="${not empty reward.id}">编辑</c:if>悬赏
 			</div>
 		</div>
 	</div>

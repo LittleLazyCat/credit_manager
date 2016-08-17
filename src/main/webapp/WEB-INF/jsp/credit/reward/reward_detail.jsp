@@ -52,13 +52,6 @@
 				<dd>${reward.carBrand }</dd>
 			</dl>
             </c:if>
-            
-            <b><font color="blue">其他信息</font></b>
-            <hr>
-            <dl class="dl-horizontal">
-				<dt>所在地：</dt>
-				<dd>${reward.province} ${reward.city}</dd>
-			</dl>
 			<dl class="dl-horizontal">
 				<dt>发布日期：</dt>
 				<dd><fmt:formatDate value="${reward.createTime }" pattern="yyyy-MM-dd"/> </dd>
@@ -69,12 +62,12 @@
 				<dd><fmt:formatDate value="${reward.endTime }" pattern="yyyy-MM-dd"/></dd>
 			</dl>
 			<dl class="dl-horizontal">
-				<dt>状态：</dt>
-				<dd>
-				<c:if test="${reward.rewardStatus==1}">发布中</c:if>
-				<c:if test="${reward.rewardStatus==0}">已结束</c:if>
-				</dd>
+				<dt>所在地：</dt>
+				<dd>${reward.province} ${reward.city}</dd>
 			</dl>
+			
+            <b><font color="blue">其他信息</font></b>
+            <hr>
 			<dl class="dl-horizontal">
 				<dt>发布者：</dt>
 				<dd>${user.nickname}</dd>

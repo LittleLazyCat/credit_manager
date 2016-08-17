@@ -20,29 +20,33 @@
                                 <dl class="dl-horizontal">
                                     <dt>债权类型：</dt>
                                     <dd>
-                                    				<c:if test="${credit.crType==1 }">民间借贷</c:if>
-												    <c:if test="${credit.crType==2 }">应收账款</c:if>
-												    <c:if test="${credit.crType==3 }">银行借贷</c:if>
-												    <c:if test="${credit.crType==4 }">互联网金融</c:if>
-												    <c:if test="${credit.crType==5 }">小额信贷</c:if>
-												    <c:if test="${credit.crType==6 }">典当担保</c:if>
-												    <c:if test="${credit.crType==7 }">司法裁决</c:if>
+                           				<c:if test="${credit.crType==1 }">民间借贷</c:if>
+									    <c:if test="${credit.crType==2 }">应收账款</c:if>
+									    <c:if test="${credit.crType==3 }">银行借贷</c:if>
+									    <c:if test="${credit.crType==4 }">互联网金融</c:if>
+									    <c:if test="${credit.crType==5 }">小额信贷</c:if>
+									    <c:if test="${credit.crType==6 }">典当担保</c:if>
+									    <c:if test="${credit.crType==7 }">司法裁决</c:if>
+									    <c:if test="${credit.crType==8 }">资产包债权</c:if>
+								    	<c:if test="${credit.crType==9 }">单笔债权</c:if>
                                     </dd>
                                </dl>
 								<dl class="dl-horizontal">
 									<dt>债权金额：</dt>
 									<dd> ${credit.crAmount }(万元)</dd>
 								</dl>
-                               <dl class="dl-horizontal">
-                                    <dt>处置方式：</dt>
-                                    <dd>
-                                    <c:forEach items="${credit.disTypes}" var="item">
-										<c:if test="${item eq '1'}">诉讼</c:if>
-										<c:if test="${item eq '2'}">催收</c:if>
-										<c:if test="${item eq '3'}">债权转让</c:if>
-									</c:forEach>
-                                    </dd>
-                               </dl>
+								<c:if test="${credit.creditType eq 1}">
+	                               <dl class="dl-horizontal">
+	                                    <dt>处置方式：</dt>
+	                                    <dd>
+	                                    <c:forEach items="${credit.disTypes}" var="item">
+											<c:if test="${item eq '1'}">诉讼</c:if>
+											<c:if test="${item eq '2'}">催收</c:if>
+											<c:if test="${item eq '3'}">债权转让</c:if>
+										</c:forEach>
+	                                    </dd>
+	                               </dl>
+                               </c:if>
 								<dl class="dl-horizontal">
 									<dt>支付佣金范围：</dt>
 									<dd>${credit.commisionRange }</dd>

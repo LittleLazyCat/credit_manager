@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -108,8 +107,6 @@ public class RewardController extends BaseController{
 	public PageData saveReward(Reward reward) throws Exception{
 		PageData result = new PageData();
 		try{
-			reward.setRewardStatus((short)1);
-			reward.setCreateTime(new Date());
 			String images = "";
 			if(null != reward.getUploadFiles()){
 				for(int i=0;i< reward.getUploadFiles().length;i++){
@@ -127,14 +124,12 @@ public class RewardController extends BaseController{
 						}
 					}
 				}
+				reward.setImages(images);
 			}
 			if(null != reward.getId() && 0 != reward.getId()){
-				if(StringUtils.isNotEmpty(images)){
-					reward.setImages(images);
-				}
 				rewardWebService.updateReward(reward);
 			}else{
-				reward.setImages(images);
+				reward.setRewardStatus((short)1);
 				reward.setCreateTime(new Date());
 				rewardWebService.rewardSave(reward);
 			}
