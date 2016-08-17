@@ -53,6 +53,15 @@ public class Credit {
 	private Integer creditType;
 	private Integer isAudit;
 	
+	//债权人性质（1个人，2企业）
+	private Integer deptType;
+	//处置签约协议地址
+	private String signedPath;
+	//法律服务协议
+	private String legalServicePath;
+	//处置团队名称
+	private String dealTeamName;
+	
 	public Credit() {
 
 	}
@@ -63,7 +72,7 @@ public class Credit {
 			String debtProvince, String debtCity, String debtPhone,
 			String debtProof, String description, Date createDate,
 			Date endDate, Date openDate, Date agreedDate,MultipartFile[] uploadFiles,
-			Integer creditType,Integer isAudit) {
+			Integer creditType,Integer isAudit,	Integer deptType,String signedPath,String legalServicePath,String dealTeamName) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -86,7 +95,11 @@ public class Credit {
 		this.agreedDate = agreedDate;
 		this.uploadFiles = uploadFiles;
 		this.creditType = creditType;
-		this.isAudit =this.isAudit;
+		this.isAudit =isAudit;
+		this.deptType = deptType;
+		this.signedPath = signedPath;
+		this.legalServicePath = legalServicePath;
+		this.dealTeamName = dealTeamName;
 	}
 
 	public Integer getId() {
@@ -280,5 +293,39 @@ public class Credit {
 	public void setIsAudit(Integer isAudit) {
 		this.isAudit = isAudit;
 	}
+
+	public Integer getDeptType() {
+		return deptType;
+	}
+
+	public void setDeptType(Integer deptType) {
+		this.deptType = deptType;
+	}
+
+	public String getSignedPath() {
+		return signedPath;
+	}
+
+	public void setSignedPath(String signedPath) {
+		this.signedPath = signedPath;
+	}
+
+	public String getLegalServicePath() {
+		return legalServicePath;
+	}
+
+	public void setLegalServicePath(String legalServicePath) {
+		this.legalServicePath = legalServicePath;
+	}
+
+	public String getDealTeamName() {
+		return dealTeamName;
+	}
+
+	public void setDealTeamName(String dealTeamName) {
+		this.dealTeamName = dealTeamName;
+	}
+	
+	
 	
 }

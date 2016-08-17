@@ -42,6 +42,16 @@ MODIFY COLUMN `blog_source`  varchar(400) CHARACTER SET utf8 COLLATE utf8_genera
 MODIFY COLUMN `blog_author`  varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作者' AFTER `blog_source`;
 
 
-
+/***********2016-08-16***************/
 alter table cr_blog add COLUMN blog_status smallint(3)COMMENT '博客状态';
+
+
+/***********2016-08-17***************/
+ALTER TABLE cr_credit ADD COLUMN signed_path VARCHAR(256) COMMENT '处置签约协议地址';
+ALTER TABLE cr_credit ADD COLUMN legal_service_path VARCHAR(256) COMMENT '法律服务协议';
+ALTER TABLE cr_credit ADD COLUMN deal_team_name VARCHAR(64) COMMENT '处置团队名称';
+ALTER TABLE cr_credit ADD COLUMN dept_type SMALLINT(3) COMMENT '债权人性质（1个人，2企业）' AFTER contact_number;
+
+
+
 

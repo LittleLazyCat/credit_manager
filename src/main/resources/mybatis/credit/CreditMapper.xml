@@ -23,7 +23,11 @@
 		 open_date,
 		 agreed_date,
 		 credit_type,
-		 is_audit
+		 is_audit,
+		 signed_path,
+		 legal_service_path,
+		 deal_team_name,
+		 dept_type
 	</sql>
 
 	<resultMap type="Credit" id="CreditResultMap">
@@ -48,6 +52,10 @@
 		<result column="agreed_date" property="agreedDate"/>
 		<result column="credit_type" property="creditType"/>
 		<result column="is_audit" property="isAudit"/>
+		<result column="signed_path" property="signedPath" />
+		<result column="legal_service_path" property="legalServicePath" />
+		<result column="deal_team_name" property="dealTeamName" />
+		<result column="dept_type" property="deptType" />
 	</resultMap>
     
     <!-- 根据id获取债权信息 -->
@@ -119,6 +127,7 @@
 			 commision_range,
 			 contact_name,
 			 contact_number,
+			 dept_type,
 			 debt_name,
 			 debt_province,
 			 debt_city,
@@ -140,6 +149,7 @@
 			#{commisionRange},
 			#{contactName},
 			#{contactNumber},
+			#{deptType},
 			#{debtName},
 			#{debtProvince},
 			#{debtCity},
@@ -165,6 +175,7 @@
 			 commision_range=#{commisionRange},
 			 contact_name=#{contactName},
 			 contact_number=#{contactNumber},
+			 dept_type=#{deptType},
 			 debt_name=#{debtName},
 			 debt_province=#{debtProvince},
 			 debt_city=#{debtCity},
