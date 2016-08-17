@@ -42,3 +42,6 @@ MODIFY COLUMN `blog_source`  varchar(400) CHARACTER SET utf8 COLLATE utf8_genera
 MODIFY COLUMN `blog_author`  varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作者' AFTER `blog_source`;
 
 
+
+alter table cr_blog add COLUMN blog_status smallint(3)COMMENT '博客状态';
+
