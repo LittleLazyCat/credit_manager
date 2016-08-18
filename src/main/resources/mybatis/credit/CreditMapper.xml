@@ -189,14 +189,18 @@
 			 where id = #{id}
 	</update>
 	
-	
 	<update id="updateStatus" parameterType="credit">
 			update cr_credit set 
 			cr_status=#{crStatus}
 			where id = #{id}
 	</update>
 	
-	
+	<update id="matchTeam" parameterType="credit">
+			update cr_credit set 
+			deal_team_name=#{dealTeamName},
+			cr_status = #{crStatus}
+			where id = #{id}
+	</update>
 	<update id="updateAudit" parameterType="credit">
 			update cr_credit set 
 			is_audit=#{isAudit}

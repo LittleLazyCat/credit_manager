@@ -52,6 +52,10 @@ ALTER TABLE cr_credit ADD COLUMN legal_service_path VARCHAR(256) COMMENT '法律
 ALTER TABLE cr_credit ADD COLUMN deal_team_name VARCHAR(64) COMMENT '处置团队名称';
 ALTER TABLE cr_credit ADD COLUMN dept_type SMALLINT(3) COMMENT '债权人性质（1个人，2企业）' AFTER contact_number;
 
+/***********2016-08-18***************/
+ALTER TABLE `cr_credit`
+MODIFY COLUMN `cr_status`  smallint(3) NULL DEFAULT NULL COMMENT '债权状态1、招标中，2、已签处置协议，3、处置中，4、还款中，9、已终结' AFTER `cr_amount`;
+
 
 
 

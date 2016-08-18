@@ -102,12 +102,15 @@
 					var html = htmlTpl.dropdown.prefix
 		            	  + '  <li><a href="credit/edit?id='+row.id+'&creditType=${pd.creditType }" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
 		            	  + '  <li><a href="credit/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
-		            	  + '  <li><a href="credit/details?id='+row.id+'" data-model="dialog" data-callback="refreshTable"><i class="fa fa-info"></i>&nbsp;详情</a></li>'
 		            <shiro:hasPermission name="credit/updateAudit">
 		            	  + '  <li class="divider"></li>'
 		            	  + '  <li><a href="credit/audit?id='+row.id+'" data-model="dialog">债权审核</a></li>'
 		            </shiro:hasPermission>
-		            	  + '  <li><a href="credit/updateStatus?crStatus=5&id='+row.id+'"  data-msg="确定已签约吗？" data-model="ajaxToDo" data-callback="refreshTable">债权签约</a></li>'
+		            	  if(row.crStatus == '1'){
+		            		  html += '  <li><a href="credit/chooseTeam?id='+row.id+'"  data-model="dialog">匹配处置团队</a></li>'
+		            	  }else if (row.crStatus == '2'){
+		            		  html += '  <li><a href="credit/delmatchTeam?id='+row.id+'" data-msg="确定取消匹配吗？" data-model="ajaxToDo" data-callback="refreshTable">取消匹配</a></li>'
+		            	  }
 		            	  + htmlTpl.dropdown.suffix;
 					return html;
 				}
@@ -135,7 +138,14 @@
 						return "单笔债权";
 					}
 				}
-			},{
+			},
+			{
+				"targets" : 4,
+				"render" : function(data,type,row){
+					return '<a href="credit/details?id='+row.id+'" data-model="dialog">'+data+'</a>';
+				}
+			},
+			{
 				"targets" : 7,
 				"render" : function(data, type, row) {
 					if(data == '1'){
@@ -152,11 +162,15 @@
 					if(data == '1'){
 						return "招标中";
 					}else if(data == '2'){
-						return "处置中";
+						return "已匹配";
 					}else if(data == '3'){
-						return "还款中";
+						return "已签处置协议";
 					}else if(data == '4'){
-						return "已结束";
+						return "处置中";
+					}else if(data == '5'){
+						return "还款中";
+					}else if(data == '9'){
+						return "已终结";
 					}
 				}
 			}],

@@ -105,7 +105,6 @@ public class CreditController extends BaseController{
 		PageData pd = super.getPageData();
 		pd.put("userLevel", 0);//注册用户
 		pd.put("userStatus", 1);
-		pd.put("from", null);
 		List<WebUser> userList = webUserWebService.findUserList(pd);
 		
 		mv.addObject("pd", pd);
@@ -333,5 +332,69 @@ public class CreditController extends BaseController{
 		mv.addObject("rewardImg",imageUrl);
 		mv.setViewName("credit/reward/image_detail");
 		return mv;
+	}
+	/**
+	 * 跳转到选择处置团队
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/chooseTeam")
+	public ModelAndView chooseTeam(Integer id)throws Exception{
+		PageData pd = new PageData();
+		pd.put("userLevel", 0);
+		pd.put("userType", 1);
+		pd.put("from", 0);
+		pd.put("size", 0);
+		List<WebUser> teamList = webUserWebService.findUserList(pd);
+		ModelAndView mv = super.getModelAndView();
+		
+		mv.addObject("id",id);
+		mv.addObject("teamList",teamList);
+		mv.setViewName("/credit/credit/choose_team");
+		return mv;
+	}
+	
+	/**
+	 * 匹配处置团队
+	 * @return
+	 */
+	@RequestMapping(value="/matchTeam")
+	@ResponseBody
+	public PageData matchTeam(Credit credit){
+		PageData result = new PageData();
+		try {
+			credit.setCrStatus((short)2);
+			creditService.matchTeam(credit);
+			result.put("status", 1);
+		} catch (Exception e) {
+			logger.error("delete filemanager error", e);
+			result.put("status", 0);
+			result.put("msg", "匹配失败");
+		}
+		return result;
+	}
+	
+	/**
+	 * 取消匹配处置团队
+	 * @return
+	 */
+	@RequestMapping(value="/delmatchTeam")
+	@ResponseBody
+	public PageData delmatchTeam(Integer id){
+		PageData result = new PageData();
+		try {
+			Credit credit = new Credit();
+			credit.setId(id);
+			credit.setCrStatus((short)1);
+			credit.setDealTeamName("");
+			creditService.matchTeam(credit);
+			result.put("status", 1);
+		} catch (Exception e) {
+			logger.error("delete filemanager error", e);
+			result.put("status", 0);
+			result.put("msg", "删除失败");
+		}
+		return result;
 	}
 }

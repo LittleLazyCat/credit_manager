@@ -83,4 +83,11 @@ public class CreditService {
 			}
 		}
 	}
+	public Boolean matchTeam(Credit credit) throws Exception{
+		int num = dao.update("CreditMapper.matchTeam", credit);
+		if (num > 0) {
+			return true;
+		}
+		return false;
+	}
 }
