@@ -79,6 +79,13 @@
 	                             
 					      <b><font color="blue">债务方信息</font></b>
 					      <hr>
+					      		<c:if test="${credit.creditType eq '1'}">
+						      		<dl class="dl-horizontal">
+										<dt>债务方性质：</dt>
+										<dd> <c:if test="${credit.deptType eq '1'}">个人</c:if>
+											 <c:if test="${credit.deptType eq '2'}">企业</c:if> </dd>
+									</dl>
+					      		</c:if>
 								<dl class="dl-horizontal">
 									<dt>债权方联系人：</dt>
 									<dd> ${credit.debtName }</dd>
