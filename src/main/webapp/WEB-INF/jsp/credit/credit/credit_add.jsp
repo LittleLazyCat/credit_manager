@@ -195,7 +195,7 @@ function loadCity(obj) {
 $(function () {
     $('#datetimepicker').datetimepicker({
     	minView: "month",//选择日期后，不会再跳转去选择时分秒 
-    	format: "yyyy-mm-dd",
+    	format: "yyyy",
     	language: 'zh-CN',
     	autoclose:true
     });

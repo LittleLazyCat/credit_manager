@@ -70,6 +70,7 @@ public class CreditController extends BaseController{
 	@RequestMapping(value="/details", method=RequestMethod.GET)
 	public ModelAndView toDetails(@RequestParam Integer id){
 		Credit credit = null;
+		WebUser user = null;
 		try {
 			credit = creditService.findById(id);
 			if(StringUtils.isNotEmpty(credit.getDisposalType())){
@@ -80,6 +81,9 @@ public class CreditController extends BaseController{
 				String[] Proofs = credit.getDebtProof().split(";");
 				credit.setDebtProofs(Proofs);
 			}
+			if(StringUtils.isNotEmpty(credit.getDealTeamName())){
+				user = webUserWebService.getUserById(Integer.valueOf(credit.getDealTeamName()));
+			}
 		} catch (Exception e) {
 			logger.error("get fileManager error", e);
 		}
@@ -87,6 +91,7 @@ public class CreditController extends BaseController{
 		ModelAndView mv = super.getModelAndView();
 		mv.addObject("showImgPath", showImgPath);
 		mv.addObject("credit", credit);
+		mv.addObject("user", user);
 		mv.setViewName("credit/credit/credit_details");
 		return mv;
 	}
@@ -391,10 +396,11 @@ public class CreditController extends BaseController{
 			creditService.matchTeam(credit);
 			result.put("status", 1);
 		} catch (Exception e) {
-			logger.error("delete filemanager error", e);
+			logger.error("delmatch Team error", e);
 			result.put("status", 0);
-			result.put("msg", "删除失败");
+			result.put("msg", "取消失败");
 		}
 		return result;
 	}
+	
 }

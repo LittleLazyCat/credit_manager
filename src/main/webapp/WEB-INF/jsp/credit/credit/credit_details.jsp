@@ -4,8 +4,7 @@
 
 <div class="modal-header">
     <div class='bootstrap-dialog-header'>
-		<div class='bootstrap-dialog-close-button'
-			style='display: block;'>
+		<div class='bootstrap-dialog-close-button' style='display: block;'>
 			<button class='close' data-dismiss='modal' aria-label='Close'>×</button>
 		</div>
 		<div class='bootstrap-dialog-title'>债权详情</div>
@@ -13,20 +12,22 @@
 </div>
 <div class="modal-body">
     <div class="container-fluid">
+    	<input name="id" id="id" type="hidden" value="${credit.id}"/>
+    	<input name="crStatus" id="crStatus" type="hidden" value="${credit.crStatus}"/>
     				         <b><font color="blue">基本信息</font></b>
                  		     <hr>
                                 <dl class="dl-horizontal">
                                     <dt>债权类型：</dt>
                                     <dd>
-                                    				<c:if test="${credit.crType==1 }">民间借贷</c:if>
-												    <c:if test="${credit.crType==2 }">应收账款</c:if>
-												    <c:if test="${credit.crType==3 }">银行借贷</c:if>
-												    <c:if test="${credit.crType==4 }">互联网金融</c:if>
-												    <c:if test="${credit.crType==5 }">小额信贷</c:if>
-												    <c:if test="${credit.crType==6 }">典当担保</c:if>
-												    <c:if test="${credit.crType==7 }">司法裁决</c:if>
-												    <c:if test="${credit.crType==8 }">资产包债权</c:if>
-												    <c:if test="${credit.crType==9 }">单笔债权</c:if>
+                           				<c:if test="${credit.crType==1 }">民间借贷</c:if>
+									    <c:if test="${credit.crType==2 }">应收账款</c:if>
+									    <c:if test="${credit.crType==3 }">银行借贷</c:if>
+									    <c:if test="${credit.crType==4 }">互联网金融</c:if>
+									    <c:if test="${credit.crType==5 }">小额信贷</c:if>
+									    <c:if test="${credit.crType==6 }">典当担保</c:if>
+									    <c:if test="${credit.crType==7 }">司法裁决</c:if>
+									    <c:if test="${credit.crType==8 }">资产包债权</c:if>
+									    <c:if test="${credit.crType==9 }">单笔债权</c:if>
                                     </dd>
                                </dl>
 								<dl class="dl-horizontal">
@@ -59,13 +60,7 @@
 								<dl class="dl-horizontal">
 									<dt>债权开始日期：</dt>
 									<dd>
-									<fmt:formatDate value="${credit.openDate }" pattern="yyyy-MM-dd"/>
-									</dd>
-								</dl>
-								<dl class="dl-horizontal">
-									<dt>债权结束日期：</dt>
-									<dd>
-									<fmt:formatDate value="${credit.endDate }" pattern="yyyy-MM-dd"/>
+									<fmt:formatDate value="${credit.openDate }" pattern="yyyy"/>
 									</dd>
 								</dl>
 	                             <dl class="dl-horizontal">
@@ -112,9 +107,18 @@
 									<dt>债权描述：</dt>
 									<dd> ${credit.description }</dd>
 								</dl>
+								<c:if test="${not empty credit.dealTeamName }">
+									<b><font color="blue">处置团队信息</font></b>
+						      		<hr>
+						      		<dl class="dl-horizontal">
+									<dt>处置团队：</dt>
+									<dd> ${user.userEmail } - ${user.userPhone }</dd>
+								</dl>
+								</c:if>
                                
     </div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 </div>
+

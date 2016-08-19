@@ -109,6 +109,7 @@
 		            	  if(row.crStatus == '1'){
 		            		  html += '  <li><a href="credit/chooseTeam?id='+row.id+'"  data-model="dialog">匹配处置团队</a></li>'
 		            	  }else if (row.crStatus == '2'){
+		            		  html += '  <li><a href="agreement/saveAgree?creditId='+row.id+'&userId='+row.dealTeamName+'" data-msg="确定签订<居间服务协议(前期)>吗？" data-model="ajaxToDo" data-callback="refreshTable">签订<居间服务协议(前期)></a></li>'
 		            		  html += '  <li><a href="credit/delmatchTeam?id='+row.id+'" data-msg="确定取消匹配吗？" data-model="ajaxToDo" data-callback="refreshTable">取消匹配</a></li>'
 		            	  }
 		            	  + htmlTpl.dropdown.suffix;
@@ -161,13 +162,13 @@
 				"render" : function(data, type, row) {
 					if(data == '1'){
 						return "招标中";
-					}else if(data == '2'){
+					}else if(data == '2' || data == '3' || data == '4'){
 						return "已匹配";
-					}else if(data == '3'){
-						return "已签处置协议";
-					}else if(data == '4'){
-						return "处置中";
 					}else if(data == '5'){
+						return "已签处置协议";
+					}else if(data == '6'){
+						return "处置中";
+					}else if(data == '7'){
 						return "还款中";
 					}else if(data == '9'){
 						return "已终结";

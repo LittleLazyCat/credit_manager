@@ -54,8 +54,20 @@ ALTER TABLE cr_credit ADD COLUMN dept_type SMALLINT(3) COMMENT '债权人性质�
 
 /***********2016-08-18***************/
 ALTER TABLE `cr_credit`
-MODIFY COLUMN `cr_status`  smallint(3) NULL DEFAULT NULL COMMENT '债权状态1、招标中，2、已签处置协议，3、处置中，4、还款中，9、已终结' AFTER `cr_amount`;
+MODIFY COLUMN `cr_status`  smallint(3) NULL DEFAULT NULL COMMENT '债权状态1、招标中，2、已匹配(可取消)，3、已匹配(已签前期协议)，4、已匹配(已签服务合同)，5、已签处置协议(已签后期协议)，6、处置中，7、还款中，9、已终结' AFTER `cr_amount`;
 
+/***********2016-08-19***************/
+CREATE TABLE `cr_agreement` (
+`id`  int(11) NULL AUTO_INCREMENT ,
+`credit_id`  int(11) NULL COMMENT '债权id' ,
+`user_id`  int(11) NULL COMMENT '处置方用户id' ,
+`agree_type`  smallint(3) NULL COMMENT '协议类型(1、居间服务协议(前期),2、服务合同,3、居间服务协议(后期))' ,
+`agree_img`  varchar(200) NULL COMMENT '协议内容(图片)' ,
+`sign_time`  datetime NULL COMMENT '签订时间' ,
+`sign_status`  smallint(3) NULL COMMENT '签订状态(0、待确认，1、已确认)' ,
+PRIMARY KEY (`id`)
+)
+;
 
 
 
