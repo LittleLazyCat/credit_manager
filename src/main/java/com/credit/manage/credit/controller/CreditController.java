@@ -275,7 +275,24 @@ public class CreditController extends BaseController{
 		}
 		return result;
 	}
-	
+	/**
+	 * 修改债权状态
+	 * @param credit
+	 * @return
+	 */
+	@RequestMapping(value="/updateStatus",method=RequestMethod.GET)
+	public ModelAndView toUpdateStatus(Integer id){
+		Credit credit = null;
+		try {
+			credit = creditService.findById(id);
+		} catch (Exception e) {
+			logger.error("get fileManager error", e);
+		}
+		ModelAndView mv = super.getModelAndView();
+		mv.addObject("credit", credit);
+		mv.setViewName("credit/credit/credit_updateStatus");
+		return mv;
+	}
 	
 	/**
 	 * 修改债权状态
