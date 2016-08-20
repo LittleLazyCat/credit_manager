@@ -115,6 +115,21 @@
 									<dd> ${user.userEmail } - ${user.userPhone }</dd>
 								</dl>
 								</c:if>
+								
+								<c:if test="${not empty agreeList }">
+									<b><font color="blue">债权协议文案</font></b>
+						      		<hr>
+						      		<dl class="dl-horizontal">
+									<dt>债权协议：</dt>
+									<dd> 
+									<c:forEach items="${agreeList}" var="item">
+											<a href="credit/imgDetail?imageUrl=${showImgPath}${item.agreeImg}" target="_blank">
+											<img alt="" src="${basePath}${item.agreeImg}" width="50px" height="50px"/>&nbsp;&nbsp;
+										    </a>
+									</c:forEach>
+									</dd>
+								</dl>
+								</c:if>
                                
     </div>
 </div>

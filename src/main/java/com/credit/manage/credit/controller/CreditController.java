@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.credit.manage.agreement.service.AgreementWebService;
 import com.credit.manage.credit.service.CreditService;
+import com.credit.manage.entity.Agreement;
 import com.credit.manage.entity.Credit;
 import com.credit.manage.entity.WebUser;
 import com.credit.manage.filemanager.service.UploadFileService;
@@ -35,7 +37,10 @@ public class CreditController extends BaseController{
 	@Resource
 	private WebUserWebService webUserWebService;
 	@Resource
+	private AgreementWebService agreementWebService;
+	@Resource
 	private UploadFileService uploadFileService;
+	
 
 	@RequestMapping
 	public ModelAndView page() {
@@ -84,16 +89,22 @@ public class CreditController extends BaseController{
 			if(StringUtils.isNotEmpty(credit.getDealTeamName())){
 				user = webUserWebService.getUserById(Integer.valueOf(credit.getDealTeamName()));
 			}
+			String showImgPath = PropertiesUtil.getValue("showImgPath");
+			PageData pd = this.getPageData();
+			pd.put("creditId", credit.getId());
+			List<Agreement> agreeList=agreementWebService.list(pd);
+			ModelAndView mv = super.getModelAndView();
+			mv.addObject("showImgPath", showImgPath);
+			mv.addObject("credit", credit);
+			mv.addObject("agreeList", agreeList);
+			mv.addObject("user", user);
+			mv.setViewName("credit/credit/credit_details");
+			return mv;
 		} catch (Exception e) {
 			logger.error("get fileManager error", e);
 		}
-		String showImgPath = PropertiesUtil.getValue("showImgPath");
-		ModelAndView mv = super.getModelAndView();
-		mv.addObject("showImgPath", showImgPath);
-		mv.addObject("credit", credit);
-		mv.addObject("user", user);
-		mv.setViewName("credit/credit/credit_details");
-		return mv;
+		
+        return null;
 	}
 	
 	

@@ -30,7 +30,7 @@
 		</if>
 	</select>
 	
-	<select id="list" parameterType="PageData" resultType="Blog">
+	<select id="list" parameterType="PageData" resultType="agreement">
 	   <include refid="commonColumns"></include>
 		from cr_agreement u
 		where 1=1
