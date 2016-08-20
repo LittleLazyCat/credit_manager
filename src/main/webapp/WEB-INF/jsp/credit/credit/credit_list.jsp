@@ -102,13 +102,13 @@
 					var html = htmlTpl.dropdown.prefix
 		            	  + '  <li><a href="credit/edit?id='+row.id+'&creditType=${pd.creditType }" data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
 		            	  + '  <li><a href="credit/delete?id='+row.id+'" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
-		            <shiro:hasPermission name="credit/updateAudit">
-		            	  + '  <li class="divider"></li>'
-		            	  + '  <li><a href="credit/audit?id='+row.id+'" data-model="dialog">债权审核</a></li>'
-		            </shiro:hasPermission>
-		            	  if(row.crStatus == '1'){
+		            	  +'  <li class="divider"></li>'
+		            	  if(row.isAudit == 0){
+		            			  html += '  <li><a href="credit/audit?id='+row.id+'" data-model="dialog">债权审核</a></li>'
+		            	  }
+		            	  if(row.crStatus == 1 && row.isAudit == 1){
 		            		  html += '  <li><a href="credit/chooseTeam?id='+row.id+'"  data-model="dialog">匹配处置团队</a></li>'
-		            	  }else if (row.crStatus == '2'){
+		            	  }else if (row.crStatus == 2 && row.isAudit == 1){
 		            		  html += '  <li><a href="agreement/saveAgree?creditId='+row.id+'&userId='+row.dealTeamName+'" data-msg="确定签订<居间服务协议(前期)>吗？" data-model="ajaxToDo" data-callback="refreshTable">签订<居间服务协议(前期)></a></li>'
 		            		  html += '  <li><a href="credit/delmatchTeam?id='+row.id+'" data-msg="确定取消匹配吗？" data-model="ajaxToDo" data-callback="refreshTable">取消匹配</a></li>'
 		            	  }
