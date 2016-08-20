@@ -81,7 +81,7 @@ public class RewardController extends BaseController{
 		
 		List<String> provinceList = ProvinceEnum.takeAllValues();//省份list
 		ModelAndView mv = this.getModelAndView();
-		PageData pd = new PageData();
+		PageData pd = super.getPageData();
 		pd.put("userLevel", 0);//注册用户
 		pd.put("userStatus", 1);
 		List<WebUser> userList = webUserWebService.findUserList(pd);
