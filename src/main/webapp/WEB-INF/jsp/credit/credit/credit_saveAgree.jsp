@@ -5,18 +5,33 @@
 <form class="form-horizontal" action="agreement/saveAgree" method="post" id="defForm" callfn="refreshTable" enctype="multipart/form-data">
 <input type="hidden" name="creditId" value="${creditId}">
 <input type="hidden" name="userId" value="${userId}">
+<input type="hidden" name="agreeType" value=${agreeType }>
 	<div class="modal-header">
 		<div class='bootstrap-dialog-header'>
 			<div class='bootstrap-dialog-close-button' style='display: block;'>
 				<button class='close' data-dismiss='modal' aria-label='Close'>×</button>
 			</div>
-			<div class='bootstrap-dialog-title'>居间服务协议(前期)</div>
+			<div class='bootstrap-dialog-title'>
+			   <c:if test="${agreeType==1 }">   
+		                             居间服务协议(前期)：
+		       </c:if>
+		       <c:if test="${agreeType==3}">   
+		                             居间服务协议(后期)：
+		       </c:if>
+			</div>
 		</div>
 	</div>
 	<div class="modal-body">
 		<div class="container-fluid">
 		                    <div class="form-group">
-		                        <label class="col-sm-3 control-label">居间服务协议(前期)：</label>
+		                        <label class="col-sm-3 control-label">
+		                     <c:if test="${agreeType==1 }">   
+		                             居间服务协议(前期)：
+		                     </c:if>
+		                     <c:if test="${agreeType==3}">   
+		                             居间服务协议(后期)：
+		                     </c:if>
+		                        </label>
 		                        <div class="col-sm-6">
 		                             <div id="addFileUpload"></div>
 		                             <span class="help-block m-b-none">

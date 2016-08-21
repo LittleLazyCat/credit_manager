@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.credit.manage.agreement.service.AgreementWebService;
+import com.credit.manage.credit.service.CreditService;
 import com.credit.manage.entity.Agreement;
 import com.credit.manage.entity.Credit;
 import com.credit.manage.entity.WebUser;
@@ -69,9 +70,11 @@ public class AgreementController extends BaseController{
 	public ModelAndView toSignAgree(){
 		String creditId = super.getRequest().getParameter("creditId");
 		String userId = super.getRequest().getParameter("userId");		
+		String agreeType =super.getRequest().getParameter("agreeType");
 		ModelAndView mv = super.getModelAndView();
 		mv.addObject("creditId", creditId);
 		mv.addObject("userId", userId);
+		mv.addObject("agreeType",agreeType);
 		mv.setViewName("credit/credit/credit_saveAgree");
 		return mv;
 	}
@@ -88,7 +91,7 @@ public class AgreementController extends BaseController{
 			PageData pd = super.getPageData();
 			pd.put("creditId", agree.getCreditId());
 			pd.put("userId", agree.getUserId());
-			pd.put("agreeType", 1);
+			pd.put("agreeType", agree.getAgreeType());
 			List<Agreement> agreeList = agreementWebService.list(pd);
 			if(null != agreeList && agreeList.size() > 0){
 				result.put("status", 0);
@@ -103,7 +106,6 @@ public class AgreementController extends BaseController{
 							uploadFileService.uploadFile(PropertiesUtil.getValue("saveImgPath")+"uploadFile/agree", agree.getUploadFiles()[i], fileName);
 							String images = "uploadFile/agree/"+fileName;
 							agree.setAgreeSample(images);
-							agree.setAgreeType((short)1);
 							agree.setSignStatus((short)0);
 							agree.setSignTime(new Date());
 							agreementWebService.saveAgree(agree);
