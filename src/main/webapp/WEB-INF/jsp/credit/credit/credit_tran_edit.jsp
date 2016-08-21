@@ -122,8 +122,22 @@
 		                    </div>         
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">债权开始日期：</label>
-                                <div class="col-sm-6">
-                                    <input class="form-control required" type="text" name="openDate" id="datetimepicker"  value="<fmt:formatDate value="${credit.openDate }" pattern="yyyy-MM-dd"/>">
+                                <div class="col-sm-4">
+                                     <select id="openDate" name="openDate" class="form-control input-sm"  required="required">
+							              <option value="">请选择</option>
+							              <option value="2009" <c:if test="${credit.openDate =='2009'}">selected="selected"</c:if>>2009</option>
+							              <option value="2010" <c:if test="${credit.openDate =='2010'}">selected="selected"</c:if>>2010</option>
+							              <option value="2011" <c:if test="${credit.openDate =='2011'}">selected="selected"</c:if>>2011</option>
+							              <option value="2012" <c:if test="${credit.openDate =='2012'}">selected="selected"</c:if>>2012</option>
+							              <option value="2013" <c:if test="${credit.openDate =='2013'}">selected="selected"</c:if>>2013</option>
+							              <option value="2014" <c:if test="${credit.openDate =='2014'}">selected="selected"</c:if>>2014</option>
+							              <option value="2015" <c:if test="${credit.openDate =='2015'}">selected="selected"</c:if>>2015</option>
+							              <option value="2016" <c:if test="${credit.openDate =='2016'}">selected="selected"</c:if>>2016</option>
+							              <option value="2017" <c:if test="${credit.openDate =='2017'}">selected="selected"</c:if>>2017</option>
+							              <option value="2018" <c:if test="${credit.openDate =='2018'}">selected="selected"</c:if>>2018</option>
+							              <option value="2019" <c:if test="${credit.openDate =='2019'}">selected="selected"</c:if>>2019</option>
+							              <option value="2020" <c:if test="${credit.openDate =='2020'}">selected="selected"</c:if>>2020</option>
+							          </select>
                                 </div>
                             </div>
                             <div class="form-group">

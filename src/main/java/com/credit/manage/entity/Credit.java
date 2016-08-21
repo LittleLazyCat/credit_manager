@@ -39,8 +39,8 @@ public class Credit {
 	private Date createDate;
 	// 结束日期
 	private Date endDate;
-	// 开启日期
-	private Date openDate;
+	// 开启日期(年份)
+	private String openDate;
 	// 约定日期
 	private Date agreedDate;
 	//表单上传的文件
@@ -71,7 +71,7 @@ public class Credit {
 			String contactName, String contactNumber, String debtName,
 			String debtProvince, String debtCity, String debtPhone,
 			String debtProof, String description, Date createDate,
-			Date endDate, Date openDate, Date agreedDate,MultipartFile[] uploadFiles,
+			Date endDate, String openDate, Date agreedDate,MultipartFile[] uploadFiles,
 			Integer creditType,Integer isAudit,	Integer deptType,String signedPath,String legalServicePath,String dealTeamName) {
 		super();
 		this.id = id;
@@ -238,11 +238,11 @@ public class Credit {
 		this.endDate = endDate;
 	}
 
-	public Date getOpenDate() {
+	public String getOpenDate() {
 		return openDate;
 	}
 
-	public void setOpenDate(Date openDate) {
+	public void setOpenDate(String openDate) {
 		this.openDate = openDate;
 	}
 
