@@ -108,8 +108,8 @@
 		            	  }
 		            	  if(row.crStatus == 1 && row.isAudit == 1){
 		            		  html += '  <li><a href="credit/chooseTeam?id='+row.id+'"  data-model="dialog">匹配处置团队</a></li>'
-		            	  }else if (row.crStatus == 2 && row.isAudit == 1){
-		            		  html += '  <li><a href="agreement/saveAgree?creditId='+row.id+'&userId='+row.dealTeamName+'" data-msg="确定签订<居间服务协议(前期)>吗？" data-model="ajaxToDo" data-callback="refreshTable">签订<居间服务协议(前期)></a></li>'
+		            	  }else if (row.crStatus == 2){
+		            		  html += '  <li><a href="agreement/saveAgree?creditId='+row.id+'&userId='+row.dealTeamName+'" data-msg="确定签订<居间服务协议(前期)>吗？" data-model="ajaxToDo" data-callback="refreshTable">上传<居间服务协议(前期)></a></li>'
 		            		  html += '  <li><a href="credit/delmatchTeam?id='+row.id+'" data-msg="确定取消匹配吗？" data-model="ajaxToDo" data-callback="refreshTable">取消匹配</a></li>'
 		            	  }
 		            	     html += '  <li><a href="credit/updateStatus?id='+row.id+'"  data-model="dialog">更新处置进度</a></li>'

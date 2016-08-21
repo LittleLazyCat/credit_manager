@@ -108,25 +108,58 @@
 									<dd> ${credit.description }</dd>
 								</dl>
 								<c:if test="${not empty credit.dealTeamName }">
-									<b><font color="blue">处置团队信息</font></b>
-						      		<hr>
 						      		<dl class="dl-horizontal">
-									<dt>处置团队：</dt>
+									<dt><font color="blue">处置团队：</font></dt>
 									<dd> ${user.userEmail } - ${user.userPhone }</dd>
 								</dl>
 								</c:if>
 								
 								<c:if test="${not empty agreeList }">
-									<b><font color="blue">债权协议文案</font></b>
+									<b><font color="blue">债权协议信息</font></b>
 						      		<hr>
 						      		<dl class="dl-horizontal">
-									<dt>债权协议：</dt>
-									<dd> 
-									<c:forEach items="${agreeList}" var="item">
-											<a href="credit/imgDetail?imageUrl=${showImgPath}${item.agreeImg}" target="_blank">
-											<img alt="" src="${basePath}${item.agreeImg}" width="50px" height="50px"/>&nbsp;&nbsp;
-										    </a>
-									</c:forEach>
+									<dt>债权协议凭证：</dt>
+									<dd>
+									<table>
+										<tr>
+											<td>居间协议(前期)：</td>
+											<td><c:forEach items="${agreeList}" var="item">
+												<c:if test="${not empty item}">
+													<c:if test="${item.agreeType eq '1'}">
+														<a href="${basePath }agreement/agreeDetail?id=${item.id}">查看《居间服务协议(前期)》</a><br>
+													</c:if>
+												</c:if>
+											</c:forEach>
+											</td>
+										</tr>
+										<tr style="height:60px">
+											<td align="right">服务协议：</td>
+											<td><c:forEach items="${agreeList}" var="item">
+												<c:if test="${not empty item}">
+													<c:if test="${item.agreeType eq '2'}">
+														<a href="${basePath }credit/imgDetail?imageUrl=${showImgPath}${item.agreeImg}" target="_blank">
+															<img alt="" src="${showImgPath}${item.agreeImg}" width="50px" height="50px"/>&nbsp;&nbsp;
+														</a>
+													</c:if>
+												</c:if>
+											</c:forEach>
+											</td>
+										</tr>
+										<tr>
+											<td>居间协议(后期)：</td>
+											<td>
+												<c:forEach items="${agreeList}" var="item">
+													<c:if test="${not empty item}">
+														<c:if test="${item.agreeType eq '3'}">
+															<a href="${basePath }credit/imgDetail?imageUrl=${showImgPath}${item.agreeImg}" target="_blank">
+																<img alt="" src="${showImgPath}${item.agreeImg}" width="50px" height="50px"/>&nbsp;&nbsp;
+															</a>
+														</c:if>
+													</c:if>
+												</c:forEach>
+											</td>
+										</tr>
+									</table>
 									</dd>
 								</dl>
 								</c:if>
