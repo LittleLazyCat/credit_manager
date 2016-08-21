@@ -102,7 +102,7 @@ public class AgreementController extends BaseController{
 							fileName = "agree"+newFileName + fileName.substring(fileName.lastIndexOf("."), fileName.length());
 							uploadFileService.uploadFile(PropertiesUtil.getValue("saveImgPath")+"uploadFile/agree", agree.getUploadFiles()[i], fileName);
 							String images = "uploadFile/agree/"+fileName;
-							agree.setAgreeImg(images);
+							agree.setAgreeSample(images);
 							agree.setAgreeType((short)1);
 							agree.setSignStatus((short)0);
 							agree.setSignTime(new Date());

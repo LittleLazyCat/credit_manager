@@ -11,6 +11,7 @@ public class Agreement {
 	private Integer userId;
 	private Short agreeType;//协议类型(1、居间服务协议(前期),2、服务合同,3、居间服务协议(后期))
 	private String agreeImg;//协议内容(图片)
+	private String agreeSample;
 	private Date signTime;
 	private Short signStatus;//签订状态(0、待确认，1、已确认)
 	private String[] agreeImgs;//用于单个图片存储
@@ -69,6 +70,12 @@ public class Agreement {
 	}
 	public void setAgreeImgs(String[] agreeImgs) {
 		this.agreeImgs = agreeImgs;
+	}
+	public String getAgreeSample() {
+		return agreeSample;
+	}
+	public void setAgreeSample(String agreeSample) {
+		this.agreeSample = agreeSample;
 	}
 	
 
