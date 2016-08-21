@@ -11,12 +11,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.credit.manage.agreement.service.AgreementWebService;
 import com.credit.manage.entity.Agreement;
+import com.credit.manage.entity.Credit;
+import com.credit.manage.entity.WebUser;
 import com.credit.manage.filemanager.service.UploadFileService;
+import com.credit.manage.util.ProvinceEnum;
 import com.gvtv.manage.base.controller.BaseController;
 import com.gvtv.manage.base.util.DataUtil;
 import com.gvtv.manage.base.util.PageData;
@@ -58,30 +62,54 @@ public class AgreementController extends BaseController{
 	}
 	
 	/**
+	 * 跳转到更新法律文件信息页面
+	 * @return
+	 */
+	@RequestMapping(value="/saveAgree", method=RequestMethod.GET)
+	public ModelAndView toSignAgree(){
+		String creditId = super.getRequest().getParameter("creditId");
+		String userId = super.getRequest().getParameter("userId");		
+		ModelAndView mv = super.getModelAndView();
+		mv.addObject("creditId", creditId);
+		mv.addObject("userId", userId);
+		mv.setViewName("credit/credit/credit_saveAgree");
+		return mv;
+	}
+	
+	/**
 	 * 签订居间服务协议(前期)
 	 * @return
 	 */
-	@RequestMapping(value="/saveAgree")
+	@RequestMapping(value="/saveAgree",method=RequestMethod.POST)
 	@ResponseBody
-	public PageData signAgreeFront(Integer creditId,Integer userId){
+	public PageData signAgreeFront(Agreement agree){
 		PageData result = new PageData();
 		try {
 			PageData pd = super.getPageData();
-			pd.put("creditId", creditId);
-			pd.put("userId", userId);
+			pd.put("creditId", agree.getCreditId());
+			pd.put("userId", agree.getUserId());
 			pd.put("agreeType", 1);
 			List<Agreement> agreeList = agreementWebService.list(pd);
 			if(null != agreeList && agreeList.size() > 0){
 				result.put("status", 0);
 				result.put("msg", "已发起<居间服务协议(前期)>,请等待确认!");
 			}else{
-				Agreement agree = new Agreement();
-				agree.setCreditId(creditId);
-				agree.setUserId(userId);
-				agree.setAgreeType((short)1);
-				agree.setSignStatus((short)0);
-				agree.setSignTime(new Date());
-				agreementWebService.saveAgree(agree);
+				if(null != agree.getUploadFiles()){
+					for(int i=0;i< agree.getUploadFiles().length;i++){
+						if(0 != agree.getUploadFiles()[i].getSize()){
+							String newFileName = DataUtil.getRandomStr();
+							String fileName = agree.getUploadFiles()[i].getOriginalFilename();
+							fileName = "agree"+newFileName + fileName.substring(fileName.lastIndexOf("."), fileName.length());
+							uploadFileService.uploadFile(PropertiesUtil.getValue("saveImgPath")+"uploadFile/agree", agree.getUploadFiles()[i], fileName);
+							String images = "uploadFile/agree/"+fileName;
+							agree.setAgreeImg(images);
+							agree.setAgreeType((short)1);
+							agree.setSignStatus((short)0);
+							agree.setSignTime(new Date());
+							agreementWebService.saveAgree(agree);
+						}
+					}
+				}
 				result.put("status", 1);
 			}
 		} catch (Exception e) {
@@ -93,40 +121,7 @@ public class AgreementController extends BaseController{
 	}
 	
 	
-	@RequestMapping(value="/addOrUpd", method=RequestMethod.POST)
-	@ResponseBody
-	public PageData saveOrUpd(Agreement agree){
-		PageData result = new PageData();
-		try{
-			String images = "";
-			if(null != agree.getUploadFiles()){
-				for(int i=0;i< agree.getUploadFiles().length;i++){
-					if(0 != agree.getUploadFiles()[i].getSize()){
-						String newFileName = DataUtil.getRandomStr();
-						String fileName = agree.getUploadFiles()[i].getOriginalFilename();
-						fileName = "agree"+newFileName + fileName.substring(fileName.lastIndexOf("."), fileName.length());
-						uploadFileService.uploadFile(PropertiesUtil.getValue("saveImgPath")+"uploadFile/agree", agree.getUploadFiles()[i], fileName);
-						if(i == 0){
-							images += "uploadFile/agree/"+fileName;
-						}else{
-							images += ";uploadFile/agree/"+fileName;
-						}
-					}
-				}
-				agree.setAgreeImg(images);
-			}
-			agree.setSignStatus((short)1);
-			agree.setSignTime(new Date());
-			agreementWebService.deleteByCreditId(agree);
-			agreementWebService.saveAgree(agree);
-			result.put("status", 1);
-		}catch(Exception e){
-			logger.error("addOrUpd blog error", e);
-			result.put("status", 0);
-			result.put("msg", "操作失败");
-		}
-		return result;
-	}
+	
 	
 	@RequestMapping(value="/delete")
 	@ResponseBody

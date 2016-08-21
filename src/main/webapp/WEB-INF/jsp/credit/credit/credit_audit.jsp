@@ -61,7 +61,7 @@
 								<dl class="dl-horizontal">
 									<dt>债权开始日期：</dt>
 									<dd>
-									<fmt:formatDate value="${credit.openDate }" pattern="yyyy-MM-dd"/>
+									${credit.openDate }
 									</dd>
 								</dl>
 
