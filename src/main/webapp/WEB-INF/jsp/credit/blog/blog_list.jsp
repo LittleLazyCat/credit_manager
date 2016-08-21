@@ -140,10 +140,8 @@ background-color:#0099FF;
 			{
 				"targets" : 5,
 				"render" : function(data, type, row) {
-					if(!data || data == ''){
-						return data;
-					}else if(data.length > 11){
-						return data.substring(0,10)+"..";;
+					if(data && data != '' && data.length > 11){
+						return data.substring(0,10)+"..";
 					}else {
 						return data;
 					}
@@ -162,13 +160,8 @@ background-color:#0099FF;
 			{
 				"targets" : 7,
 				"render" : function(data, type, row) {
-					if(data && data != null && data != '' && data.length > 60){
-						var index = data.indexOf(">");
-						if(index != -1){
-							return data.substring((index+1),(index+50))+"...";
-						}else{
+					if(data && data != null && data != '' && data.length > 50){
 							return data.substring(0,50)+"...";
-						}
 					}else{
 						return data;
 					}
