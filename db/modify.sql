@@ -68,6 +68,5 @@ CREATE TABLE `cr_agreement` (
 PRIMARY KEY (`id`)
 )
 ;
-
-
-
+/***********2016-08-21***************/
+ALTER TABLE cr_credit MODIFY COLUMN open_date VARCHAR(32) COMMENT '债权开始年份';
