@@ -35,7 +35,7 @@
 			<div class="form-group">
 				<label for="name" class="col-sm-1 control-label">来源</label>
 				<div class="col-sm-7">
-					<input class="form-control" type="text" maxlength="30" name="blogSource" id="blogSource" value="${blog.blogSource}" placeholder="请输入链接地址或来源名称"/>
+					<input class="form-control" type="text" maxlength="128" name="blogSource" id="blogSource" value="${blog.blogSource}" placeholder="请输入链接地址或来源名称"/>
 				</div>
 			</div>
 			<div class="form-group">

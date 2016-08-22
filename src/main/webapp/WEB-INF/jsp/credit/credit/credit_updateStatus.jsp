@@ -22,11 +22,13 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 										<label class="col-sm-4 control-label">债权状态：</label>
 										<div class="col-sm-6">
 											<select name="crStatus" class="form-control" required="required">
+											    <%--
 												<option value="1" <c:if test="${credit.crStatus==1 }"> selected="selected"</c:if>>招标中</option>
 												<option value="2" <c:if test="${credit.crStatus==2 }"> selected="selected"</c:if>>已匹配</option>
 												<option value="3" <c:if test="${credit.crStatus==3 }"> selected="selected"</c:if>>已签前期协议</option>
 												<option value="4" <c:if test="${credit.crStatus==4 }"> selected="selected"</c:if>>已签服务合同</option>
 												<option value="5" <c:if test="${credit.crStatus==5 }"> selected="selected"</c:if>>已签处置协议</option>
+												 --%>
 												<option value="6" <c:if test="${credit.crStatus==6 }"> selected="selected"</c:if>>处置中</option>
 												<option value="7" <c:if test="${credit.crStatus==7 }"> selected="selected"</c:if>>还款中</option>
 												<option value="9" <c:if test="${credit.crStatus==9 }"> selected="selected"</c:if>>已完成</option>
