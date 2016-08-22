@@ -165,7 +165,7 @@
 				"render" : function(data, type, row) {
 					if(data == '1'){
 						return "招标中";
-					}else if(data == '2' || data == '3' || data == '4'){
+					}else if(data == '2'){
 						return "已匹配";
 					}else if(data == '3'){
 						return "已签前期协议";
