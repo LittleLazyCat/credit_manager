@@ -167,20 +167,23 @@ public class WebUserController extends BaseController{
 	@RequestMapping(value="/disable")
 	@ResponseBody
 	public PageData disableWebUser(Integer id){
-		PageData pd = new PageData();
+		PageData result = new PageData();
 		try {
-			pd.put("id", id);
-			Boolean isFlag = webUserWebService.disableUser(pd);
+			result.put("id", id);
+			Boolean isFlag = webUserWebService.disableUser(result);
 			if(isFlag){
-				pd.put("result", "用户已禁用");
+				result.put("result", "用户已禁用");
+				result.put("status", 1);
 			}else{
-				pd.put("result", "禁用失败");
+				result.put("result", "禁用失败");
+				result.put("status", 0);
 			}
 		} catch (Exception e) {
 			logger.error("disable webUser error", e);
-			pd.put("result", "禁用失败");
+			result.put("result", "禁用失败");
+			result.put("status", 0);
 		}
-		return pd;
+		return result;
 	}
 	
 	/**

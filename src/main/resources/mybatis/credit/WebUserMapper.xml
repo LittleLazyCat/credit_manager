@@ -62,7 +62,7 @@
 	<select id="count" parameterType="PageData" resultType="int">
 		select count(1)
 		from cr_user u
-		where 1=1
+		where user_status!=-1
 		<if test="userStatus != null and userStatus != ''">
 			and u.user_status = #{userStatus}
 		</if>
@@ -87,7 +87,7 @@
 		select  
 		 <include refid="userColumns"></include>
 		from cr_user u
-		where 1=1
+		where user_status!=-1
 		<if test="userStatus != null and userStatus != ''">
 			and u.user_status = #{userStatus}
 		</if>
