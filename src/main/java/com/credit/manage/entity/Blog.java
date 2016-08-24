@@ -14,6 +14,8 @@ public class Blog {
 	private String blogSource;
 	private String blogAuthor;
 	private Short blogStatus;
+	private String blogImage;
+	private String blogIntroduction;
 	private MultipartFile uploadFile;
 	
 	public Blog() {
@@ -21,7 +23,8 @@ public class Blog {
 	}
 
 	public Blog(Integer id, Short blogType, String blogTitle,
-			String blogContext, Date createTime,String blogSource,String blogAuthor) {
+			String blogContext, Date createTime,String blogSource,
+			String blogAuthor,String blogImage,String blogIntroduction) {
 		super();
 		this.id = id;
 		this.blogType = blogType;
@@ -30,6 +33,8 @@ public class Blog {
 		this.createTime = createTime;
 		this.blogSource = blogSource;
 		this.blogAuthor = blogAuthor;
+		this.blogImage = blogImage;
+		this.blogIntroduction = blogIntroduction;
 	}
 
 	public Integer getId() {
@@ -96,6 +101,22 @@ public class Blog {
 		this.blogStatus = blogStatus;
 	}
 
+	public String getBlogImage() {
+		return blogImage;
+	}
+
+	public void setBlogImage(String blogImage) {
+		this.blogImage = blogImage;
+	}
+
+	public String getBlogIntroduction() {
+		return blogIntroduction;
+	}
+
+	public void setBlogIntroduction(String blogIntroduction) {
+		this.blogIntroduction = blogIntroduction;
+	}
+
 	public MultipartFile getUploadFile() {
 		return uploadFile;
 	}
@@ -104,4 +125,5 @@ public class Blog {
 		this.uploadFile = uploadFile;
 	}
 
+	
 }

@@ -39,18 +39,31 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="name" class="col-sm-1 control-label" id="soureName">作者</label>
+				<label for="name" class="col-sm-1 control-label">作者</label>
+				<div class="col-sm-7">
+					<input class="form-control" type="text" maxlength="128" name="blogAuthor" id="blogAuthor" value="${blog.blogAuthor}" placeholder="请输入作者名称"/>
+				</div>
+			</div>
+			<div class="form-group" id="imgDiv">
+				<label for="name" class="col-sm-1 control-label" id="soureName">博客封面图片</label>
 				<div class="col-sm-7" id="fileSelect">
-					<input class="form-control" type="text" maxlength="30" name="blogAuthor" style="display:none" id="blogAuthor" value="${blog.blogAuthor}"/>
+					<input class="form-control" type="text" maxlength="30" name="blogImage" style="display:none" id="blogImage" value="${blog.blogImage}"/>
 					<span class="help-block m-b-none" id="fileAddBtn">
 	                	<button type="button" class="btn btn-white btn-xs" onclick="addFileUpload()" ><span class="glyphicon glyphicon-plus-sign">添加文件</span></button> 
 	           		</span>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="description" class="col-sm-1 control-label">描述</label>
+				<label for="description" class="col-sm-1 control-label">博客内容</label>
 				<div class="col-sm-7">
 					<textarea name="blogContext" id="blogContext" style="width:800px;height:400px;visibility:hidden;">${blog.blogContext}</textarea>
+				</div>
+			</div>
+			
+		    <div class="form-group">
+				<label for="description" class="col-sm-1 control-label">博客简介</label>
+				<div class="col-sm-7">
+					<textarea name="blogIntroduction" rows="5" cols="60" id="blogIntroduction">${blog.blogContext}</textarea>
 				</div>
 			</div>
 		</div>
@@ -63,16 +76,9 @@
 <script>
 	function blogTypeInput(value){
 		if(value == '1'){
-			$("#soureName").html("封面图片");
-			$("#fileAddBtn").show();
-			$("#blogAuthor").hide();
-			$("#blogAuthorDiv").hide();
+			$("#imgDiv").show();
 		}else{
-			$("#soureName").html("作者");
-			$("#fileAddBtn").hide();
-			$("#uploadFile").remove();
-			$("#blogAuthor").show();
-			$("#blogAuthorDiv").show();
+			$("#imgDiv").hide();
 		}
 		
 	}

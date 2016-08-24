@@ -66,8 +66,13 @@ CREATE TABLE `cr_agreement` (
 `sign_time`  datetime NULL COMMENT '签订时间' ,
 `sign_status`  smallint(3) NULL COMMENT '签订状态(0、待确认，1、已确认)' ,
 PRIMARY KEY (`id`)
-)
-;
+);
+
+
 /***********2016-08-21***************/
 ALTER TABLE cr_credit MODIFY COLUMN open_date VARCHAR(32) COMMENT '债权开始年份';
 ALTER TABLE cr_agreement ADD COLUMN agree_sample VARCHAR(256) COMMENT '居间协议样本地址' AFTER agree_type;
+
+
+/***********2016-08-24***************/
+ALTER TABLE cr_blog add COLUMN blog_introduction VARCHAR(256) COMMENT '博客简介';
