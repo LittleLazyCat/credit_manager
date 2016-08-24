@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BlogMapper">
-	<sql id="commonColumns">select id,blog_type,blog_title,blog_context,create_time,blog_source,blog_author,blog_status,blog_image </sql>
+	<sql id="commonColumns">select id,blog_type,blog_title,blog_context,create_time,blog_source,blog_author,blog_status,blog_image,blog_introduction </sql>
 
 	<resultMap type="Blog" id="userResultMap">
 		<id column="id" property="id"/>

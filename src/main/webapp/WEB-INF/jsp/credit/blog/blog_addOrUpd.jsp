@@ -63,7 +63,7 @@
 		    <div class="form-group">
 				<label for="description" class="col-sm-1 control-label">博客简介</label>
 				<div class="col-sm-7">
-					<textarea name="blogIntroduction" rows="5" cols="60" id="blogIntroduction">${blog.blogContext}</textarea>
+					<textarea name="blogIntroduction" rows="5" cols="60" id="blogIntroduction">${blog.blogIntroduction}</textarea>
 				</div>
 			</div>
 		</div>
