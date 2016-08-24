@@ -94,9 +94,12 @@
 				"targets" : 1,
 				"render" : function(data, type, row) {
 					var html = htmlTpl.dropdown.prefix
-					+ '  <li><a href="webUser/update?id='+row.id+'"  data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
-		            	  + '  <li><a href="webUser/resetPass?id='+row.id+'" data-msg="重置后新密码为123456!" data-model="ajaxToDo" data-callback=""><i class="fa fa-pencil"></i>重置密码</a></li>'
-		            	  + '  <li><a href="webUser/disable?id='+row.id+'" data-msg="删除该用户后将不能再登录网站!" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'
+					      + '  <li><a href="webUser/update?id='+row.id+'"  data-model="dialog"><i class="fa fa-pencil"></i>编辑</a></li>'
+		            	  + '  <li><a href="webUser/resetPass?id='+row.id+'" data-msg="重置后新密码为123456!" data-model="ajaxToDo" data-callback=""><i class="fa fa-pencil"></i>重置密码</a></li>';
+                          if(row.userStatus==1){
+                        	  html+= '  <li><a href="webUser/disable?id='+row.id+'" data-msg="删除该用户后将不能再登录网站!" data-model="ajaxToDo" data-callback="refreshTable"><i class="fa fa-trash-o"></i>删除</a></li>'; 
+                          }		            			  
+		            	  
 		            	  + htmlTpl.dropdown.suffix;
 					return html;
 				}
