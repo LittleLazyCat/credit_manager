@@ -170,9 +170,9 @@
 					}else if(data == '3'){
 						return "已签前期协议";
 					}else if(data == '4'){
-						return "已签服务合同";
-					}else if(data == '5'){
 						return "已签处置协议";
+					}else if(data == '5'){
+						return "已签后期协议";
 					}else if(data == '6'){
 						return "处置中";
 					}else if(data == '7'){
