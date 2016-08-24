@@ -18,7 +18,7 @@
 			<ul class='control-sidebar-menu'>
 				<li>
 					<div class="menu-info">
-						<p>系统将进行升级</p>
+						<p>没有最新动态</p>
 					</div>
 				</li>
 			</ul>
