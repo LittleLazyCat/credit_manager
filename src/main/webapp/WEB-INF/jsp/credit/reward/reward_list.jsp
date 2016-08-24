@@ -103,7 +103,8 @@
 		            		  html += '<li><a href="reward/updStatus?rewardStatus=1&id='+row.id+'" data-msg="确定发布吗？" data-model="ajaxToDo" data-callback="refreshTable">发布</a></li>'
 		            	  }else if(row.rewardStatus == '1'){
 		            		  html += '<li><a href="reward/updStatus?rewardStatus=0&id='+row.id+'" data-msg="确定取消发布吗？" data-model="ajaxToDo" data-callback="refreshTable">取消发布</a></li>'
-		            	  }else if(row.rewardStatus != '-1'){
+		            	  }
+						  if(row.rewardStatus != '-1'){
 			            	  html += '<li><a href="reward/updStatus?rewardStatus=-1&id='+row.id+'" data-msg="确定审核结束该悬赏吗？" data-model="ajaxToDo" data-callback="refreshTable">审核(结束)</a></li>'
 		            	  }
 		            	  html += htmlTpl.dropdown.suffix;

@@ -23,7 +23,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="loginName" class="col-sm-2 control-label">用户昵称：</label>
+				<label for="loginName" class="col-sm-2 control-label">用户手机：</label>
 				<div class="col-sm-7">
 					<input id="userPhone" name="userPhone" type="text" maxlength="30" value="${user.userPhone}" class="form-control required" placeholder="请输入专家顾问名称"/>
 				</div>
