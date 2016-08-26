@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BlogMapper">
-	<sql id="commonColumns">select id,blog_type,blog_title,blog_context,create_time,blog_source,blog_author,blog_status </sql>
+	<sql id="commonColumns">select id,blog_type,blog_title,blog_context,create_time,blog_source,blog_author,blog_status,blog_image,blog_introduction </sql>
 
 	<resultMap type="Blog" id="userResultMap">
 		<id column="id" property="id"/>
@@ -14,6 +14,9 @@
 		<result column="blog_source" property="blogSource"/>
 		<result column="blog_author" property="blogAuthor"/>
 		<result column="blog_status" property="blogStatus"/>
+		<result column="blog_image" property="blogImage"/>
+		<result column="blog_introduction" property="blogIntroduction"/>
+		
 	</resultMap>
 	
 	    <!-- 根据id获取债权信息 -->
@@ -57,6 +60,8 @@
 			create_time,
 			blog_source,
 			blog_author,
+			blog_image,
+			blog_introduction,
 			blog_status
 		) values (
 			#{blogType},
@@ -65,6 +70,8 @@
 			#{createTime},
 			#{blogSource},
 			#{blogAuthor},
+			#{blogImage},
+			#{blogIntroduction},
 			#{blogStatus}
 		)
 	</insert>
@@ -74,7 +81,9 @@
 		blog_title = #{blogTitle},
 		blog_context = #{blogContext},
 		blog_source = #{blogSource},
-		blog_author = #{blogAuthor}
+		blog_author = #{blogAuthor},
+		blog_image =#{blogImage},
+		blog_introduction =#{blogIntroduction}
 		where id = #{id}
 	</update>
 	<update id="updateBlogStatus" parameterType="Blog">

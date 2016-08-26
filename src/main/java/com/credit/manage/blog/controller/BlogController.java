@@ -100,7 +100,7 @@ public class BlogController extends BaseController{
 				fileName = newFileName + fileName.substring(fileName.lastIndexOf("."), fileName.length());
 				
 				uploadFileService.uploadFile(PropertiesUtil.getValue("saveImgPath"), blog.getUploadFile(), fileName);
-				blog.setBlogAuthor(fileName);
+				blog.setBlogImage(fileName);
 			}
 			if(null != blog.getId() && 0 != blog.getId()){
 				blogWebService.updateBlog(blog);

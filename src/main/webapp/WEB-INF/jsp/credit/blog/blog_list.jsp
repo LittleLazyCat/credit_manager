@@ -39,6 +39,7 @@ background-color:#0099FF;
 								<th>标题</th>
 								<th>类型</th>
 								<th>作者</th>
+								<th>图片简介</th>
 								<th>来源</th>
 								<th>发布状态</th>
 								<th>内容</th>
@@ -86,6 +87,7 @@ background-color:#0099FF;
 			              {"data" : "blogTitle"},
 			              {"data" : "blogType"}, 
 			              {"data" : "blogAuthor"},
+			              {"data" : "blog_image"},
 			              {"data" : "blogSource"},
 			              {"data" : "blogStatus"},
 			              {"data" : "blogContext"}
@@ -127,7 +129,7 @@ background-color:#0099FF;
 				}
 			},
 			{
-				"targets" : 4,
+				"targets" : 5,
 				"render" : function(data, type, row) {
 					if(row.blogType == '1'){
 						var content = "<img src='${headUrl}"+data+"' width='30px' height='25px' onmouseover='showImg(this);' onmouseout='hideImg()' />";
@@ -138,7 +140,7 @@ background-color:#0099FF;
 				}
 			},
 			{
-				"targets" : 5,
+				"targets" : 6,
 				"render" : function(data, type, row) {
 					if(data && data != '' && data.length > 11){
 						return data.substring(0,10)+"..";
@@ -148,7 +150,7 @@ background-color:#0099FF;
 				}
 			},
 			{
-				"targets" : 6,
+				"targets" : 7,
 				"render" : function(data, type, row) {
 					if(data == '0'){
 						return "<font color='red'>未发布</font>";
@@ -158,7 +160,7 @@ background-color:#0099FF;
 				}
 			},
 			{
-				"targets" : 7,
+				"targets" : 8,
 				"render" : function(data, type, row) {
 					if(data && data != null && data != '' && data.length > 50){
 							return data.substring(0,50)+"...";

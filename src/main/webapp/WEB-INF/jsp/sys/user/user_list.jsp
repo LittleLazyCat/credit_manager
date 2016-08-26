@@ -81,7 +81,7 @@
 			"createdRow" : function(row, data, index) {
 				$('td:eq(0)', row).html("<input type='checkbox' name='chx_default' value='" + data.userId + "'/>");
 			},
-			"lengthMenu": [[2, 4, 6], [2, 4, 6]],
+			"lengthMenu": [[10, 20, 50], [10, 20, 50]],
 			"columns" : [ 
 			              {"data" : "userId"},
 			              {"data" : null},
