@@ -208,7 +208,7 @@
 	</update>
 	
    	<delete id="delete" parameterType="Integer">
-		delete from cr_credit where id = #{id}
+		 update  cr_credit set cr_status=-1 where id = #{id}
 	</delete>
 	
 	<update id="batchDelete" parameterType="java.util.List">
