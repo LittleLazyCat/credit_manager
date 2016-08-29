@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -42,6 +43,7 @@ public class CreditController extends BaseController{
 	private UploadFileService uploadFileService;
 	
 
+
 	@RequestMapping
 	public ModelAndView page() {
 		PageData pd = super.getPageData();
@@ -51,6 +53,7 @@ public class CreditController extends BaseController{
 		return mv;
 	}
 
+	@RequiresPermissions("credit:view")
 	@RequestMapping(value = "/list")
 	@ResponseBody
 	public PageData list() {
@@ -72,6 +75,7 @@ public class CreditController extends BaseController{
 	 * @param id
 	 * @return
 	 */
+	@RequiresPermissions("credit:view")
 	@RequestMapping(value="/details", method=RequestMethod.GET)
 	public ModelAndView toDetails(@RequestParam Integer id){
 		Credit credit = null;
@@ -113,6 +117,7 @@ public class CreditController extends BaseController{
      * @return
      * @throws Exception 
      */
+	@RequiresPermissions("credit:view")
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public ModelAndView toAdd() throws Exception{
 		List<String> provinceList = ProvinceEnum.takeAllValues();//省份list
@@ -138,6 +143,7 @@ public class CreditController extends BaseController{
 	 * 新增下载法律文件信息
 	 * @return
 	 */
+	@RequiresPermissions("credit:add")
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	@ResponseBody
 	public PageData add(Credit credit){
@@ -179,6 +185,7 @@ public class CreditController extends BaseController{
 	 * 跳转到更新法律文件信息页面
 	 * @return
 	 */
+	@RequiresPermissions("credit:view")
 	@RequestMapping(value="/edit", method=RequestMethod.GET)
 	public ModelAndView toEdit(@RequestParam Integer id){
 		Credit credit = null;
@@ -213,6 +220,7 @@ public class CreditController extends BaseController{
 	 * 更新法律文件信息
 	 * @return
 	 */
+	@RequiresPermissions("credit:edit")
 	@RequestMapping(value="/edit", method=RequestMethod.POST)
 	@ResponseBody
 	public PageData edit(Credit credit){
@@ -251,6 +259,7 @@ public class CreditController extends BaseController{
 	 * 跳转到更新法律文件信息页面
 	 * @return
 	 */
+	@RequiresPermissions("credit:view")
 	@RequestMapping(value="/audit", method=RequestMethod.GET)
 	public ModelAndView toAudit(@RequestParam Integer id){
 		Credit credit = null;
@@ -269,6 +278,7 @@ public class CreditController extends BaseController{
 	 * 更新法律文件信息
 	 * @return
 	 */
+	@RequiresPermissions("credit:edit")
 	@RequestMapping(value="/audit", method=RequestMethod.POST)
 	@ResponseBody
 	public PageData audit(Credit credit){
@@ -291,6 +301,7 @@ public class CreditController extends BaseController{
 	 * @param credit
 	 * @return
 	 */
+	@RequiresPermissions("credit:view")
 	@RequestMapping(value="/updateStatus",method=RequestMethod.GET)
 	public ModelAndView toUpdateStatus(Integer id){
 		Credit credit = null;
@@ -310,6 +321,7 @@ public class CreditController extends BaseController{
 	 * @param credit
 	 * @return
 	 */
+	@RequiresPermissions("credit:edit")
 	@RequestMapping(value="/updateStatus")
 	@ResponseBody
 	public PageData updateStatus(Credit credit){

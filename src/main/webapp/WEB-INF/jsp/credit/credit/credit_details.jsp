@@ -126,7 +126,7 @@
 											<td><c:forEach items="${agreeList}" var="item">
 												<c:if test="${not empty item}">
 													<c:if test="${item.agreeType eq '1'}">
-														<a href="${basePath }agreement/agreeDetail?id=${item.id}">查看《居间服务协议(前期)》</a><br>
+														<a href="${showImgPath}${item.agreeSample}">查看《居间服务协议(前期)》</a><br>
 													</c:if>
 												</c:if>
 											</c:forEach>
