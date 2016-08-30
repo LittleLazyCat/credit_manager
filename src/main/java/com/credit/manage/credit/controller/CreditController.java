@@ -256,7 +256,7 @@ public class CreditController extends BaseController{
 	}
 		
 	/**
-	 * 跳转到更新法律文件信息页面
+	 * 跳转到债权审核
 	 * @return
 	 */
 	@RequiresPermissions("credit:view")
@@ -275,7 +275,7 @@ public class CreditController extends BaseController{
 	}
 	
 	/**
-	 * 更新法律文件信息
+	 * 债权审核
 	 * @return
 	 */
 	@RequiresPermissions("credit:edit")
@@ -285,6 +285,37 @@ public class CreditController extends BaseController{
 		PageData result = new PageData();
 		try {
 			int num= creditService.updateAudit(credit);
+			if(num>0){
+				result.put("status", 1);
+				result.put("msg", "审核成功");
+			}
+		} catch (Exception e) {
+			logger.error("edit filemanager error", e);
+			result.put("status", 0);
+			result.put("msg", "审核失败");
+		}
+		return result;
+	}
+	/**
+	 * 批量债权审核
+	 * @return
+	 */
+	@RequiresPermissions("credit:edit")
+	@RequestMapping(value="/batchAudit")
+	@ResponseBody
+	public PageData batchAudit(String ids){
+		PageData result = new PageData();
+		try {
+			String[] res = ids.split(",");
+			int num= 0;
+			if(null != res && res.length > 0){
+				for(String id : res){
+					Credit credit = new Credit();
+					credit.setId(Integer.valueOf(id));
+					credit.setIsAudit(1);
+					num= creditService.updateAudit(credit);
+				}
+			}
 			if(num>0){
 				result.put("status", 1);
 				result.put("msg", "审核成功");

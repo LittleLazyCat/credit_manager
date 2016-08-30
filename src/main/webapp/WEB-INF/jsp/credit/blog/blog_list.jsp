@@ -28,6 +28,16 @@ background-color:#0099FF;
 					<button type="button" data-url="blog/toAddOrUpd" data-model="dialog" class="btn btn-sm btn-primary">
 						<i class="fa fa-fw fa-plus"></i>新增
 					</button>
+					<button type="button" data-url="blog/batchStatus"
+							data-msg="确定发布选中的数据吗？" data-model="ajaxToDo" class="btn btn-sm btn-primary"
+							data-checkbox-name="chx_default" data-callback="refreshTable">
+							<i class="fa fa-fw fa-edit"></i>批量发布
+					</button>
+					<button type="button" data-url="blog/batchDelete"
+							data-msg="确定批量删除吗？" data-model="ajaxToDo" class="btn btn-sm btn-danger"
+							data-checkbox-name="chx_default" data-callback="refreshTable">
+							<i class="fa fa-fw fa-remove"></i>批量删除
+					</button>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">

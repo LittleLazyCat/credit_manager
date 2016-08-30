@@ -156,6 +156,56 @@ public class BlogController extends BaseController{
 		return result;
 	}
 	
+	@RequestMapping(value="/batchStatus")
+	@ResponseBody
+	public PageData batchStatus(String ids){
+		PageData result = new PageData();
+		try{
+			String[] res = ids.split(",");
+			if(null != res && res.length > 0){
+				for(String id : res){
+					Blog blog = new Blog();
+					blog.setId(Integer.valueOf(id));
+					blog.setBlogStatus((short)1);
+					blogWebService.updateBlogStatus(blog);
+					blog = null;
+				}
+			}
+			result.put("status", 1);
+		}catch(Exception e){
+			logger.error("delete blog error", e);
+			result.put("status", 0);
+			result.put("msg", "删除失败");
+		}
+		return result;
+	}
+	
+	@RequestMapping(value="/batchDelete")
+	@ResponseBody
+	public PageData batchDelete(String ids){
+		PageData result = new PageData();
+		try{
+			int line = 0;
+			String[] res = ids.split(",");
+			if(null != res && res.length > 0){
+				for(String id : res){
+					line = blogWebService.deleteById(Integer.valueOf(id));
+				}
+			}
+			if(line>0){
+				result.put("status", 1);
+			}else{
+				result.put("status", 0);
+				result.put("msg", "删除失败或者为不可删除状态");
+			}
+		}catch(Exception e){
+			logger.error("delete blog error", e);
+			result.put("status", 0);
+			result.put("msg", "删除失败");
+		}
+		return result;
+	}
+	
 	/**
 	 * 业务资讯详细信息
 	 * @param request
