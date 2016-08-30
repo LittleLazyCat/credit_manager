@@ -45,7 +45,7 @@
 				</div>
 			</div>
 			<div class="form-group" id="imgDiv">
-				<label for="name" class="col-sm-1 control-label" id="soureName">博客封面图片</label>
+				<label for="name" class="col-sm-1 control-label" id="soureName">封面图片</label>
 				<div class="col-sm-7" id="fileSelect">
 					<input class="form-control" type="text" maxlength="30" name="blogImage" style="display:none" id="blogImage" value="${blog.blogImage}"/>
 					<span class="help-block m-b-none" id="fileAddBtn">
