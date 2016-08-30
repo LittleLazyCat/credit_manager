@@ -54,14 +54,14 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="description" class="col-sm-1 control-label">博客内容</label>
+				<label for="description" class="col-sm-1 control-label">文章内容</label>
 				<div class="col-sm-7">
 					<textarea name="blogContext" id="blogContext" style="width:800px;height:400px;visibility:hidden;">${blog.blogContext}</textarea>
 				</div>
 			</div>
 			
 		    <div class="form-group">
-				<label for="description" class="col-sm-1 control-label">博客简介</label>
+				<label for="description" class="col-sm-1 control-label">文章摘要</label>
 				<div class="col-sm-7">
 					<textarea name="blogIntroduction" rows="5" cols="60" id="blogIntroduction">${blog.blogIntroduction}</textarea>
 				</div>
