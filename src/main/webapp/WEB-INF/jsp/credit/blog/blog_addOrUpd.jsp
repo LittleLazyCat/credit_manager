@@ -29,7 +29,7 @@
 			<div class="form-group">
 				<label for="loginName" class="col-sm-1 control-label">标题</label>
 				<div class="col-sm-7">
-					<input id="blogTitle" name="blogTitle" type="text" maxlength="30" value="${blog.blogTitle}" class="form-control required" placeholder="请输入标题"/>
+					<input id="blogTitle" name="blogTitle" type="text" maxlength="90" value="${blog.blogTitle}" class="form-control required" placeholder="请输入标题"/>
 				</div>
 			</div>
 			<div class="form-group">

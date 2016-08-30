@@ -87,7 +87,7 @@ background-color:#0099FF;
 			              {"data" : "blogTitle"},
 			              {"data" : "blogType"}, 
 			              {"data" : "blogAuthor"},
-			              {"data" : "blog_image"},
+			              {"data" : "blogImage"},
 			              {"data" : "blogSource"},
 			              {"data" : "blogStatus"},
 			              {"data" : "blogContext"}
