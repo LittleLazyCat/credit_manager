@@ -16,7 +16,6 @@
 	</div>
 	<input type="hidden" name="userHeadImages" value="${user.userHeadImages}"/>
 	<input type="hidden" name="id" value="${user.id}"/>
-	<input type="hidden" name="userStatus" value="${user.userStatus}"/>
 	<div class="modal-body">
 		<div class="container-fluid">
 			<div class="form-group">
